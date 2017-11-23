@@ -53,39 +53,6 @@ Board::Board(const Board& b) {
     }
 }
 
-//
-//void Board::print() const {
-//    int boardCoordinates[this->size];
-//    for (int i = 0; i < this->size; i++) {
-//        boardCoordinates[i] = i + 1;
-//    }
-//    string dottedLine = "----------------------------------";
-//    for (int i = 0; i < this->size; i++) {
-//        cout << " | " << boardCoordinates[i];
-//    }
-//    cout << " | " << endl;
-//    cout << dottedLine << endl;
-//    for (int i = 0; i < this->size; i++) {
-//        cout << boardCoordinates[i] << "|";
-//        for (int j = 0; j < this->size; j++) {
-//            Status stat = this->cellArray[i][j];
-//            switch (stat) {
-//                case Empty:
-//                    cout << "   |";
-//                    break;
-//                case White:
-//                    cout << " O |";
-//                    break;
-//                case Black:
-//                    cout << " X |";
-//                    break;
-//            }
-//        }
-//        cout << "" << endl;
-//        cout << dottedLine << endl;
-//    }
-//}
-
 Board::Status Board::getCellStatus(const Pair &p) const {
     if(p.getRow()>=0 && p.getRow() < this->getSize() && p.getCol() >=0 && p.getCol() < this->getSize()) {
         return this->cellArray[p.getRow()][p.getCol()];

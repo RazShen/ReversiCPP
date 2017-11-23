@@ -22,21 +22,6 @@ const Pair HumanPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Boar
     display->itsYourMove(this->getType());
     display->possibleMoves(positions, moves);
     display->getInput();
-//    if(this->getType() == Board::White) {
-//        cout << "O: It's your move." << endl;
-//    }
-//    if(this->getType() == Board::Black) {
-//        cout << "X: It's your move." << endl;
-//    }
-//    cout << "Your possible moves: ";
-//    for (int i = 0; i < moves; i++) {
-//        if (i != 0) {
-//            cout << ",";
-//        }
-//        positions[i].print();
-//    }
-//    cout << "" << endl << endl;
-//    cout << "Please enter your move row (space) col: ";
     cin >> xUser >> yUser;
     if (cin.fail()) {
         cin.clear();

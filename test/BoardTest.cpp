@@ -1,6 +1,4 @@
-//
-//
-//
+
 #include "gtest/gtest.h"
 #include "../src/Board.h"
 
