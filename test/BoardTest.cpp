@@ -18,5 +18,5 @@ TEST(TestBoard, Test2) {
     EXPECT_EQ(board.isBoardFull(),true);
     Board::Status stat = board.getCellStatus(Pair(99,99));
     // get default value
-    EXPECT_EQ(stat, Board::Empty);
+    EXPECT_EQ(stat, 0);
 }
