@@ -4,7 +4,7 @@
 #include "gtest/gtest.h"
 #include "../src/Board.h"
 
-TEST(TestBoard, Test3) {
+TEST(TestBoard, Test2) {
     int size = 8;
     Board board = Board(size);
     // check the default board (4 cells in the middle)
