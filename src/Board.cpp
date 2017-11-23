@@ -116,7 +116,7 @@ Board::~Board() {
     delete[] this->cellArray;
 }
 
-int Board::getSize() const{
+int Board::getSize() const {
     return this->size;
 }
 
