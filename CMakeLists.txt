@@ -10,7 +10,7 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
         src/RegularGameLogic.h src/HumanPlayer.h src/HumanPlayer.cpp src/AIPlayer.cpp src/AIPlayer.h src/Player.h
         src/Player.cpp src/Pair.cpp src/Pair.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/Game.cpp src/Game.h)
 
-set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp)
+set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp)
 
 add_executable(ex3Tests ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 add_executable(Reversi ${SOURCE_FILES} src/main.cpp)
