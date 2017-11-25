@@ -11,9 +11,14 @@
 #include "Board.h"
 #include "Display.h"
 
+
 class ConsoleDisplay : public Display {
 public:
     ConsoleDisplay();
+    /**
+    * print board
+    * @param board given board
+     */
     void printBoard(Board* board);
     void possibleMoves(Pair positions[], int moves);
     void noValidMove();

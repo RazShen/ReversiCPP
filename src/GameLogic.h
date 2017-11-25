@@ -4,13 +4,6 @@
  */
 
 
-/*
- * GameLogic.h
- *  Abstract game logic class.
- *  Created on: Nov 3, 2017
- *      Author: Raz Shenkman
- */
-
 #ifndef EX2_GAMELOGIC_H
 #define EX2_GAMELOGIC_H
 

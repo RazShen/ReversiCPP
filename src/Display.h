@@ -1,7 +1,7 @@
-//
-// Created by tomer on 11/25/17.
-//
-
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 #ifndef EX3WITHTESTS_DISPLAY_H
 #define EX3WITHTESTS_DISPLAY_H
 

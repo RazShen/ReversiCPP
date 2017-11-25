@@ -4,12 +4,6 @@
  */
 
 
-/*
- * Game.cpp
- *  This class features a specific game for 2 users.
- *  Created on: Nov 2, 2017
- *      Author: Raz Shenkman
- */
 
 #include <iostream>
 #include "Game.h"

@@ -4,13 +4,6 @@
  */
 
 
-/*
- * GameLogic.cpp
- *  Abstract game logic class.
- *  Created on: Nov 3, 2017
- *      Author: Raz Shenkman
- */
-
 #include "GameLogic.h"
 
 GameLogic::GameLogic(int size, GLType type) {

@@ -7,10 +7,7 @@
 #include "ConsoleDisplay.h"
 
 ConsoleDisplay::ConsoleDisplay() {}
-/**
- * print board
- * @param board given board
- */
+
 void ConsoleDisplay::printBoard(Board *board) {
     int size = board->getSize();
     int boardCoordinates[size];
@@ -26,7 +23,7 @@ void ConsoleDisplay::printBoard(Board *board) {
     for (int i = 0; i < size; i++) {
         cout << boardCoordinates[i] << "|";
         for (int j = 0; j < size; j++) {
-            Board::Status stat = board->getCellStatus(Pair(i,j));
+            Board::Status stat = board->getCellStatus(Pair(i, j));
             switch (stat) {
                 case Board::Empty:
                     cout << "   |";
@@ -53,10 +50,10 @@ void ConsoleDisplay::currentBoard() {
 }
 
 void ConsoleDisplay::itsYourMove(Board::Status player) {
-    if(player == Board::White) {
+    if (player == Board::White) {
         cout << "O: It's your move." << endl;
     }
-    if(player == Board::Black) {
+    if (player == Board::Black) {
         cout << "X: It's your move." << endl;
     }
 }
@@ -67,7 +64,7 @@ void ConsoleDisplay::possibleMoves(Pair *positions, int moves) {
         if (i != 0) {
             cout << ",";
         }
-    //    positions[i].print();
+        //    positions[i].print();
         printPair(positions[i]);
     }
     cout << "" << endl << endl;

@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 Board::Board(int &size) {
     this->size = size;
     try {

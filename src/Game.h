@@ -4,12 +4,6 @@
  */
 
 
-/*
- * Game.h
- *  This class features a specific game for 2 users.
- *  Created on: Nov 2, 2017
- *      Author: Raz Shenkman
- */
 
 #ifndef EX2_GAME_H
 #define EX2_GAME_H

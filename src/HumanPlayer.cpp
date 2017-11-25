@@ -4,24 +4,18 @@
  */
 
 
-/*
- * HumanPlayer.cpp
- *  This struct features a human player.
- *  Created on: Nov 2, 2017
- *      Author: Raz Shenkman
- */
-
 #include <iostream>
 #include <limits>
 #include "HumanPlayer.h"
+
 using namespace std;
 
-HumanPlayer::HumanPlayer(Board::Status stat): Player(stat) {
+HumanPlayer::HumanPlayer(Board::Status stat) : Player(stat) {
 
 }
 
-
-const Pair HumanPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display) {
+const Pair
+HumanPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
     int xUser, yUser;
     display->itsYourMove(this->getType());
     display->possibleMoves(positions, moves);
