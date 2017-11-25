@@ -16,13 +16,16 @@
 #include "RegularGameLogic.h"
 #include <string>
 
+/**
+ * This class features a game class, it runs the game.
+ */
 class Game {
 public:
     /**
      * Constructor for HumanPlayersOnComputer class.
      * @param gameLogic inputted pointer to game logic.
      */
-    Game(RegularGameLogic *gameLogic, int choose, Display* consoleDisplay);
+    Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay);
 
     /**
      * This method runs the game.
@@ -35,12 +38,11 @@ public:
     ~Game();
 
 private:
-    // Human players.
     GameLogic *gameLogic;
     bool blackTurn;
-    Player* bHP;
-    Player* wHP;
-    Display* display;
+    Player *bHP;
+    Player *wHP;
+    Display *display;
 };
 
 

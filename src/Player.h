@@ -12,6 +12,9 @@
 #include "Board.h"
 #include "GameLogic.h"
 
+/**
+ * This class features a general player.
+ */
 class Player {
 public:
 
@@ -21,6 +24,9 @@ public:
      */
     Player(Board::Status status);
 
+    /**
+     * Empty constructor for the player.
+     */
     Player();
 
     /**

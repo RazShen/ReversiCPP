@@ -4,14 +4,7 @@
  */
 
 
-/*
- * Pair.cpp
- *  Struct of a Pair in order to describe a location for the cell.
- *  Created on: Nov 3, 2017
- *  Author: Raz Shenkman
- */
 
-#include <iostream>
 #include "Pair.h"
 
 Pair::Pair() {

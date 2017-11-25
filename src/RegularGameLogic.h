@@ -1,11 +1,5 @@
 //ID: 311130777
 //Name: Raz Shenkman
-/*
- * RegularGameLogic.h
- *  The regular game logic.
- *  Created on: Nov 3, 2017
- *      Author: Raz Shenkman
- */
 
 #ifndef EX2_REGULARGAMELOGIC_H
 #define EX2_REGULARGAMELOGIC_H
@@ -16,7 +10,9 @@
 #include "Board.h"
 #include "ConsoleDisplay.h"
 
-
+/**
+ * This class features a regular game logic.
+ */
 class RegularGameLogic : public GameLogic {
 public:
     /**
@@ -25,9 +21,18 @@ public:
      */
     RegularGameLogic(int size, GLType type);
 
-    RegularGameLogic* clone();
+    /**
+     * This method clones a game logic (return a new game logic).
+     * @return new cloned game logic.
+     */
+    RegularGameLogic *clone();
 
-    void setBoard(Board* b);
+    /**
+     * This method sets the game board of this game logic.
+     * @param b inputted board.
+     */
+    void setBoard(Board *b);
+
     /**
      * Function to check if the move is valid.
      * @param p wanted cell.
@@ -70,7 +75,7 @@ public:
      * @param count number of possible moves.
      * @return true/false for good/bad format.
      */
-    bool checkInput(Pair &p, Pair arr[], int , Display* display) const;
+    bool checkInput(Pair &p, Pair arr[], int, Display *display) const;
 
 private:
     /**
