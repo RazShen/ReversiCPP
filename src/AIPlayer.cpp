@@ -11,7 +11,7 @@ AIPlayer::AIPlayer(Board::Status stat): Player(stat) {
 }
 
 
-const Pair AIPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display) {
+const Pair AIPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display) {
     int score = -(gl->getBoard()->getSize() * gl->getBoard()->getSize() +1);
     int arrayOfMaxOpp[moves];
     for (int i = 0; i < moves; i++) {

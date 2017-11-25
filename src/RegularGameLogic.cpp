@@ -43,7 +43,7 @@ void RegularGameLogic::possibleMoves(Pair pairArr[], int &index, Board::Status p
     }
 }
 
-bool RegularGameLogic::checkInput(Pair &p, Pair arr[], int count, ConsoleDisplay* display) const {
+bool RegularGameLogic::checkInput(Pair &p, Pair arr[], int count, Display* display) const {
     for (int i = 0; i < count; i++) {
         if (p.getRow() - 1 == arr[i].getRow() && p.getCol() - 1 == arr[i].getCol()) {
             return true;

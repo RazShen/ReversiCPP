@@ -28,13 +28,15 @@ public:
      * @param moves number of positions
      * @return wanted move
      */
-    virtual const Pair getMove(Pair positions[], int moves,GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display) = 0;
+    virtual const Pair
+    getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) = 0;
 
     /**
      * This method returns the player's type.
      * @return
      */
     Board::Status getType() const;
+
 private:
     Board::Status type;
 

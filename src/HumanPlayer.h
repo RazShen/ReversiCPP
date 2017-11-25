@@ -19,7 +19,7 @@
 class HumanPlayer: public Player {
 public:
     HumanPlayer(Board::Status);
-    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display);
+    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
 };
 
 

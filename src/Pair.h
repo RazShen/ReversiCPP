@@ -31,11 +31,6 @@ public:
     Pair();
 
     /**
-     * This method prints the pair.
-     */
-    void print() const;
-
-    /**
      * This method returns the row of the pair.
      * @return row.
      */
@@ -52,6 +47,5 @@ private:
     // Row and column integers.
     int row, column;
 };
-
 
 #endif //EX2_PAIR_H

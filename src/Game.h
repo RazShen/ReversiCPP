@@ -24,7 +24,7 @@ public:
      * Constructor for HumanPlayersOnComputer class.
      * @param gameLogic inputted pointer to game logic.
      */
-    Game(RegularGameLogic *gameLogic, int choose, ConsoleDisplay* consoleDisplay);
+    Game(RegularGameLogic *gameLogic, int choose, Display* consoleDisplay);
 
     /**
      * This method runs the game.
@@ -42,7 +42,7 @@ private:
     bool blackTurn;
     Player* bHP;
     Player* wHP;
-    ConsoleDisplay* display;
+    Display* display;
 };
 
 

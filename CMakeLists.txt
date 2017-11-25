@@ -13,6 +13,6 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
 set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp)
 
 add_executable(ex3Tests ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
-add_executable(Reversi ${SOURCE_FILES} src/main.cpp)
+add_executable(Reversi ${SOURCE_FILES} src/main.cpp src/Display.h)
 target_link_libraries(ex3Tests gtest gtest_main pthread)
 add_test(ex3Tests ex3Tests)

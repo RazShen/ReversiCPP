@@ -58,7 +58,7 @@ public:
      * @param noMoreActionsW boolean for the while player possible move (have moves or don't have moves).
      * @return
      */
-    bool checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, ConsoleDisplay* display) const;
+    bool checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display* display) const;
 
     /**
      * Pure virtual function to check if the move is valid.
@@ -102,7 +102,7 @@ public:
      * @param count number of possible moves.
      * @return true/false for good/bad format.
      */
-    virtual bool checkInput(Pair &p, Pair arr[], int count, ConsoleDisplay* display) const = 0;
+    virtual bool checkInput(Pair &p, Pair arr[], int count, Display* display) const = 0;
 
     Board* getBoard() const;
 

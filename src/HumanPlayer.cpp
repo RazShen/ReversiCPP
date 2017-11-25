@@ -17,7 +17,7 @@ HumanPlayer::HumanPlayer(Board::Status stat): Player(stat) {
 }
 
 
-const Pair HumanPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display) {
+const Pair HumanPlayer::getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display) {
     int xUser, yUser;
     display->itsYourMove(this->getType());
     display->possibleMoves(positions, moves);

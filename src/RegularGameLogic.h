@@ -70,7 +70,7 @@ public:
      * @param count number of possible moves.
      * @return true/false for good/bad format.
      */
-    bool checkInput(Pair &p, Pair arr[], int , ConsoleDisplay* display) const;
+    bool checkInput(Pair &p, Pair arr[], int , Display* display) const;
 
 private:
     /**

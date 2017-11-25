@@ -36,7 +36,7 @@ GameLogic::GameWinner GameLogic::whoWon() const {
     }
 }
 
-bool GameLogic::checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, ConsoleDisplay* display) const {
+bool GameLogic::checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display* display) const {
     if (this->board->isBoardFull()) {
         display->currentBoard();
         display->printBoard(board);

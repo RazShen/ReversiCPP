@@ -13,7 +13,7 @@
 class AIPlayer: public Player {
 public:
     AIPlayer(Board::Status);
-    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display);
+    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
 };
 
 
