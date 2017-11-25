@@ -1,5 +1,9 @@
-//ID: 311130777
-//Name: Raz Shenkman
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
+
 /*
  * GameLogic.cpp
  *  Abstract game logic class.

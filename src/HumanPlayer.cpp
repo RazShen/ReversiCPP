@@ -1,5 +1,9 @@
-//ID: 311130777
-//Name: Raz Shenkman
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
+
 /*
  * HumanPlayer.cpp
  *  This struct features a human player.

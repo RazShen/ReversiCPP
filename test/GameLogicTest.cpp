@@ -1,9 +1,16 @@
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #include "gtest/gtest.h"
 #include "../src/GameLogic.h"
 #include "../src/RegularGameLogic.h"
 
-
+/**
+ * This class tests the Game logic.
+ */
 TEST(TestGameLogic, Test1) {
     int boardSize = 8;
     GameLogic* gl = new RegularGameLogic(boardSize, GameLogic::Regular);

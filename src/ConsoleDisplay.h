@@ -1,6 +1,8 @@
-//
-// Created by tomer on 11/21/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX2_CONSOLEDISPLAY_H
 #define EX2_CONSOLEDISPLAY_H

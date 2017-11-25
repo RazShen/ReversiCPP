@@ -1,7 +1,15 @@
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #include "gtest/gtest.h"
 #include "../src/Board.h"
 
+/**
+ * This class tests the Board.
+ */
 TEST(TestBoard, Test2) {
     int size = 8;
     Board board = Board(size);

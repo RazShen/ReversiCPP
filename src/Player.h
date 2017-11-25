@@ -1,6 +1,8 @@
-//
-// Created by raz on 11/18/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H

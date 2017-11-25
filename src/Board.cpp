@@ -1,11 +1,8 @@
-//ID: 311130777
-//Name: Raz Shenkman
 /*
- * Board.cpp
- *  This class features a game board.
- *  Created on: Nov 2, 2017
- *      Author: Raz Shenkman
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
  */
+
 
 #include "Board.h"
 #include <iostream>
@@ -35,7 +32,8 @@ Board::Board(int &size) {
     this->cellArray[4][3] = Black;
 
 }
-Board::Board(const Board& b) {
+
+Board::Board(const Board &b) {
     this->size = b.size;
     try {
         this->cellArray = new Status *[this->size];
@@ -54,13 +52,13 @@ Board::Board(const Board& b) {
 }
 
 Board::Status Board::getCellStatus(const Pair &p) const {
-    if(p.getRow()>=0 && p.getRow() < this->getSize() && p.getCol() >=0 && p.getCol() < this->getSize()) {
+    if (p.getRow() >= 0 && p.getRow() < this->getSize() && p.getCol() >= 0 && p.getCol() < this->getSize()) {
         return this->cellArray[p.getRow()][p.getCol()];
     }
 }
 
 void Board::changeStatus(const Pair &p, Status s) {
-    if(p.getRow()>=0 && p.getRow() < this->getSize() && p.getCol() >=0 && p.getCol() < this->getSize()) {
+    if (p.getRow() >= 0 && p.getRow() < this->getSize() && p.getCol() >= 0 && p.getCol() < this->getSize()) {
         this->cellArray[p.getRow()][p.getCol()] = s;
     }
 }

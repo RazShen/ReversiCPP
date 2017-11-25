@@ -1,6 +1,7 @@
-//
-// Created by tomer on 11/21/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 
 #include <iostream>
 #include "ConsoleDisplay.h"

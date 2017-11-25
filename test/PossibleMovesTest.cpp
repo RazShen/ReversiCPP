@@ -1,9 +1,17 @@
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #include "gtest/gtest.h"
 #include "../src/Board.h"
 #include "../src/GameLogic.h"
 #include "../src/RegularGameLogic.h"
 
+/**
+ * This test test the possible moves
+ */
 TEST(TestPossibleMoves, Test3) {
     int boardSize = 8;
     int index1 = 0;

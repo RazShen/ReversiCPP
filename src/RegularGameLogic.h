@@ -1,5 +1,9 @@
-//ID: 311130777
-//Name: Raz Shenkman
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
+
 /*
  * RegularGameLogic.h
  *  The regular game logic.
@@ -25,9 +29,18 @@ public:
      */
     RegularGameLogic(int size, GLType type);
 
-    RegularGameLogic* clone();
+    /**
+     * This method returns a new game logic by cloning the current one.
+     * @return
+     */
+    RegularGameLogic *clone();
 
-    void setBoard(Board* b);
+    /**
+     * This method sets the board of the current game logic.
+     * @param b inputted board.
+     */
+    void setBoard(Board *b);
+
     /**
      * Function to check if the move is valid.
      * @param p wanted cell.
@@ -70,7 +83,7 @@ public:
      * @param count number of possible moves.
      * @return true/false for good/bad format.
      */
-    bool checkInput(Pair &p, Pair arr[], int , ConsoleDisplay* display) const;
+    bool checkInput(Pair &p, Pair arr[], int, ConsoleDisplay *display) const;
 
 private:
     /**
