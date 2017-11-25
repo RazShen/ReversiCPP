@@ -17,10 +17,10 @@
 
 using namespace std;
 
-Game::Game(RegularGameLogic *gameLogic, int choose, ConsoleDisplay* consoleDisplay) {
+Game::Game(RegularGameLogic *gameLogic, int choose, Display* consoleDisplay) {
     this->blackTurn = true;
     this->gameLogic = gameLogic;
-    display = consoleDisplay;
+    this->display = consoleDisplay;
     this->bHP = new HumanPlayer(Board::Black);
     if(choose == 1) {
         this->wHP = new HumanPlayer(Board::White);

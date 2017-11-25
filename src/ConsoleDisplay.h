@@ -9,8 +9,9 @@
 
 
 #include "Board.h"
+#include "Display.h"
 
-class ConsoleDisplay {
+class ConsoleDisplay : public Display {
 public:
     ConsoleDisplay();
     void printBoard(Board* board);

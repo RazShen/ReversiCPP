@@ -22,10 +22,6 @@ Pair::Pair(int row, int column) {
     this->column = column;
 }
 
-void Pair::print() const {
-    cout << "(" << this->row + 1 << "," << this->column + 1 << ")";
-}
-
 int Pair::getRow() const {
     return this->row;
 }

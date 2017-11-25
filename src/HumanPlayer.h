@@ -1,9 +1,11 @@
+//ID: 311130777
+//Name: Raz Shenkman
 /*
- * Tomer Grady 205660863
- * Raz Shenkman 311130777
+ * HumanPlayer.h
+ *  This struct features a human player.
+ *  Created on: Nov 2, 2017
+ *  Author: Raz Shenkman
  */
-
-
 
 #ifndef EX2_HUMANPLAYER_H
 #define EX2_HUMANPLAYER_H
@@ -17,17 +19,7 @@
 class HumanPlayer: public Player {
 public:
     HumanPlayer(Board::Status);
-
-    /**
-     * This method returns a move from the player (in this case the human player decides the move himself).
-     * @param positions possible positions.
-     * @param moves number of positions.
-     * @param gl game logic.
-     * @param opponentStat opponent color.
-     * @param display the display.
-     * @return selected move.
-     */
-    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, ConsoleDisplay* display);
+    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
 };
 
 

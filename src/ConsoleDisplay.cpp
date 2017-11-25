@@ -67,7 +67,8 @@ void ConsoleDisplay::possibleMoves(Pair *positions, int moves) {
         if (i != 0) {
             cout << ",";
         }
-        positions[i].print();
+    //    positions[i].print();
+        printPair(positions[i]);
     }
     cout << "" << endl << endl;
 }
@@ -94,7 +95,7 @@ void ConsoleDisplay::oPlayed() {
 }
 
 void ConsoleDisplay::printPair(Pair p) {
-    p.print();
+    cout << "(" << p.getRow() + 1 << "," << p.getCol() + 1 << ")";
 }
 
 void ConsoleDisplay::welcome() {
