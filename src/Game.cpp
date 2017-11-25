@@ -11,14 +11,14 @@
 
 using namespace std;
 
-Game::Game(RegularGameLogic *gameLogic, int choose, Display* consoleDisplay) {
+Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
     this->bHP = new HumanPlayer(Board::Black);
-    if(choose == 1) {
+    if (choose == 1) {
         this->wHP = new HumanPlayer(Board::White);
-    } else if(choose == 2){
+    } else if (choose == 2) {
         this->wHP = new AIPlayer(Board::White);
     }
 }
@@ -80,6 +80,6 @@ void Game::run() {
 
 Game::~Game() {
     delete (this->gameLogic);
-    delete(this->bHP);
-    delete(this->wHP);
+    delete (this->bHP);
+    delete (this->wHP);
 }

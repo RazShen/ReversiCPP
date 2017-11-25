@@ -4,12 +4,6 @@
  */
 
 
-/*
- * RegularGameLogic.cpp
- *  The regular game logic.
- *  Created on: Nov 3, 2017
- *  Author: Raz Shenkman
- */
 #include <iostream>
 #include "RegularGameLogic.h"
 
@@ -22,7 +16,7 @@ RegularGameLogic::RegularGameLogic(int size, GLType type) : GameLogic(size, type
 RegularGameLogic *RegularGameLogic::clone() {
     RegularGameLogic *newGL = new RegularGameLogic(this->getBoardSize(), this->getType());
     // deleting the current board and creating a new one
-    delete(newGL->board);
+    delete (newGL->board);
     newGL->setBoard(this->getBoard());
     return newGL;
 }
@@ -47,7 +41,7 @@ void RegularGameLogic::possibleMoves(Pair pairArr[], int &index, Board::Status p
     }
 }
 
-bool RegularGameLogic::checkInput(Pair &p, Pair arr[], int count, Display* display) const {
+bool RegularGameLogic::checkInput(Pair &p, Pair arr[], int count, Display *display) const {
     for (int i = 0; i < count; i++) {
         if (p.getRow() - 1 == arr[i].getRow() && p.getCol() - 1 == arr[i].getCol()) {
             return true;
@@ -366,6 +360,6 @@ void RegularGameLogic::flipSouthEast(const Pair &p, Board::Status opponentP, Boa
     }
 }
 
-void RegularGameLogic::setBoard(Board* board) {
+void RegularGameLogic::setBoard(Board *board) {
     this->board = new Board(*board);
 }

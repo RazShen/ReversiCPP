@@ -33,7 +33,7 @@ GameLogic::GameWinner GameLogic::whoWon() const {
     }
 }
 
-bool GameLogic::checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display* display) const {
+bool GameLogic::checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display *display) const {
     if (this->board->isBoardFull()) {
         display->currentBoard();
         display->printBoard(board);
@@ -69,7 +69,7 @@ GameLogic::~GameLogic() {
     delete (this->board);
 }
 
-Board* GameLogic::getBoard() const {
+Board *GameLogic::getBoard() const {
     return this->board;
 }
 
@@ -89,6 +89,6 @@ int GameLogic::getBlackScore() {
             }
         }
     }
-    return (blackCells-whiteCells);
+    return (blackCells - whiteCells);
 
 }

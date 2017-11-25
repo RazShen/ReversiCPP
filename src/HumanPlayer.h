@@ -29,7 +29,7 @@ public:
     * @param opponentStat color of the opponent.
     * @param display display.
     * @return user's decided move.
-*/
+    */
     const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
 };
 

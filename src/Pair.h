@@ -4,14 +4,6 @@
  */
 
 
-/*
- * Pair.h
- *  Struct of a Pair in order to describe a location for the cell.
- *  Created on: Nov 3, 2017
- *  Author: Raz Shenkman
- */
-
-
 #ifndef EX2_PAIR_H
 #define EX2_PAIR_H
 
@@ -19,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * This struct is a struct of a Pair in order to describe a location for the cell.
+ */
 struct Pair {
 public:
     /**
@@ -27,7 +22,6 @@ public:
      * @param column column.
      */
     Pair(int row, int column);
-
 
     /**
      * Empty constructor for pair.

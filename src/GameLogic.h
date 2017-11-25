@@ -14,28 +14,39 @@
 class GameLogic {
 public:
 
-    enum GLType {Regular, Advanced};
+    /**
+     * This enum is for the game logic type.
+     */
+    enum GLType {
+        Regular, Advanced
+    };
+
+    /**
+     * Enum for the board scanning directions.
+     */
+    enum ScanDirection {
+        NorthWest, North, NorthEast, West, East, SouthWest, South, SouthEast
+    };
+
+    /**
+     * Enum for game winning.
+     */
+    enum GameWinner {
+        Draw, BlackWon, WhiteWon
+    };
+
     /**
      * This constructor creates a basic game logic abstract class.
      * @param size inputted board size.
      */
     GameLogic(int size, GLType type);
 
-    /*
-     *
+    /**
+     * This method clones the game logic.
+     * @return
      */
-    virtual GameLogic* clone() = 0;
+    virtual GameLogic *clone() = 0;
 
-
-
-    // Enum for the board scanning directions.
-    enum ScanDirection {
-        NorthWest, North, NorthEast, West, East, SouthWest, South, SouthEast
-    };
-    // Enum for game winning.
-    enum GameWinner {
-        Draw, BlackWon, WhiteWon
-    };
 
     /**
      * This method returns who won the game, or draw by scanning the board cells.
@@ -55,7 +66,7 @@ public:
      * @param noMoreActionsW boolean for the while player possible move (have moves or don't have moves).
      * @return
      */
-    bool checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display* display) const;
+    bool checkAndAnnounceFinish(bool &noMoreActionsB, bool &noMoreActionsW, Display *display) const;
 
     /**
      * Pure virtual function to check if the move is valid.
@@ -99,10 +110,18 @@ public:
      * @param count number of possible moves.
      * @return true/false for good/bad format.
      */
-    virtual bool checkInput(Pair &p, Pair arr[], int count, Display* display) const = 0;
+    virtual bool checkInput(Pair &p, Pair arr[], int count, Display *display) const = 0;
 
-    Board* getBoard() const;
+    /**
+     * This method returns the current board (used for cloning).
+     * @return
+     */
+    Board *getBoard() const;
 
+    /**
+     * This method returns the type of the game logic.
+     * @return
+     */
     GLType getType() const;
 
     /**
@@ -110,6 +129,10 @@ public:
      */
     ~GameLogic();
 
+    /**
+     * This method returns the current score of the black player.
+     * @return current score of the black player.
+     */
     int getBlackScore();
 
 protected:
