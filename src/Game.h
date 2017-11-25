@@ -5,8 +5,8 @@
 
 
 
-#ifndef EX2_GAME_H
-#define EX2_GAME_H
+#ifndef EX3WITHTESTS_GAME_H
+#define EX3WITHTESTS_GAME_H
 
 
 #include "HumanPlayer.h"
@@ -46,4 +46,4 @@ private:
 };
 
 
-#endif //EX2_GAME_H
+#endif //EX3WITHTESTS_GAME_H

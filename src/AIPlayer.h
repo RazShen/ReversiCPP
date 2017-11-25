@@ -3,8 +3,8 @@
  * Raz Shenkman 311130777
  */
 
-#ifndef EX2_AIPLAYER_H
-#define EX2_AIPLAYER_H
+#ifndef EX3WITHTESTS_AIPLAYER_H
+#define EX3WITHTESTS_AIPLAYER_H
 
 #include <iostream>
 #include "Board.h"
@@ -34,4 +34,4 @@ public:
 };
 
 
-#endif //EX2_AIPLAYER_H
+#endif //EX3WITHTESTS_AIPLAYER_H

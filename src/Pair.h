@@ -4,8 +4,8 @@
  */
 
 
-#ifndef EX2_PAIR_H
-#define EX2_PAIR_H
+#ifndef EX3WITHTESTS_PAIR_H
+#define EX3WITHTESTS_PAIR_H
 
 #include <string>
 
@@ -46,4 +46,4 @@ private:
     int row, column;
 };
 
-#endif //EX2_PAIR_H
+#endif //EX3WITHTESTS_PAIR_H

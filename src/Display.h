@@ -7,6 +7,9 @@
 
 #include "Board.h"
 
+/**
+ * This is an abstract class for the display.
+ */
 class Display {
 public:
     /**

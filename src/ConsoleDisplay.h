@@ -4,16 +4,21 @@
  */
 
 
-#ifndef EX2_CONSOLEDISPLAY_H
-#define EX2_CONSOLEDISPLAY_H
+#ifndef EX3WITHTESTS_CONSOLEDISPLAY_H
+#define EX3WITHTESTS_CONSOLEDISPLAY_H
 
 
 #include "Board.h"
 #include "Display.h"
 
-
+/**
+ * This class is used to print on the console.
+ */
 class ConsoleDisplay : public Display {
 public:
+    /**
+     * Constructor for the console display.
+     */
     ConsoleDisplay();
     /**
     * print board
@@ -102,4 +107,4 @@ public:
 
 };
 
-#endif //EX2_CONSOLEDISPLAY_H
+#endif //EX3WITHTESTS_CONSOLEDISPLAY_H

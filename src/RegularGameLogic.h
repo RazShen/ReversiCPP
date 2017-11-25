@@ -1,8 +1,8 @@
 //ID: 311130777
 //Name: Raz Shenkman
 
-#ifndef EX2_REGULARGAMELOGIC_H
-#define EX2_REGULARGAMELOGIC_H
+#ifndef EX3WITHTESTS_REGULARGAMELOGIC_H
+#define EX3WITHTESTS_REGULARGAMELOGIC_H
 
 
 #include "Pair.h"
@@ -143,4 +143,4 @@ private:
     void flipSouthEast(const Pair &p, Board::Status opponentP, Board::Status player);
 };
 
-#endif //EX2_REGULARGAMELOGIC_H
+#endif //EX3WITHTESTS_REGULARGAMELOGIC_H

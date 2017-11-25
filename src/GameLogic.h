@@ -4,8 +4,8 @@
  */
 
 
-#ifndef EX2_GAMELOGIC_H
-#define EX2_GAMELOGIC_H
+#ifndef EX3WITHTESTS_GAMELOGIC_H
+#define EX3WITHTESTS_GAMELOGIC_H
 
 
 #include "Board.h"
@@ -143,4 +143,4 @@ protected:
 };
 
 
-#endif //EX2_GAMELOGIC_H
+#endif //EX3WITHTESTS_GAMELOGIC_H

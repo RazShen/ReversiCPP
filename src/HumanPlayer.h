@@ -4,8 +4,8 @@
  */
 
 
-#ifndef EX2_HUMANPLAYER_H
-#define EX2_HUMANPLAYER_H
+#ifndef EX3WITHTESTS_HUMANPLAYER_H
+#define EX3WITHTESTS_HUMANPLAYER_H
 
 #include <iostream>
 #include "Board.h"
@@ -34,4 +34,4 @@ public:
 };
 
 
-#endif //EX2_HUMANPLAYER_H
+#endif //EX3WITHTESTS_HUMANPLAYER_H

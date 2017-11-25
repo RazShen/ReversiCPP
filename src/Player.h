@@ -4,8 +4,8 @@
  */
 
 
-#ifndef EX2_PLAYER_H
-#define EX2_PLAYER_H
+#ifndef EX3WITHTESTS_PLAYER_H
+#define EX3WITHTESTS_PLAYER_H
 
 
 #include "Pair.h"
@@ -51,4 +51,4 @@ private:
 };
 
 
-#endif //EX2_PLAYER_H
+#endif //EX3WITHTESTS_PLAYER_H
