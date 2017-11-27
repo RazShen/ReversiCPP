@@ -25,19 +25,23 @@ const Pair AIPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::
         newGL->possibleMoves(opponentMoves, numOpponentMoves, opponentStat);
         int maxScore = score;
         // scan the opponent moves.
-        for (int j = 0; j < numOpponentMoves; j++) {
-            GameLogic *opponentGL = newGL->clone();
-            opponentGL->flipCell(Pair(opponentMoves[j].getRow() + 1, opponentMoves[j].getCol() + 1), this->getType(),
-                                 opponentStat);
-            int curScore = opponentGL->getBlackScore();
-            if (curScore > maxScore) {
-                maxScore = curScore;
-            }
-            delete (opponentGL);
-        }
-        arrayOfMaxOpp[i] = maxScore;
-        delete (newGL);
+        if (numOpponentMoves == 0) {
 
+        } else {
+            for (int j = 0; j < numOpponentMoves; j++) {
+                GameLogic *opponentGL = newGL->clone();
+                opponentGL->flipCell(Pair(opponentMoves[j].getRow() + 1, opponentMoves[j].getCol() + 1),
+                                     this->getType(),
+                                     opponentStat);
+                int curScore = opponentGL->getBlackScore();
+                if (curScore > maxScore) {
+                    maxScore = curScore;
+                }
+                delete (opponentGL);
+            }
+            arrayOfMaxOpp[i] = maxScore;
+            delete (newGL);
+        }
     }
     int curMin = arrayOfMaxOpp[0];
     int indexOfMin = 0;
