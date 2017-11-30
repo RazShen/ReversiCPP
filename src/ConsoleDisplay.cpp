@@ -64,7 +64,6 @@ void ConsoleDisplay::possibleMoves(Pair *positions, int moves) {
         if (i != 0) {
             cout << ",";
         }
-        //    positions[i].print();
         printPair(positions[i]);
     }
     cout << "" << endl << endl;
@@ -109,7 +108,7 @@ void ConsoleDisplay::noValidOption() {
 }
 
 void ConsoleDisplay::anyKeyToExitMassage() {
-    cout << "Press any key to exit the game:" << endl;
+    cout << "Game Over" << endl;
 }
 
 void ConsoleDisplay::fullBoard() {

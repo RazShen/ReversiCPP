@@ -37,9 +37,7 @@ int main() {
     } while (isNotValidInput);
     Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
     game.run();
-    string anyKey;
     display->anyKeyToExitMassage();
-    getline(cin, anyKey);
     delete (display);
     return 0;
 }
