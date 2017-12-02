@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(ex3WithTests)
+project(ex4)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
 add_subdirectory(lib/googletest-release-1.8.0)
@@ -13,7 +13,7 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
 
 set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp src/server/mainS.cpp src/server/Server.cpp src/server/Server.h)
 
-add_executable(ex3Tests ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
+add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 add_executable(Reversi ${SOURCE_FILES} src/main.cpp)
-target_link_libraries(ex3Tests gtest gtest_main pthread)
-add_test(ex3Tests ex3Tests)
+target_link_libraries(ex4 gtest gtest_main pthread)
+add_test(ex4 ex4)
