@@ -11,7 +11,7 @@
 #include <iostream>
 #include <stdio.h>
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 10
+#define MAX_CONNECTED_CLIENTS 2
 Server::Server(int port): port(port), serverSocket(0) {
     cout << "Server" << endl;
 }
@@ -28,8 +28,7 @@ void Server::start() {
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(port);
-    if (bind(serverSocket, (struct sockaddr
-    *) &serverAddress, sizeof(serverAddress)) == -1) {
+    if (bind(serverSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error on binding";
     }
     // Start listening to incoming connections
@@ -40,8 +39,7 @@ void Server::start() {
     while (true) {
         cout << "Waiting for client connections..." << endl;
         // Accept a new client connection
-        int clientSocket = accept(serverSocket, (struct
-                sockaddr *)&clientAddress, &clientAddressLen);
+        int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
         cout << "Client connected" << endl;
         if (clientSocket == -1)
             throw "Error on accept";
@@ -56,7 +54,7 @@ void Server::handleClient(int clientSocket) {
     char op;
     while (true) {
         // Read new exercise arguments
-        int n = read(clientSocket, arg1, sizeof(arg1));
+        ssize_t n = read(clientSocket, arg1, sizeof(arg1));
         if (n == -1) {
             cout << "Error reading arg1" << endl;
             return;
@@ -65,7 +63,7 @@ void Server::handleClient(int clientSocket) {
             cout << "Client disconnected" << endl;
             return;
         }
-        n = read(clientSocket, &op, sizeof(op));
+        n = read(clientSocket, &op, size_t(op));
         if (n == -1) {
             cout << "Error reading operator" << endl;
             return;

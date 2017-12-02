@@ -11,7 +11,7 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
         src/Player.cpp src/Pair.cpp src/Pair.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/Game.cpp src/Game.h
         src/Display.h)
 
-set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp src/server/mainS.cpp src/server/Server.cpp src/server/Server.h)
+set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp src/server/mainS.cpp src/server/Server.cpp src/server/Server.h src/client/mainC.cpp)
 
 add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 add_executable(Reversi ${SOURCE_FILES} src/main.cpp)
