@@ -66,7 +66,7 @@ void Server::handleClient(int clientSocket) {
     char op;
     while (true) {
         // Read new exercise arguments
-        ssize_t n = read(clientSocket, arg1, sizeof(arg1));
+        ssize_t n = read(clientSocket, &arg1, sizeof(arg1));
         if (n == -1) {
             cout << "Error reading arg1" << endl;
             return;
@@ -81,7 +81,7 @@ void Server::handleClient(int clientSocket) {
             return;
         }
 
-        n = read(clientSocket, arg2, sizeof(arg2));
+        n = read(clientSocket, &arg2, sizeof(arg2));
         if (n == -1) {
             cout << "Error reading arg2" << endl;
             return;
