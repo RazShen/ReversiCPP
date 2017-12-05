@@ -9,6 +9,10 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
+#include <cstdlib>
+
+#define MaxDataSize 20
+
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 Server::Server(int port): port(port), serverSocket(0) {
@@ -51,66 +55,47 @@ void Server::start() {
         cout << "Player O connected." << endl;
         if (playerSocket2 == -1)
             throw "Error on accept";
+        initializingPlayer(playerSocket1,1);
+        initializingPlayer(playerSocket2,2);
 
-
-
-        handleClient(playerSocket1);
+        handleClients(playerSocket1, playerSocket2);
         // Close communication with the client
         close(playerSocket1);
         close(playerSocket2);
     }
 }
+void Server:: initializingPlayer(int playerSocket, int playerNum) {
+    ssize_t x = write(playerSocket, &playerNum, sizeof(playerNum));
+    if(x == -1) {
+        cout << "Error writing to socket" << endl;
+        exit(1);
+    }
 
-void Server::handleClient(int clientSocket) {
-    int arg1, arg2;
-    char op;
-    while (true) {
-        // Read new exercise arguments
-        ssize_t n = read(clientSocket, &arg1, sizeof(arg1));
-        if (n == -1) {
-            cout << "Error reading arg1" << endl;
-            return;
-        }
-        if (n == 0) {
-            cout << "Client disconnected" << endl;
-            return;
-        }
-        n = read(clientSocket, &op, size_t(op));
-        if (n == -1) {
-            cout << "Error reading operator" << endl;
-            return;
-        }
-
-        n = read(clientSocket, &arg2, sizeof(arg2));
-        if (n == -1) {
-            cout << "Error reading arg2" << endl;
-            return;
-        }
-        cout << "Got exercise: " << arg1 << op << arg2 <<
-             endl;
-        int result = calc(arg1, op, arg2);
-        // Write the result back to the client
-        n = write(clientSocket, &result, sizeof(result));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return;
-        }
+}
+void Server::handleClients(int player1, int player2) {
+    int sender = player1;
+    int receiver = player2;
+    int temp;
+    while (transferMessege(sender, receiver)) {
+        temp = sender;
+        sender = receiver;
+        receiver = temp;
     }
 }
-int Server::calc(int arg1, const char op, int arg2) const {
-    switch (op) {
-        case '+':
-            return arg1 + arg2;
-        case '-':
-            return arg1 - arg2;
-        case '*':
-            return arg1 * arg2;
-        case '/':
-            return arg1 / arg2;
-        default:
-            cout << "Invalid operator" << endl;
-            return 0;
+bool Server:: transferMessege(int sender, int receiver) {
+    char buffer[MaxDataSize] = "\0";
+    ssize_t checkTransfer = read(sender, buffer, sizeof(buffer));
+    if (checkTransfer == -1) {
+        return false;
     }
+    checkTransfer = write(receiver, buffer, sizeof(receiver));
+    if (checkTransfer == 0) {
+        return false;
+    }
+    return true;
+
+
+
 }
 void Server::stop() {
     close(serverSocket);
