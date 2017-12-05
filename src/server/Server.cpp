@@ -97,3 +97,21 @@ void Server::handleClient(int clientSocket) {
         }
     }
 }
+int Server::calc(int arg1, const char op, int arg2) const {
+    switch (op) {
+        case '+':
+            return arg1 + arg2;
+        case '-':
+            return arg1 - arg2;
+        case '*':
+            return arg1 * arg2;
+        case '/':
+            return arg1 / arg2;
+        default:
+            cout << "Invalid operator" << endl;
+            return 0;
+    }
+}
+void Server::stop() {
+    close(serverSocket);
+}
