@@ -76,13 +76,13 @@ void Server::handleClients(int player1, int player2) {
     int sender = player1;
     int receiver = player2;
     int temp;
-    while (transferMessege(sender, receiver)) {
+    while (transferMessage(sender, receiver)) {
         temp = sender;
         sender = receiver;
         receiver = temp;
     }
 }
-bool Server:: transferMessege(int sender, int receiver) {
+bool Server:: transferMessage(int sender, int receiver) {
     char buffer[MaxDataSize] = "\0";
     ssize_t checkTransfer = read(sender, buffer, sizeof(buffer));
     if (checkTransfer == -1) {
