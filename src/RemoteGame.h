@@ -1,13 +1,9 @@
-/*
- * Tomer Grady 205660863
- * Raz Shenkman 311130777
- */
+//
+// Created by raz on 12/5/17.
+//
 
-
-
-#ifndef EX3WITHTESTS_GAME_H
-#define EX3WITHTESTS_GAME_H
-
+#ifndef EX4_REMOTEGAME_H
+#define EX4_REMOTEGAME_H
 
 #include "HumanPlayer.h"
 #include "GameLogic.h"
@@ -17,16 +13,13 @@
 #include "client/Client.h"
 #include <string>
 
-/**
- * This class features a game class, it runs the game.
- */
-class Game {
+class RemoteGame {
 public:
     /**
      * Constructor for HumanPlayersOnComputer class.
      * @param gameLogic inputted pointer to game logic.
      */
-    Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay);
+    RemoteGame(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay);
 
     /**
      * This method runs the game.
@@ -36,7 +29,7 @@ public:
     /**
      * Destructor for HumanPlayersOnComputer game.
      */
-    ~Game();
+    ~RemoteGame();
 
 private:
     GameLogic *gameLogic;
@@ -44,7 +37,8 @@ private:
     Player *bHP;
     Player *wHP;
     Display *display;
+    Client blackPClient, whitePClient;
 };
 
 
-#endif //EX3WITHTESTS_GAME_H
+#endif //EX4_REMOTEGAME_H
