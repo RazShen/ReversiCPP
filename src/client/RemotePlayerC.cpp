@@ -2,7 +2,7 @@
 // Created by tomer on 12/2/17.
 //
 
-#include "Client.h"
+#include "RemotePlayerC.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -10,12 +10,23 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits>
+
 using namespace std;
-Client::Client(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+
+RemotePlayerC::RemotePlayerC(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort),
+                                                                    clientSocket(0) {
+
     cout << "Client" << endl;
 }
 
-void Client::connectToServer() {
+RemotePlayerC::RemotePlayerC(Board::Status stat): clientSocket(0)  {
+    //set client
+    this->serverIP = "127.0.0.1";
+    this->serverPort = 10001;
+}
+
+void RemotePlayerC::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -46,7 +57,7 @@ void Client::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-int Client::sendMove(int arg1, int arg2) {
+int RemotePlayerC::sendMove(int arg1, int arg2) {
     ssize_t n;
     // Write the exercise arguments to the socket
     n = write(clientSocket, &arg1, sizeof(arg1));
@@ -64,4 +75,23 @@ int Client::sendMove(int arg1, int arg2) {
         throw "Error reading result from socket";
     }
     return result;
+}
+
+
+const Pair
+RemotePlayerC::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
+    int xUser, yUser;
+    display->itsYourMove(this->getType());
+    display->possibleMoves(positions, moves);
+    display->getInput();
+    cin >> xUser >> yUser;
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        // illegal value in purpose
+        xUser = -5;
+        yUser = -5;
+    }
+    Pair inputUser = Pair(xUser, yUser);
+    return inputUser;
 }

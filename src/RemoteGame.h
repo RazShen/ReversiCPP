@@ -10,7 +10,7 @@
 #include "Board.h"
 #include "ConsoleDisplay.h"
 #include "RegularGameLogic.h"
-#include "client/Client.h"
+#include "client/RemotePlayerC.h"
 #include <string>
 
 class RemoteGame {
@@ -34,8 +34,8 @@ public:
 private:
     GameLogic *gameLogic;
     bool blackTurn;
-    Player *bHP;
-    Player *wHP;
+    RemotePlayerC *bHP;
+    RemotePlayerC *wHP;
     Display *display;
 };
 

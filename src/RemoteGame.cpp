@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Game.h"
 #include "RemoteGame.h"
-#include "RemotePlayer.h"
+
 
 using namespace std;
 
@@ -13,11 +13,13 @@ RemoteGame::RemoteGame(RegularGameLogic *gameLogic, int choose, Display *console
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
-    this->bHP = new RemotePlayer(Board::Black);
-    this->wHP = new RemotePlayer(Board::White);
+    this->bHP = new RemotePlayerC(Board::Black);
+    this->wHP = new RemotePlayerC(Board::White);
 }
 
 void RemoteGame::run() {
+    this->bHP->connectToServer();
+    this->wHP->connectToServer();
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {

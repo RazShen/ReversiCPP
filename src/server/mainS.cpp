@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
 
-    Server server(6557);
+    Server server(10001);
     try {
         server.start();
     } catch (const char *msg) {
