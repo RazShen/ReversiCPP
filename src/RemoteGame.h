@@ -19,7 +19,7 @@ public:
      * Constructor for HumanPlayersOnComputer class.
      * @param gameLogic inputted pointer to game logic.
      */
-    RemoteGame(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay);
+    RemoteGame(RegularGameLogic *gameLogic, Display *consoleDisplay);
 
     /**
      * This method runs the game.

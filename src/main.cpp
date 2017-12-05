@@ -7,6 +7,7 @@
 #include <iostream>
 #include <limits>
 #include "Game.h"
+#include "RemoteGame.h"
 
 using namespace std;
 
@@ -28,15 +29,21 @@ int main() {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        if (input != 1 && input != 2) {
+        if (input != 1 && input != 2 && input != 3) {
             display->noValidOption();
             isNotValidInput = true;
         } else {
             isNotValidInput = false;
         }
     } while (isNotValidInput);
-    Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
-    game.run();
+    if (input != 3) {
+        Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
+        game.run();
+    } else {
+        RemoteGame rG = RemoteGame(new RegularGameLogic(boardSize, GameLogic::Regular), display);
+        rG.run();
+    }
+
     display->anyKeyToExitMassage();
     delete (display);
     return 0;

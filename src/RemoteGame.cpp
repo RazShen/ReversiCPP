@@ -9,7 +9,7 @@
 
 using namespace std;
 
-RemoteGame::RemoteGame(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
+RemoteGame::RemoteGame(RegularGameLogic *gameLogic, Display *consoleDisplay) {
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;

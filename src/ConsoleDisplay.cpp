@@ -95,12 +95,13 @@ void ConsoleDisplay::printPair(Pair p) {
 }
 
 void ConsoleDisplay::welcome() {
-    cout << "Welcome to reversi game, choose your game mode" << endl;
+    cout << "Welcome to reversi game" << endl << endl << "choose your opponent type" << endl;
 }
 
 void ConsoleDisplay::chooseGameOptions() {
-    cout << "Press 1 to play against a human player " << endl;
-    cout << "Press 2 to play against a computer player" << endl;
+    cout << "1. A human local player" << endl;
+    cout << "2. An AI player" << endl;
+    cout << "3. A remote player" << endl;
 }
 
 void ConsoleDisplay::noValidOption() {
