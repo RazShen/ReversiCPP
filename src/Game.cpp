@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Game.h"
 #include "AIPlayer.h"
+#include "client/RemotePlayerSender.h"
 
 using namespace std;
 
@@ -15,15 +16,34 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
-    this->bHP = new HumanPlayer(Board::Black);
     if (choose == 1) {
+        this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new HumanPlayer(Board::White);
     } else if (choose == 2) {
+        this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new AIPlayer(Board::White);
+    } else if (choose == 3) {
+        //create a new player that connect to the server
+        this->bHP = new RemotePlayerSender("127.0.0.1", 10001);
+        //connect to server
+        this->bHP->connectToServer();
+        // get from the server if the player is Black or White 1 for X , 2 for O.
+        if (this->bHP->getMoveFromServer() == 1) {
+            this->bHP->setType(Board::Black);
+            this->wHP = new RemotePlayerReceiver("127.0.0.1", 10001);
+            this->wHP->setType(Board::White);
+        } else {
+            this->wHP = this->bHP;
+            this->wHP->setType(Board::White);
+            this->bHP = new RemotePlayerReceiver("127.0.0.1", 10001);
+            this->bHP->setType(Board::Black);
+        }
+
     }
 }
 
 void Game::run() {
+
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {

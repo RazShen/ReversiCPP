@@ -2,7 +2,7 @@
 // Created by tomer on 12/2/17.
 //
 
-#include "RemotePlayerC.h"
+#include "RemotePlayerReceiver.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -14,19 +14,15 @@
 
 using namespace std;
 
-RemotePlayerC::RemotePlayerC(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort),
+RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort),
                                                                     clientSocket(0) {
-
+    this->serverIP = "127.0.0.1";
+    this->serverPort = 10001;
     cout << "Client" << endl;
 }
 
-RemotePlayerC::RemotePlayerC(Board::Status stat): clientSocket(0)  {
-    //set client
-    this->serverIP = "127.0.0.1";
-    this->serverPort = 10001;
-}
 
-void RemotePlayerC::connectToServer() {
+void RemotePlayerReceiver::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -57,7 +53,7 @@ void RemotePlayerC::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-int RemotePlayerC::sendMove(int arg1, int arg2) {
+int RemotePlayerReceiver::sendMove(int arg1, int arg2) {
     ssize_t n;
     // Write the exercise arguments to the socket
     n = write(clientSocket, &arg1, sizeof(arg1));
@@ -68,6 +64,10 @@ int RemotePlayerC::sendMove(int arg1, int arg2) {
     if (n == -1) {
         throw "Error writing arg2 to socket";
     }
+}
+
+int RemotePlayerReceiver::getMoveFromServer() {
+    ssize_t n;
     // Read the result from the server
     int result;
     n = read(clientSocket, &result, sizeof(result));
@@ -77,9 +77,8 @@ int RemotePlayerC::sendMove(int arg1, int arg2) {
     return result;
 }
 
-
 const Pair
-RemotePlayerC::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
+RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
     int xUser, yUser;
     display->itsYourMove(this->getType());
     display->possibleMoves(positions, moves);
@@ -95,3 +94,4 @@ RemotePlayerC::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status
     Pair inputUser = Pair(xUser, yUser);
     return inputUser;
 }
+

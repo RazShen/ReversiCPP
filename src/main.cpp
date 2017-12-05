@@ -36,13 +36,14 @@ int main() {
             isNotValidInput = false;
         }
     } while (isNotValidInput);
-    if (input != 3) {
+
         Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
         game.run();
-    } else {
-        RemoteGame rG = RemoteGame(new RegularGameLogic(boardSize, GameLogic::Regular), display);
-        rG.run();
-    }
+
+//    } else {
+//        RemoteGame rG = RemoteGame(new RegularGameLogic(boardSize, GameLogic::Regular), display);
+//        rG.run();
+//    }
 
     display->anyKeyToExitMassage();
     delete (display);

@@ -38,12 +38,18 @@ public:
      */
     virtual const Pair
     getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) = 0;
+    Player(const char *serverIP, int serverPort);
+
+    void connectToServer();
+    int sendMove(int arg1, int arg2);
+    int getMoveFromServer();
 
     /**
      * This method returns the player's type.
      * @return
      */
     Board::Status getType() const;
+    void setType(Board::Status stat);
 
 private:
     Board::Status type;

@@ -2,21 +2,17 @@
 // Created by tomer on 12/2/17.
 //
 
-#ifndef EX4_REMOTEPLAYERCLIENT_H
-#define EX4_REMOTEPLAYERCLIENT_H
+#ifndef EX4_REMOTEPLAYERRECEIVER_H
+#define EX4_REMOTEPLAYERRECEIVER_H
 
 
 #include "../Player.h"
 
-class RemotePlayerC: public Player {
+class RemotePlayerReceiver: public Player {
 public:
-    RemotePlayerC(const char *serverIP, int serverPort);
-    void connectToServer();
-    int sendMove(int arg1, int arg2);
-    /**
-    * Constructor for the human player.
-    */
-    RemotePlayerC(Board::Status);
+    RemotePlayerReceiver(const char *serverIP, int serverPort);
+
+
     /**
     * This method asks the user to pick he's selected move.
     * @param positions possible moves.
@@ -27,6 +23,11 @@ public:
     * @return user's decided move.
     */
     const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
+
+    void connectToServer();
+    int sendMove(int arg1, int arg2);
+    int getMoveFromServer();
+
 private:
     const char *serverIP;
     int serverPort;
@@ -34,4 +35,4 @@ private:
 };
 
 
-#endif //EX4_REMOTEPLAYERCLIENT_H
+#endif //EX4_REMOTEPLAYERRECEIVER_H

@@ -19,5 +19,23 @@ Board::Status Player::getType() const {
 
 Player::Player() {}
 
+void Player::setType(Board::Status stat) {
+    this->type = stat;
+}
 
 
+Player::Player(const char *serverIP, int serverPort) {
+
+}
+
+void Player::connectToServer() {
+
+}
+
+int Player::sendMove(int arg1, int arg2) {
+
+}
+
+int Player::getMoveFromServer() {
+
+}

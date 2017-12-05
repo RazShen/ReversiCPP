@@ -9,10 +9,10 @@ include_directories(lib/googletest-release-1.8.0/googlemock/include)
 set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src/RegularGameLogic.cpp
         src/RegularGameLogic.h src/HumanPlayer.h src/HumanPlayer.cpp src/AIPlayer.cpp src/AIPlayer.h src/Player.h
         src/Player.cpp src/Pair.cpp src/Pair.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/Game.cpp src/Game.h
-        src/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerC.cpp src/client/RemotePlayerC.h
-        src/RemoteGame.cpp src/RemoteGame.h)
+        src/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
+        src/RemoteGame.cpp src/RemoteGame.h src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h)
 
-set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp)
+set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp )
 
 add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
 add_executable(ReversiServer ${SOURCE_FILES} src/server/mainS.cpp)
