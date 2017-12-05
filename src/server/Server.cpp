@@ -3,7 +3,6 @@
 //
 
 #include "Server.h"
-#include "Server.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -34,18 +33,31 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
     // Define the client socket's structures
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
+    struct sockaddr_in playerAddress1;
+    struct sockaddr_in playerAddress2;
+    socklen_t playerAddressLen1;
+    socklen_t playerAddressLen2;
     while (true) {
-        cout << "Waiting for client connections..." << endl;
+        cout << "Waiting for X player to connect..." << endl;
         // Accept a new client connection
-        int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-        cout << "Client connected" << endl;
-        if (clientSocket == -1)
+        int playerSocket1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
+        cout << "Player X connected." << endl;
+        if (playerSocket1 == -1)
             throw "Error on accept";
-        handleClient(clientSocket);
+
+        cout << "Waiting for O player to connect..." << endl;
+        // Accept a new client connection
+        int playerSocket2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
+        cout << "Player O connected." << endl;
+        if (playerSocket2 == -1)
+            throw "Error on accept";
+
+
+
+        handleClient(playerSocket1);
         // Close communication with the client
-        close(clientSocket);
+        close(playerSocket1);
+        close(playerSocket2);
     }
 }
 
