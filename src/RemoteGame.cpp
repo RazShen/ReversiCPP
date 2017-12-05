@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include "Game.h"
-#include "AIPlayer.h"
 #include "RemoteGame.h"
+#include "RemotePlayer.h"
 
 using namespace std;
 
@@ -13,13 +13,8 @@ RemoteGame::RemoteGame(RegularGameLogic *gameLogic, int choose, Display *console
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
-    this->bHP = new HumanPlayer(Board::Black);
-    if (choose == 1) {
-        this->wHP = new HumanPlayer(Board::White);
-    } else if (choose == 2) {
-        this->wHP = new AIPlayer(Board::White);
-    }
-    this->blackPClient = new client
+    this->bHP = new RemotePlayer(Board::Black);
+    this->wHP = new RemotePlayer(Board::White);
 }
 
 void RemoteGame::run() {

@@ -46,15 +46,12 @@ void Client::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-int Client::sendExercise(int arg1, char op, int arg2) {
+int Client::sendMove(int arg1, int arg2) {
+    ssize_t n;
     // Write the exercise arguments to the socket
-    int n = write(clientSocket, &arg1, sizeof(arg1));
+    n = write(clientSocket, &arg1, sizeof(arg1));
     if (n == -1) {
         throw "Error writing arg1 to socket";
-    }
-    n = write(clientSocket, &op, sizeof(op));
-    if (n == -1) {
-        throw "Error writing op to socket";
     }
     n = write(clientSocket, &arg2, sizeof(arg2));
     if (n == -1) {

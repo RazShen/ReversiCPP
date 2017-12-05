@@ -37,7 +37,6 @@ private:
     Player *bHP;
     Player *wHP;
     Display *display;
-    Client blackPClient, whitePClient;
 };
 
 

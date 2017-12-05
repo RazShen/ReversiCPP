@@ -12,6 +12,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
+#include "client/Client.h"
 
 /*
  * This class features a remote player class.
@@ -32,6 +33,9 @@ public:
     * @return user's decided move.
     */
     const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
+
+private:
+    Client* pClient;
 };
 
 

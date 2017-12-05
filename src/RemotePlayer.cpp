@@ -11,6 +11,8 @@
 using namespace std;
 
 RemotePlayer::RemotePlayer(Board::Status stat) : Player(stat) {
+    //set client
+    pClient = new Client("127.0.0.1", 10010);
 
 }
 
