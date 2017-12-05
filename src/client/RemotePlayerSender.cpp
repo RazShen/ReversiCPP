@@ -23,6 +23,7 @@ RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
 
 
 void RemotePlayerSender::connectToServer() {
+    cout << "7" << endl;
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {

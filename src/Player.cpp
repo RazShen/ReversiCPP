@@ -4,6 +4,7 @@
  */
 
 
+#include <iostream>
 #include "Player.h"
 
 
@@ -24,15 +25,15 @@ void Player::setType(Board::Status stat) {
 }
 
 
-Player::Player(const char *serverIP, int serverPort) {
+virtual Player::Player(const char *serverIP, int serverPort) {
 
 }
 
-void Player::connectToServer() {
+virtual void Player::connectToServer() {
 
 }
 
-int Player::sendMove(int arg1, int arg2) {
+virtual int Player::sendMove(int arg1, int arg2) {
 
 }
 

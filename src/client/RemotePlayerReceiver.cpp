@@ -23,6 +23,7 @@ RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort)
 
 
 void RemotePlayerReceiver::connectToServer() {
+
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {

@@ -40,9 +40,9 @@ public:
     getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) = 0;
     Player(const char *serverIP, int serverPort);
 
-    void connectToServer();
-    int sendMove(int arg1, int arg2);
-    int getMoveFromServer();
+    virtual void connectToServer();
+    virtual int sendMove(int arg1, int arg2);
+    virtual int getMoveFromServer();
 
     /**
      * This method returns the player's type.
