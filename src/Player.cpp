@@ -25,15 +25,15 @@ void Player::setType(Board::Status stat) {
 }
 
 
-virtual Player::Player(const char *serverIP, int serverPort) {
+Player::Player(const char *serverIP, int serverPort) {
 
 }
 
-virtual void Player::connectToServer() {
+void Player::connectToServer() {
 
 }
 
-virtual int Player::sendMove(int arg1, int arg2) {
+int Player::sendMove(int arg1, int arg2) {
 
 }
 
