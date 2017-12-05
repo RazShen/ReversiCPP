@@ -25,7 +25,7 @@ void Server::start() {
         throw "Error opening socket";
     }
     // Assign a local address to the socket
-    struct sockaddr_in serverAddress;
+    struct sockaddr_in serverAddress = {};
     bzero((void *) &serverAddress,
           sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
@@ -37,31 +37,31 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
     // Define the client socket's structures
-    struct sockaddr_in playerAddress1;
-    struct sockaddr_in playerAddress2;
+    struct sockaddr_in playerAddress1 = {};
+    struct sockaddr_in playerAddress2 = {};
     socklen_t playerAddressLen1;
     socklen_t playerAddressLen2;
     while (true) {
         cout << "Waiting for X player to connect..." << endl;
         // Accept a new client connection
-        int playerSocket1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
+        int player1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
-        if (playerSocket1 == -1)
+        if (player1 == -1)
             throw "Error on accept";
 
         cout << "Waiting for O player to connect..." << endl;
         // Accept a new client connection
-        int playerSocket2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
+        int player2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
-        if (playerSocket2 == -1)
+        if (player2 == -1)
             throw "Error on accept";
-        initializingPlayer(playerSocket1,1);
-        initializingPlayer(playerSocket2,2);
+        initializingPlayer(player1,1);
+        initializingPlayer(player2,2);
 
-        handleClients(playerSocket1, playerSocket2);
+        handleClients(player1, player2);
         // Close communication with the client
-        close(playerSocket1);
-        close(playerSocket2);
+        close(player1);
+        close(player2);
     }
 }
 void Server:: initializingPlayer(int playerSocket, int playerNum) {
@@ -83,13 +83,21 @@ void Server::handleClients(int player1, int player2) {
     }
 }
 bool Server:: transferMessage(int sender, int receiver) {
-    char buffer[MaxDataSize] = "\0";
-    ssize_t checkTransfer = read(sender, buffer, sizeof(buffer));
-    if (checkTransfer == -1) {
+    int arg1, arg2;
+    ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
+    if (checkTransfer <= 0) {
         return false;
     }
-    checkTransfer = write(receiver, buffer, sizeof(receiver));
-    if (checkTransfer == 0) {
+    checkTransfer = read(sender, &arg2, sizeof(arg2));
+    if (checkTransfer <= 0) {
+        return false;
+    }
+    checkTransfer = write(receiver, &arg1, sizeof(arg1));
+    if (checkTransfer <= 0) {
+        return false;
+    }
+    checkTransfer = write(receiver, &arg2, sizeof(arg2));
+    if (checkTransfer <= 0) {
         return false;
     }
     return true;
