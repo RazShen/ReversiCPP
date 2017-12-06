@@ -18,7 +18,6 @@ RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     this->serverIP = "127.0.0.1";
     this->serverPort = 10001;
-    cout << "Client" << endl;
 }
 
 
@@ -55,14 +54,14 @@ void RemotePlayerSender::connectToServer() {
 }
 
 int RemotePlayerSender::sendMove(int arg1, int arg2) {
-    ssize_t n;
-    // Write the exercise arguments to the socket
-    n = write(clientSocket, &arg1, sizeof(arg1));
-    if (n == -1) {
+    ssize_t numToSend;
+    // Write 2 numbers t
+    numToSend = write(clientSocket, &arg1, sizeof(arg1));
+    if (numToSend == -1) {
         throw "Error writing arg1 to socket";
     }
-    n = write(clientSocket, &arg2, sizeof(arg2));
-    if (n == -1) {
+    numToSend = write(clientSocket, &arg2, sizeof(arg2));
+    if (numToSend == -1) {
         throw "Error writing arg2 to socket";
     }
 }

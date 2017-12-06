@@ -38,7 +38,6 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->bHP = new RemotePlayerReceiver("127.0.0.1", 10001);
             this->bHP->setType(Board::Black);
         }
-
     }
 }
 

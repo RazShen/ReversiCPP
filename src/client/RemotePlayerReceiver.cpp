@@ -18,7 +18,6 @@ RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort)
                                                                     clientSocket(0) {
     this->serverIP = "127.0.0.1";
     this->serverPort = 10001;
-    cout << "Client" << endl;
 }
 
 
