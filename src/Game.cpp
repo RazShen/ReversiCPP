@@ -89,7 +89,7 @@ void Game::run() {
                 noMoreActionW = true;
             } else {
                 do {
-                    userInput = wHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
+                    userInput = wHP->getMove(pArr, moves, this->gameLogic, Board::Black, display);
                 } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
                 // updating the server after the move according to the type
                 this->gameLogic->flipCell(userInput, Board::Black, Board::White);

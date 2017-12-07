@@ -18,7 +18,7 @@ using namespace std;
 RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     this->serverIP = "127.0.0.1";
-    this->serverPort = 11002;
+    this->serverPort = 11011;
 }
 
 
