@@ -53,10 +53,11 @@ void Game::run() {
         if (this->blackTurn) {
             this->gameLogic->possibleMoves(pArr, moves, bHP->getType());
             if (moves == 0) {
-                string anyKey;
-                display->noPossibleMoves();
-                std::getline(cin, anyKey);
-                display->newLine();
+                this->bHP->noMove(this->display);
+//                string anyKey;
+//                display->noPossibleMoves();
+//                std::getline(cin, anyKey);
+//                display->newLine();
                 noMoreActionsB = true;
             } else {
                 do {
@@ -77,10 +78,11 @@ void Game::run() {
             }
             this->gameLogic->possibleMoves(pArr, moves, wHP->getType());
             if (moves == 0) {
-                string anyKey;
-                display->noPossibleMoves();
-                std::getline(cin, anyKey);
-                display->newLine();
+                this->wHP->noMove(this->display);
+//                string anyKey;
+//                display->noPossibleMoves();
+//                std::getline(cin, anyKey);
+//                display->newLine();
                 noMoreActionW = true;
             } else {
                 do {

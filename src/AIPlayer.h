@@ -31,6 +31,7 @@ public:
      * @return most valuable move.
      */
     const Pair getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display);
+    void noMove(Display* display);
 };
 
 

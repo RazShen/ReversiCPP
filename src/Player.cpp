@@ -46,6 +46,4 @@ void Player::noMove(Display *display) {
 
 }
 
-void update(int arg1, int arg2) {
 
-}

@@ -78,9 +78,6 @@ void ConsoleDisplay::getInput() {
     cout << "Please enter your move row (space) col: ";
 }
 
-void ConsoleDisplay::noPossibleMoves() {
-    cout << "No possible moves. Play passes back to other player. Press any key to continue." << endl;
-}
 
 void ConsoleDisplay::newLine() {
     cout << "" << endl;
@@ -135,7 +132,7 @@ void ConsoleDisplay::noMoreMovesForAll() {
 void ConsoleDisplay::waitForMove() {
     cout << "Waiting for other player's move..." << endl;
 }
-void ConsoleDisplay::noPossiblePlayerMove(Board:: Status stat) {
+void ConsoleDisplay::noPossiblePlayerMove(Board::Status stat) {
     cout << "No possible moves for" ;
     if (stat == Board::Black) {
         cout << "X player" << endl;
@@ -146,3 +143,4 @@ void ConsoleDisplay::noPossiblePlayerMove(Board:: Status stat) {
     cout << "Play passes back to other player" << endl;
 
 }
+

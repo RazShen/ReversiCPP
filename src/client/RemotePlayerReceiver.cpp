@@ -96,3 +96,18 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     return inputUser;
 }
 
+void RemotePlayerReceiver::noMove(Display* display) {
+    // just getting the pair -1,-1 from server to know opponent has no moves
+    int xUser, yUser;
+    ssize_t n;
+    display->noPossiblePlayerMove(this->getType());
+    n = read(clientSocket, &xUser, sizeof(xUser));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
+    n = read(clientSocket, &yUser, sizeof(yUser));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
+    return;
+}

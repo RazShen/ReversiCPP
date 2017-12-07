@@ -56,10 +56,6 @@ public:
      */
     virtual void getInput() = 0;
     /**
-     * this method prints no possible moves for player.
-     */
-    virtual void noPossibleMoves() = 0;
-    /**
      * this method prints new line.
      */
     virtual void newLine() = 0;
@@ -96,6 +92,11 @@ public:
      * this method prints that there is no more moves for both player.
      */
     virtual void noMoreMovesForAll() = 0;
+    /*
+     * Waiting for the opponent move.
+     */
+    virtual void waitForMove() = 0;
 
+    virtual void noPossiblePlayerMove(Board::Status stat) = 0;
 };
 #endif //EX3WITHTESTS_DISPLAY_H

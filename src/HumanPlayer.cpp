@@ -31,3 +31,10 @@ HumanPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status o
     Pair inputUser = Pair(xUser, yUser);
     return inputUser;
 }
+
+void HumanPlayer::noMove(Display* display) {
+    string anyKey;
+    display->noPossiblePlayerMove(this->getType());
+    std::getline(cin, anyKey);
+    display->newLine();
+}

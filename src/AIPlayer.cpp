@@ -52,4 +52,9 @@ const Pair AIPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::
     return Pair(positions[indexOfMin].getRow() + 1, positions[indexOfMin].getCol() + 1);
 }
 
+void AIPlayer::noMove(Display* display) {
+    display->noPossiblePlayerMove(this->getType());
+    display->newLine();
+}
+
 

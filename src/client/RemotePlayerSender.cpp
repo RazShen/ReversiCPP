@@ -2,6 +2,7 @@
 // Created by raz on 12/5/17.
 //
 
+
 #include "RemotePlayerSender.h"
 #include <iostream>
 #include <sys/socket.h>
@@ -88,3 +89,10 @@ int RemotePlayerSender::getMoveFromServer() {
     return Player::getMoveFromServer();
 }
 
+void RemotePlayerSender::noMove(Display* display) {
+    string anyKey;
+    display->noPossiblePlayerMove(this->getType());
+    std::getline(cin, anyKey);
+    display->newLine();
+    update(-1, -1);
+}

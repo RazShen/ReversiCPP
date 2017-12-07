@@ -63,10 +63,7 @@ public:
      * this method prints and ask an input from the player.
      */
     void getInput();
-    /**
-     * this method prints no possible moves for player.
-     */
-    void noPossibleMoves();
+
     /**
      * this method prints new line.
      */
@@ -110,6 +107,8 @@ public:
     void waitForMove();
 
     void noPossiblePlayerMove(Board::Status stat);
+
+
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H
