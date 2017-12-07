@@ -15,7 +15,7 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
 set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp )
 
 add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
-add_executable(ReversiServer ${SOURCE_FILES} src/server/mainS.cpp)
+add_executable(ServerForReversi ${SOURCE_FILES} src/server/mainS.cpp)
 add_executable(Reversi ${SOURCE_FILES} src/main.cpp)
 target_link_libraries(ex4 gtest gtest_main pthread)
 add_test(ex4 ex4)

@@ -23,7 +23,6 @@ RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
 
 
 void RemotePlayerSender::connectToServer() {
-    cout << "7" << endl;
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -86,7 +85,14 @@ RemotePlayerSender::getMove(Pair positions[], int moves, GameLogic *gl, Board::S
 }
 
 int RemotePlayerSender::getMoveFromServer() {
-    return Player::getMoveFromServer();
+    ssize_t n;
+    // Read the result from the server
+    int result;
+    n = read(clientSocket, &result, sizeof(result));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
+    return result;
 }
 
 void RemotePlayerSender::noMove(Display* display) {
