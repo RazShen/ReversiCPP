@@ -98,5 +98,7 @@ public:
     virtual void waitForMove() = 0;
 
     virtual void noPossiblePlayerMove(Board::Status stat) = 0;
+    virtual void waitingForOppToConnect() = 0;
+    virtual void connectedToServer() = 0;
 };
 #endif //EX3WITHTESTS_DISPLAY_H

@@ -18,7 +18,7 @@ using namespace std;
 RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     this->serverIP = "127.0.0.1";
-    this->serverPort = 10001;
+    this->serverPort = 11002;
 }
 
 
@@ -50,7 +50,6 @@ void RemotePlayerSender::connectToServer() {
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout << "Connected to server" << endl;
 }
 
 void RemotePlayerSender::update(int arg1, int arg2) {

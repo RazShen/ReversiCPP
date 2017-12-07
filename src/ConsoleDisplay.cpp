@@ -144,3 +144,9 @@ void ConsoleDisplay::noPossiblePlayerMove(Board::Status stat) {
 
 }
 
+void ConsoleDisplay::waitingForOppToConnect() {
+    cout << "Waiting for other player to join..." << endl;
+}
+void ConsoleDisplay::connectedToServer() {
+    cout << "Connected to server" << endl;
+}

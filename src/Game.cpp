@@ -29,10 +29,13 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
         this->bHP->connectToServer();
         // get from the server if the player is Black or White 1 for X , 2 for O.
         if (this->bHP->getMoveFromServer() == 1) {
+            this->display->connectedToServer();
+            this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
             this->wHP = new RemotePlayerReceiver("127.0.0.1", 10001);
             this->wHP->setType(Board::White);
         } else {
+            this->display->connectedToServer();
             this->wHP = this->bHP;
             this->wHP->setType(Board::White);
             this->bHP = new RemotePlayerReceiver("127.0.0.1", 10001);
