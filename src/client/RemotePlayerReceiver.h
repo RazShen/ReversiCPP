@@ -25,7 +25,6 @@ public:
     const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
 
     void connectToServer();
-    int sendMove(int arg1, int arg2);
     int getMoveFromServer();
 
 private:

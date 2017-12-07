@@ -33,10 +33,19 @@ void Player::connectToServer() {
 
 }
 
-int Player::sendMove(int arg1, int arg2) {
+
+int Player::getMoveFromServer() {
 
 }
 
-int Player::getMoveFromServer() {
+void Player::update(int arg1, int arg2) {
+    return;
+}
+
+void Player::noMove(Display *display) {
+
+}
+
+void update(int arg1, int arg2) {
 
 }

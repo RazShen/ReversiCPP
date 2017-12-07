@@ -131,3 +131,18 @@ void ConsoleDisplay::declareDraw() {
 void ConsoleDisplay::noMoreMovesForAll() {
     cout << "No more moves available for both players: " << endl;
 }
+
+void ConsoleDisplay::waitForMove() {
+    cout << "Waiting for other player's move..." << endl;
+}
+void ConsoleDisplay::noPossiblePlayerMove(Board:: Status stat) {
+    cout << "No possible moves for" ;
+    if (stat == Board::Black) {
+        cout << "X player" << endl;
+    }
+    else {
+        cout << "O player" << endl;
+    }
+    cout << "Play passes back to other player" << endl;
+
+}

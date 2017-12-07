@@ -53,18 +53,18 @@ void RemotePlayerReceiver::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-int RemotePlayerReceiver::sendMove(int arg1, int arg2) {
-    ssize_t n;
-    // Write the exercise arguments to the socket
-    n = write(clientSocket, &arg1, sizeof(arg1));
-    if (n == -1) {
-        throw "Error writing arg1 to socket";
-    }
-    n = write(clientSocket, &arg2, sizeof(arg2));
-    if (n == -1) {
-        throw "Error writing arg2 to socket";
-    }
-}
+//int RemotePlayerReceiver::update(int arg1, int arg2) {
+//    ssize_t n;
+//    // Write the exercise arguments to the socket
+//    n = write(clientSocket, &arg1, sizeof(arg1));
+//    if (n == -1) {
+//        throw "Error writing arg1 to socket";
+//    }
+//    n = write(clientSocket, &arg2, sizeof(arg2));
+//    if (n == -1) {
+//        throw "Error writing arg2 to socket";
+//    }
+//}
 
 int RemotePlayerReceiver::getMoveFromServer() {
     ssize_t n;
@@ -80,16 +80,17 @@ int RemotePlayerReceiver::getMoveFromServer() {
 const Pair
 RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
     int xUser, yUser;
-    display->itsYourMove(this->getType());
-    display->possibleMoves(positions, moves);
-    display->getInput();
-    cin >> xUser >> yUser;
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        // illegal value in purpose
-        xUser = -5;
-        yUser = -5;
+    //display->itsYourMove(this->getType());
+    //display->possibleMoves(positions, moves);
+    //display->getInput();
+    ssize_t n;
+    n = read(clientSocket, &xUser, sizeof(xUser));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
+    n = read(clientSocket, &yUser, sizeof(yUser));
+    if (n == -1) {
+        throw "Error reading result from socket";
     }
     Pair inputUser = Pair(xUser, yUser);
     return inputUser;

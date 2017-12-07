@@ -42,7 +42,6 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
 }
 
 void Game::run() {
-
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
@@ -64,6 +63,8 @@ void Game::run() {
                     userInput = bHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
                 } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
                 this->gameLogic->flipCell(userInput, Board::White, Board::Black);
+                // updating the server after the move according to the type
+                this->bHP->update(userInput.getRow(), userInput.getCol());
                 display->xPlayed();
                 display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
                 display->newLine();
@@ -71,7 +72,6 @@ void Game::run() {
             }
             this->blackTurn = false;
         } else {
-
             if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
                 return;
             }
@@ -86,7 +86,9 @@ void Game::run() {
                 do {
                     userInput = wHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
                 } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
+                // updating the server after the move according to the type
                 this->gameLogic->flipCell(userInput, Board::Black, Board::White);
+                this->wHP->update(userInput.getRow(), userInput.getCol());
                 display->oPlayed();
                 display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
                 display->newLine();

@@ -53,7 +53,7 @@ void RemotePlayerSender::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-int RemotePlayerSender::sendMove(int arg1, int arg2) {
+void RemotePlayerSender::update(int arg1, int arg2) {
     ssize_t numToSend;
     // Write 2 numbers t
     numToSend = write(clientSocket, &arg1, sizeof(arg1));
@@ -64,17 +64,6 @@ int RemotePlayerSender::sendMove(int arg1, int arg2) {
     if (numToSend == -1) {
         throw "Error writing arg2 to socket";
     }
-}
-
-int RemotePlayerSender::getMoveFromServer() {
-    ssize_t n;
-    // Read the result from the server
-    int result;
-    n = read(clientSocket, &result, sizeof(result));
-    if (n == -1) {
-        throw "Error reading result from socket";
-    }
-    return result;
 }
 
 const Pair
@@ -93,5 +82,9 @@ RemotePlayerSender::getMove(Pair positions[], int moves, GameLogic *gl, Board::S
     }
     Pair inputUser = Pair(xUser, yUser);
     return inputUser;
+}
+
+int RemotePlayerSender::getMoveFromServer() {
+    return Player::getMoveFromServer();
 }
 

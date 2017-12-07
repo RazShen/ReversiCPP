@@ -104,7 +104,12 @@ public:
      * this method prints that there is no more moves for both player.
      */
     void noMoreMovesForAll();
+    /*
+     * Waiting for the opponent move.
+     */
+    void waitForMove();
 
+    void noPossiblePlayerMove(Board::Status stat);
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H

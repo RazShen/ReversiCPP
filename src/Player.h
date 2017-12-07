@@ -41,8 +41,9 @@ public:
     Player(const char *serverIP, int serverPort);
 
     virtual void connectToServer();
-    virtual int sendMove(int arg1, int arg2);
+    virtual void update(int arg1, int arg2);
     virtual int getMoveFromServer();
+    virtual void noMove(Display* display);
 
     /**
      * This method returns the player's type.

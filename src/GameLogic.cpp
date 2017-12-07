@@ -90,5 +90,4 @@ int GameLogic::getBlackScore() {
         }
     }
     return (blackCells - whiteCells);
-
 }
