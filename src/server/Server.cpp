@@ -91,18 +91,23 @@ void Server::handleClients(int player1, int player2) {
 bool Server::transferMessage(int sender, int receiver) {
     int arg1, arg2;
     ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
+    cout << "server read" << arg1 << endl;
     if (checkTransfer <= 0) {
         return false;
     }
     checkTransfer = read(sender, &arg2, sizeof(arg2));
+    cout << "server read" << arg2 << endl;
+
     if (checkTransfer <= 0) {
         return false;
     }
     checkTransfer = write(receiver, &arg1, sizeof(arg1));
+    cout << "server wrote" << arg1 << endl;
     if (checkTransfer <= 0) {
         return false;
     }
     checkTransfer = write(receiver, &arg2, sizeof(arg2));
+    cout << "server wrote" << arg2 << endl;
     if (checkTransfer <= 0) {
         return false;
     }
