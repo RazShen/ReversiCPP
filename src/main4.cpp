@@ -14,7 +14,7 @@ int main() {
     int serverPort;
     string buffer;
     ifstream settings;
-    settings.open("server/sconfig.txt.txt");
+    settings.open("sconfig.txt");
 
    if(settings.fail()) {
         throw "Can't open file, aborting";
