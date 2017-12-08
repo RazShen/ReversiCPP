@@ -14,12 +14,13 @@
 
 using namespace std;
 
-RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort),
-                                                                    clientSocket(0) {
-    this->serverIP = "127.0.0.1";
-    this->serverPort = 11002;
-}
+//RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort): serverIP(serverIP),
+//                    serverPort(serverPort), clientSocket(0) {
+//}
 
+RemotePlayerReceiver::RemotePlayerReceiver(const char* filename): Player(filename) {
+
+}
 
 void RemotePlayerReceiver::connectToServer() {
     // Create a socket point

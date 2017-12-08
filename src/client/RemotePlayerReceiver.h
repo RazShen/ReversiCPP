@@ -10,8 +10,8 @@
 
 class RemotePlayerReceiver: public Player {
 public:
-    RemotePlayerReceiver(const char *serverIP, int serverPort);
-
+ //   RemotePlayerReceiver(const char *serverIP, int serverPort);
+    RemotePlayerReceiver(const char* filename);
 
     /**
     * This method asks the user to pick he's selected move.
@@ -28,8 +28,6 @@ public:
     int getMoveFromServer();
     void noMove(Display* display);
 private:
-    const char *serverIP;
-    int serverPort;
     int clientSocket;
 };
 

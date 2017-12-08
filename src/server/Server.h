@@ -14,12 +14,14 @@ public:
     Server(int port);
     void start();
     void stop();
+
 private:
     int port;
-    int serverSocket; // the socket's file descriptor
+    int serverSocket;
     void handleClients(int clientSocket1, int clientSocket2);
     void initializingPlayer(int playerSocket, int playerNum);
     bool transferMessage(int sender, int reciever);
+
     };
 
 

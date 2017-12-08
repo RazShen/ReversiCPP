@@ -11,7 +11,8 @@
 
 class RemotePlayerSender: public Player {
 public:
-    RemotePlayerSender(const char *serverIP, int serverPort);
+//    RemotePlayerSender(const char *serverIP, int serverPort);
+    RemotePlayerSender(const char* filename);
     /**
     * This method asks the user to pick he's selected move.
     * @param positions possible moves.
@@ -27,9 +28,8 @@ public:
     int getMoveFromServer();
     void noMove(Display* display);
 
+
 private:
-    const char *serverIP;
-    int serverPort;
     int clientSocket;
 };
 

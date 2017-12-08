@@ -10,6 +10,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
+#include <fstream>
+#include <cstdlib>
 
 #define MaxDataSize 20
 
@@ -18,6 +20,8 @@ using namespace std;
 Server::Server(int port): port(port), serverSocket(0) {
     cout << "Server" << endl;
 }
+
+
 void Server::start() {
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -82,7 +86,7 @@ void Server::handleClients(int player1, int player2) {
         receiver = temp;
     }
 }
-bool Server:: transferMessage(int sender, int receiver) {
+bool Server::transferMessage(int sender, int receiver) {
     int arg1, arg2;
     ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
     if (checkTransfer <= 0) {
@@ -101,10 +105,9 @@ bool Server:: transferMessage(int sender, int receiver) {
         return false;
     }
     return true;
-
-
-
 }
+
 void Server::stop() {
     close(serverSocket);
 }
+

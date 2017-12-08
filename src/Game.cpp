@@ -10,9 +10,11 @@
 #include "AIPlayer.h"
 #include "client/RemotePlayerSender.h"
 
+
 using namespace std;
 
 Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
+    const char* filename = "server/serversettings.txt";
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
@@ -24,7 +26,9 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
         this->wHP = new AIPlayer(Board::White);
     } else if (choose == 3) {
         //create a new player that connect to the server
-        this->bHP = new RemotePlayerSender("127.0.0.1", 10001);
+
+        this->bHP = new RemotePlayerSender(filename);
+
         //connect to server
         this->bHP->connectToServer();
         // get from the server if the player is Black or White 1 for X , 2 for O.
@@ -32,17 +36,19 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->display->connectedToServer();
             this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
-            this->wHP = new RemotePlayerReceiver("127.0.0.1", 10001);
+            this->wHP = new RemotePlayerReceiver(filename);
             this->wHP->setType(Board::White);
         } else {
             this->display->connectedToServer();
             this->wHP = this->bHP;
             this->wHP->setType(Board::White);
-            this->bHP = new RemotePlayerReceiver("127.0.0.1", 10001);
+            this->bHP = new RemotePlayerReceiver(filename);
             this->bHP->setType(Board::Black);
         }
     }
 }
+
+
 
 void Game::run() {
     bool noMoreActionsB = false;

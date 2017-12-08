@@ -15,13 +15,14 @@
 
 using namespace std;
 
-RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
-        serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    this->serverIP = "127.0.0.1";
-    this->serverPort = 11011;
+//RemotePlayerSender::RemotePlayerSender(const char *serverIP, int serverPort):
+//        serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+//}
+
+
+RemotePlayerSender::RemotePlayerSender(const char* filename): Player(filename) {
+
 }
-
-
 void RemotePlayerSender::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -101,3 +102,4 @@ void RemotePlayerSender::noMove(Display* display) {
     display->newLine();
     update(-1, -1);
 }
+

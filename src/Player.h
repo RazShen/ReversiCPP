@@ -28,7 +28,7 @@ public:
      * Empty constructor for the player.
      */
     Player();
-
+    Player(const char* filename);
     /**
      * This method return the wanted move the player decided.
      * @param b board.
@@ -39,7 +39,6 @@ public:
     virtual const Pair
     getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) = 0;
     Player(const char *serverIP, int serverPort);
-
     virtual void connectToServer();
     virtual void update(int arg1, int arg2);
     virtual int getMoveFromServer();
@@ -52,8 +51,10 @@ public:
     Board::Status getType() const;
     void setType(Board::Status stat);
 
-private:
+protected:
     Board::Status type;
+    const char *serverIP;
+    int serverPort;
 
 };
 
