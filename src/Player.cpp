@@ -8,6 +8,7 @@
 #include "Player.h"
 #include <fstream>
 #include <cstdlib>
+#include <cstring>
 
 using namespace std;
 
@@ -61,6 +62,8 @@ Player::Player(const char* filename) {
             settings >> buffer; // buffer is now :
             settings >> buffer; // buffer equals the ip number
             this->serverIP = buffer.c_str();
+            char buffer2[20] = buffer.c_str();
+            strcpy(buffer2, serverIP);
         }
         settings >> buffer;
         if (buffer == "Port") {
