@@ -57,24 +57,19 @@ Player::Player(const char* filename) {
         throw "Can't open file, aborting";
     }
     while (!settings.eof()) {
-
         if(buffer == "IP") {
             settings >> buffer; // buffer is now :
             settings >> buffer; // buffer equals the ip number
             this->serverIP = buffer.c_str();
         }
-
-            if (buffer == "Port") {
-                settings >> buffer; // buffer = :
-                settings >> buffer; // buffer is now the port number
-                this->serverPort = atoi(buffer.c_str());
-            }
         settings >> buffer;
+        if (buffer == "Port") {
+            settings >> buffer; // buffer is now :
+            settings >> buffer; // buffer is now the port number
+            this->serverPort = atoi(buffer.c_str());
         }
-
-        settings.close();
-
-
+    }
+    settings.close();
     cout <<serverPort<<endl;
     cout<<serverIP<<endl;
 }
