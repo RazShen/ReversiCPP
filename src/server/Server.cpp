@@ -54,12 +54,14 @@ void Server::start() {
             throw "Error on accept";
 
         cout << "Waiting for O player to connect..." << endl;
+        initializingPlayer(player1,1);
+
         // Accept a new client connection
         int player2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
         if (player2 == -1)
             throw "Error on accept";
-        initializingPlayer(player1,1);
+     //   initializingPlayer(player1,1);
         initializingPlayer(player2,2);
 
         handleClients(player1, player2);

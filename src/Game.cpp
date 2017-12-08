@@ -32,13 +32,14 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
         //connect to server
         this->bHP->connectToServer();
         // get from the server if the player is Black or White 1 for X , 2 for O.
-        if (this->bHP->getMoveFromServer() == 1) {
+        int indexPlayer = this->bHP->getMoveFromServer();
+        if (indexPlayer == 1) {
             this->display->connectedToServer();
             this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
             this->wHP = new RemotePlayerReceiver(filename);
             this->wHP->setType(Board::White);
-        } else {
+        } else if (indexPlayer == 2) {
             this->display->connectedToServer();
             this->wHP = this->bHP;
             this->wHP->setType(Board::White);
@@ -72,9 +73,9 @@ void Game::run() {
                 do {
                     userInput = bHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
                 } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
+                this->bHP->update(userInput.getRow(), userInput.getCol());
                 this->gameLogic->flipCell(userInput, Board::White, Board::Black);
                 // updating the server after the move according to the type
-                this->bHP->update(userInput.getRow(), userInput.getCol());
                 display->xPlayed();
                 display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
                 display->newLine();
