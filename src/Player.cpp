@@ -55,7 +55,7 @@ Player::Player(const char* filename) {
     ifstream settings;
     settings.open(filename);
     char * writable;
-    const char * buffer2;
+    //const char * buffer2;
     if(!settings) {
         throw "Can't open file, aborting";
     }
@@ -63,7 +63,7 @@ Player::Player(const char* filename) {
         if(buffer == "IP") {
             settings >> buffer; // buffer is now :
             settings >> buffer; // buffer equals the ip number
-            buffer2 = buffer.c_str();
+            //buffer2 = buffer.c_str();
             writable = new char[buffer.size() + 1];
             std::copy(buffer.begin(), buffer.end(), writable);
             writable[buffer.size()] = '\0';
