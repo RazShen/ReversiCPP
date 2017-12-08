@@ -14,7 +14,7 @@
 using namespace std;
 
 Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
-    const char* filename = "server/serversettings.txt";
+    const char* filename = "server/sconfig.txt";
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;

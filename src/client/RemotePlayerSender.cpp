@@ -23,6 +23,7 @@ using namespace std;
 RemotePlayerSender::RemotePlayerSender(const char* filename): Player(filename) {
 
 }
+
 void RemotePlayerSender::connectToServer() {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
