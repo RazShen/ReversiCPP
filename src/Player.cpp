@@ -65,7 +65,7 @@ Player::Player(const char* filename) {
             settings >> buffer; // buffer equals the ip number
             //buffer2 = buffer.c_str();
             writable = new char[buffer.size() + 1];
-            std::copy(buffer.begin(), buffer.end(), writable);
+            copy(buffer.begin(), buffer.end(), writable);
             writable[buffer.size()] = '\0';
 
         }
@@ -76,10 +76,6 @@ Player::Player(const char* filename) {
             this->serverPort = atoi(buffer.c_str());
         }
     }
-    //strcpy(buffer2, serverIP);
-    this->serverIP = writable;
-
     settings.close();
-    cout <<serverPort<<endl;
-    cout<<serverIP<<endl;
+    this->serverIP = writable;
 }
