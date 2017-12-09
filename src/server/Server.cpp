@@ -41,8 +41,8 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
     // Define the client socket's structures
-    struct sockaddr_in playerAddress1 = {};
-    struct sockaddr_in playerAddress2 = {};
+    struct sockaddr_in playerAddress1;
+    struct sockaddr_in playerAddress2;
     socklen_t playerAddressLen1;
     socklen_t playerAddressLen2;
     while (true) {
@@ -89,6 +89,8 @@ void Server::handleClients(int player1, int player2) {
     }
 }
 bool Server::transferMessage(int sender, int receiver) {
+    cout << sender << endl;
+    cout << receiver << endl;
     int arg1, arg2;
     ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
     cout << "server read" << arg1 << endl;
