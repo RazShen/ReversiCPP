@@ -62,7 +62,6 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
 
 
 void Game::run() {
-    cout <<1 << endl;
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
@@ -71,9 +70,7 @@ void Game::run() {
         Pair pArr[this->gameLogic->getBoardSize() * this->gameLogic->getBoardSize() + 1];
         display->currentBoard();
         display->printBoard(this->gameLogic->getBoard());
-        cout <<2<< endl;
         if (this->blackTurn) {
-            cout <<3 << endl;
             this->gameLogic->possibleMoves(pArr, moves, bHP->getType());
             if (moves == 0) {
                 this->bHP->noMove(this->display);
@@ -84,10 +81,7 @@ void Game::run() {
                 noMoreActionsB = true;
             } else {
                 do {
-                    cout << "started get move black" << endl;
-
                     userInput = bHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
-                    cout << "Ended get move black" << endl;
                 } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
                 this->bHP->update(userInput.getRow(), userInput.getCol());
                 this->gameLogic->flipCell(userInput, Board::White, Board::Black);
@@ -99,7 +93,6 @@ void Game::run() {
             }
             this->blackTurn = false;
         } else {
-            cout <<4<< endl;
             if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
                 return;
             }

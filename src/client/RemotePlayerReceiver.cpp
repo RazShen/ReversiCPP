@@ -78,23 +78,18 @@ int RemotePlayerReceiver::getMoveFromServer() {
 
 const Pair
 RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
-    cout << "receiver get move" << endl;
     int xUser = -6;
     int yUser = -6;
     
     //display->itsYourMove(this->getType());
     //display->possibleMoves(positions, moves);
     //display->getInput();
-    while (xUser == -6 && yUser == -6) {
-        ssize_t n;
-        n = read(clientSocket, &xUser, sizeof(xUser));
-        if (n == -1) {
-            throw "Error reading result from socket";
-        }
-        n = read(clientSocket, &yUser, sizeof(yUser));
-        if (n == -1) {
-            throw "Error reading result from socket";
-        }
+    ssize_t n;
+    n = read(clientSocket, &xUser, sizeof(xUser));
+    if (n == -1) {
+    }
+    n = read(clientSocket, &yUser, sizeof(yUser));
+    if (n == -1) {
     }
     
     cout << "receiver get move33" <<endl;

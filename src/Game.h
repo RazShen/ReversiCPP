@@ -44,7 +44,6 @@ private:
     Player *bHP;
     Player *wHP;
     Display *display;
-    bool secondPlayerJoined;
 };
 
 
