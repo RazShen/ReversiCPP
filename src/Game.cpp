@@ -21,11 +21,9 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     if (choose == 1) {
         this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new HumanPlayer(Board::White);
-        secondPlayerJoined = true;
     } else if (choose == 2) {
         this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new AIPlayer(Board::White);
-        secondPlayerJoined = true;
     } else if (choose == 3) {
         //create a new player that connect to the server
         this->bHP = new RemotePlayerSender(filename);
