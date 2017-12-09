@@ -89,8 +89,6 @@ void Server::handleClients(int player1, int player2) {
     }
 }
 bool Server::transferMessage(int sender, int receiver) {
-    cout << sender << endl;
-    cout << receiver << endl;
     int arg1, arg2;
     ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
     if (checkTransfer <= 0) {
