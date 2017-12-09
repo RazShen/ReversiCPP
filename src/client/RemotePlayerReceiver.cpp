@@ -76,10 +76,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     n = read(clientSocket, &yUser, sizeof(yUser));
     if (n == -1) {
     }
-    
-    cout << "receiver get move33" <<endl;
     Pair inputUser = Pair(xUser, yUser);
-    cout << " end receiver get move" <<endl;
     return inputUser;
 }
 
