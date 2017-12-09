@@ -27,10 +27,10 @@ Board::Board(int &size) {
             this->cellArray[i][j] = Empty;
         }
     }
-    this->cellArray[3][3] = White;
-    this->cellArray[4][4] = White;
-    this->cellArray[3][4] = Black;
-    this->cellArray[4][3] = Black;
+    this->cellArray[this->size / 2 - 1][this->size / 2 - 1] = White;
+    this->cellArray[this->size / 2][this->size / 2] = White;
+    this->cellArray[this->size / 2 - 1][this->size / 2] = Black;
+    this->cellArray[this->size / 2][this->size / 2 - 1] = Black;
 
 }
 
@@ -84,5 +84,9 @@ Board::~Board() {
 
 int Board::getSize() const {
     return this->size;
+}
+
+Board::Status **Board::getMatrix() {
+    return cellArray;
 }
 

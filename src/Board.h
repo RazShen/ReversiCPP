@@ -61,6 +61,7 @@ public:
     * Destructor for the board.
     */
     ~Board();
+    Status** getMatrix();
 
 private:
     // The cells of the board.

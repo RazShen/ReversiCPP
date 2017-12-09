@@ -10,34 +10,40 @@ ConsoleDisplay::ConsoleDisplay() {}
 
 void ConsoleDisplay::printBoard(Board *board) {
     int size = board->getSize();
-    int boardCoordinates[size];
-    for (int i = 0; i < size; i++) {
-        boardCoordinates[i] = i + 1;
+    Board::Status ** cells = board->getMatrix();
+    int i, j;
+    char symbol = ' ';
+    cout << " |";
+    for (i = 0; i < size; i++) {
+        cout << " " << i + 1 << " |";
     }
-    string dottedLine = "----------------------------------";
-    for (int i = 0; i < size; i++) {
-        cout << " | " << boardCoordinates[i];
+    cout << endl;
+    cout << "--";
+    for (i = 0; i < size; i++) {
+        cout << "----";
     }
-    cout << " | " << endl;
-    cout << dottedLine << endl;
-    for (int i = 0; i < size; i++) {
-        cout << boardCoordinates[i] << "|";
-        for (int j = 0; j < size; j++) {
-            Board::Status stat = board->getCellStatus(Pair(i, j));
-            switch (stat) {
-                case Board::Empty:
-                    cout << "   |";
-                    break;
-                case Board::White:
-                    cout << " O |";
-                    break;
-                case Board::Black:
-                    cout << " X |";
-                    break;
+    cout << endl;
+    for (i = 0; i < size; i++) {
+        cout << i + 1 << "|";
+
+        for (j = 0; j < size; j++) {
+            if (cells[i][j] == Board::Empty) {
+                symbol = ' ';
             }
+            if (cells[i][j] == Board::White) {
+                symbol = 'O';
+            }
+            if (cells[i][j] == Board::Black) {
+                symbol = 'X';
+            }
+            cout << " " << symbol << " |";
         }
-        cout << "" << endl;
-        cout << dottedLine << endl;
+        cout << endl;
+        cout << "--";
+        for (j = 0; j < size; j++) {
+            cout << "----";
+        }
+        cout << endl;
     }
 }
 
@@ -133,12 +139,12 @@ void ConsoleDisplay::waitForMove() {
     cout << "Waiting for other player's move..." << endl;
 }
 void ConsoleDisplay::noPossiblePlayerMove(Board::Status stat) {
-    cout << "No possible moves for" ;
+    cout << "No possible moves for " ;
     if (stat == Board::Black) {
-        cout << "X player" << endl;
+        cout << "X" << endl;
     }
     else {
-        cout << "O player" << endl;
+        cout << "O" << endl;
     }
     cout << "Play passes back to other player" << endl;
 
@@ -151,5 +157,8 @@ void ConsoleDisplay::connectedToServer() {
     cout << "Connected to server" << endl;
 }
 void ConsoleDisplay::waitingForOppToPlay() {
+    cout << "Waiting for other player's move..." << endl;
+}
+void ConsoleDisplay::pressAnyKey() {
     cout << "Waiting for other player's move..." << endl;
 }

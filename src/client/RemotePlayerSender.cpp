@@ -95,6 +95,7 @@ int RemotePlayerSender::getMoveFromServer() {
 void RemotePlayerSender::noMove(Display* display) {
     string anyKey;
     display->noPossiblePlayerMove(this->getType());
+    display->pressAnyKey();
     std::getline(cin, anyKey);
     display->newLine();
     update(-1, -1);

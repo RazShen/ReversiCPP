@@ -110,7 +110,7 @@ public:
     void waitingForOppToConnect();
     void connectedToServer();
     void waitingForOppToPlay();
-
+    void pressAnyKey();
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H
