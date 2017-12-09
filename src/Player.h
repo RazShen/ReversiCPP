@@ -83,6 +83,7 @@ public:
     ;
     int getClientSocket();
     void setClientSocket(int socket);
+    virtual void finishGame();
 protected:
     Board::Status type;
     const char *serverIP;

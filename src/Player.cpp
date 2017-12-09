@@ -87,3 +87,7 @@ int Player::getClientSocket() {
 void Player::setClientSocket(int socket) {
     this->clientSocket = socket;
 }
+
+void Player::finishGame() {
+    
+}

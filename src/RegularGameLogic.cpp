@@ -66,7 +66,7 @@ bool RegularGameLogic::checkCell(const Pair &p, Board::Status opponentP, Board::
             return true;
         }
     }
-    if (p.getRow() > 0 && p.getCol() < 7 &&
+    if (p.getRow() > 0 && p.getCol() < this->boardSize-1 &&
         this->board->getCellStatus(Pair(p.getRow() - 1, p.getCol() + 1)) == opponentP) {
         //scan north-east
         if (validMove(Pair(p.getRow() - 1, p.getCol() + 1), NorthEast, opponentP, player)) {
@@ -79,26 +79,26 @@ bool RegularGameLogic::checkCell(const Pair &p, Board::Status opponentP, Board::
             return true;
         }
     }
-    if (p.getCol() < 7 && this->board->getCellStatus(Pair(p.getRow(), p.getCol() + 1)) == opponentP) {
+    if (p.getCol() < this->boardSize -1  && this->board->getCellStatus(Pair(p.getRow(), p.getCol() + 1)) == opponentP) {
         //scan east
         if (validMove(Pair(p.getRow(), p.getCol() + 1), East, opponentP, player)) {
             return true;
         }
     }
-    if (p.getRow() < 7 && p.getCol() > 0 &&
+    if (p.getRow() < this->boardSize -1 && p.getCol() > 0 &&
         this->board->getCellStatus(Pair(p.getRow() + 1, p.getCol() - 1)) == opponentP) {
         //scan south-west
         if (validMove(Pair(p.getRow() + 1, p.getCol() - 1), SouthWest, opponentP, player)) {
             return true;
         }
     }
-    if (p.getRow() < 7 && this->board->getCellStatus(Pair(p.getRow() + 1, p.getCol())) == opponentP) {
+    if (p.getRow() < this->boardSize -1 && this->board->getCellStatus(Pair(p.getRow() + 1, p.getCol())) == opponentP) {
         //scan south
         if (validMove(Pair(p.getRow() + 1, p.getCol()), South, opponentP, player)) {
             return true;
         }
     }
-    if (p.getRow() < 7 && p.getCol() < 7 &&
+    if (p.getRow() < this->boardSize -1 && p.getCol() < this->boardSize -1 &&
         this->board->getCellStatus(Pair(p.getRow() + 1, p.getCol() + 1)) == opponentP) {
         //scan south-east
         if (validMove(Pair(p.getRow() + 1, p.getCol() + 1), SouthEast, opponentP, player)) {
@@ -128,7 +128,7 @@ bool RegularGameLogic::validMove(const Pair &p, RegularGameLogic::ScanDirection 
             }
             return false;
         case NorthEast:
-            for (; x >= 0 && y < 8; x--, y++) {
+            for (; x >= 0 && y < this->boardSize; x--, y++) {
                 if (this->board->getCellStatus(Pair(x, y)) == opponentP) {
                     continue;
                 } else return this->board->getCellStatus(Pair(x, y)) == player;

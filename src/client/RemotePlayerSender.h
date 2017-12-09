@@ -26,8 +26,7 @@ public:
     void update(int arg1, int arg2);
     int getMoveFromServer();
     void noMove(Display* display);
-
-
+    void finishGame();
 
 };
 

@@ -45,10 +45,11 @@ void Server::start() {
     struct sockaddr_in playerAddress2;
     socklen_t playerAddressLen1;
     socklen_t playerAddressLen2;
-    while (true) {
+    int player1,player2;
+    do {
         cout << "Waiting for X player to connect..." << endl;
         // Accept a new client connection
-        int player1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
+        player1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
         if (player1 == -1)
             throw "Error on accept";
@@ -56,7 +57,7 @@ void Server::start() {
         cout << "Waiting for O player to connect..." << endl;
         initializingPlayer(player1,1);
         // Accept a new client connection
-        int player2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
+        player2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
         if (player2 == -1)
             throw "Error on accept";
@@ -68,7 +69,7 @@ void Server::start() {
         // Close communication with the client
         close(player1);
         close(player2);
-    }
+    } while (!endGame(player1) && !endGame(player2));
 }
 void Server:: initializingPlayer(int playerSocket, int playerNum) {
     ssize_t x = write(playerSocket, &playerNum, sizeof(playerNum));
@@ -113,3 +114,14 @@ void Server::stop() {
     close(serverSocket);
 }
 
+bool Server::endGame(int player) {
+    int arg1;
+    ssize_t checkTransfer = read(player, &arg1, sizeof(arg1));
+    if (checkTransfer <= 0) {
+        return false;
+    }
+    if (arg1 == -2) {
+        return true;
+    }
+    return false;
+}

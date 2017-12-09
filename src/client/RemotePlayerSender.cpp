@@ -101,3 +101,11 @@ void RemotePlayerSender::noMove(Display* display) {
     update(-1, -1);
 }
 
+void RemotePlayerSender::finishGame() {
+    int result = -2;
+    ssize_t n;
+    n = write(this->clientSocket, &result, sizeof(result));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
+}

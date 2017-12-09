@@ -14,7 +14,7 @@ public:
     Server(int port);
     void start();
     void stop();
-
+    bool endGame(int player);
 private:
     int port;
     int serverSocket;

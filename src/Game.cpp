@@ -66,6 +66,10 @@ void Game::run() {
         display->currentBoard();
         display->printBoard(this->gameLogic->getBoard());
         if (this->blackTurn) {
+            if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+                this->bHP->finishGame();
+                return;
+            }
             this->gameLogic->possibleMoves(pArr, moves, bHP->getType());
             if (moves == 0) {
                 this->bHP->noMove(this->display);
@@ -85,6 +89,7 @@ void Game::run() {
             this->blackTurn = false;
         } else {
             if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+                this->wHP->finishGame();
                 return;
             }
             this->gameLogic->possibleMoves(pArr, moves, wHP->getType());

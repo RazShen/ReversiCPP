@@ -3,14 +3,12 @@
 //
 
 #include "RemotePlayerReceiver.h"
-#include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
-#include <limits>
 
 using namespace std;
 
@@ -82,7 +80,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
 }
 
 void RemotePlayerReceiver::noMove(Display* display) {
-    // just getting the pair -1,-1 from server to know opponent has no moves
+    // just getting the pair -5,-5 from server to know opponent has no moves
     int xUser, yUser;
     ssize_t n;
     display->noPossiblePlayerMove(this->getType());
@@ -96,3 +94,4 @@ void RemotePlayerReceiver::noMove(Display* display) {
     }
     return;
 }
+
