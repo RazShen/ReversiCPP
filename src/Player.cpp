@@ -79,3 +79,11 @@ Player::Player(const char* filename) {
     settings.close();
     this->serverIP = writable;
 }
+
+int Player::getClientSocket() {
+    return this->clientSocket;
+}
+
+void Player::setClientSocket(int socket) {
+    this->clientSocket = socket;
+}

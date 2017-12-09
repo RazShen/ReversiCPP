@@ -43,7 +43,9 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
                     secondPlayerJoined = true;
             }
             this->wHP = new RemotePlayerReceiver(filename);
+            this->wHP->connectToServer();
             this->wHP->setType(Board::White);
+            this->wHP->setClientSocket(this->bHP->getClientSocket());
         } else if (indexPlayer == 2) {
             this->display->connectedToServer();
             this->wHP = this->bHP;
@@ -51,6 +53,8 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->bHP = new RemotePlayerReceiver(filename);
             this->bHP->setType(Board::Black);
             bool secondPlayerJoined = true;
+            this->bHP->connectToServer();
+            this->bHP->setClientSocket(this->wHP->getClientSocket());
         }
     }
 }

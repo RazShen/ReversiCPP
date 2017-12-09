@@ -29,8 +29,7 @@ public:
     void noMove(Display* display);
 
 
-private:
-    int clientSocket;
+
 };
 
 

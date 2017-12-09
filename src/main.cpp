@@ -7,7 +7,7 @@
 #include <iostream>
 #include <limits>
 #include "Game.h"
-#include "RemoteGame.h"
+
 
 using namespace std;
 

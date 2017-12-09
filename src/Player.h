@@ -80,12 +80,14 @@ public:
      * @param stat type of the player
      */
     void setType(Board::Status stat);
-
+    ;
+    int getClientSocket();
+    void setClientSocket(int socket);
 protected:
     Board::Status type;
     const char *serverIP;
     int serverPort;
-
+    int clientSocket;
 };
 
 

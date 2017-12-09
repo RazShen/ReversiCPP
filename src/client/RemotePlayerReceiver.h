@@ -27,8 +27,7 @@ public:
     void connectToServer();
     int getMoveFromServer();
     void noMove(Display* display);
-private:
-    int clientSocket;
+
 };
 
 
