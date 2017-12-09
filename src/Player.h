@@ -28,7 +28,18 @@ public:
      * Empty constructor for the player.
      */
     Player();
+    /**
+     * constractor to a remote player
+     * @param filename a given file
+     */
     Player(const char* filename);
+    /**
+     * constractor for a remote player
+     * @param serverIP a given server ip
+     * @param serverPort a given server port
+     */
+    Player(const char *serverIP, int serverPort);
+
     /**
      * This method return the wanted move the player decided.
      * @param b board.
@@ -38,10 +49,25 @@ public:
      */
     virtual const Pair
     getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) = 0;
-    Player(const char *serverIP, int serverPort);
+    /**
+     * virtual function for a remote player
+     */
     virtual void connectToServer();
+    /**
+     * this method updates thr player move
+     * @param arg1 a given num
+     * @param arg2 a sec given num
+     */
     virtual void update(int arg1, int arg2);
+    /**
+     * this method gets move from the sever
+     * @return the given number from the server
+     */
     virtual int getMoveFromServer();
+    /**
+     * this method update when there is no move for the player
+     * @param display
+     */
     virtual void noMove(Display* display);
 
     /**
@@ -49,6 +75,10 @@ public:
      * @return
      */
     Board::Status getType() const;
+    /**
+     * this method gets the type of the player
+     * @param stat type of the player
+     */
     void setType(Board::Status stat);
 
 protected:

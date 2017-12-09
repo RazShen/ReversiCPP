@@ -21,22 +21,27 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     if (choose == 1) {
         this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new HumanPlayer(Board::White);
+        secondPlayerJoined = true;
     } else if (choose == 2) {
         this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new AIPlayer(Board::White);
+        secondPlayerJoined = true;
     } else if (choose == 3) {
         //create a new player that connect to the server
-
         this->bHP = new RemotePlayerSender(filename);
-
         //connect to server
         this->bHP->connectToServer();
         // get from the server if the player is Black or White 1 for X , 2 for O.
         int indexPlayer = this->bHP->getMoveFromServer();
+        bool secondPlayerJoined = false;
         if (indexPlayer == 1) {
             this->display->connectedToServer();
             this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
+            while (!secondPlayerJoined) {
+                if(this->bHP->getMoveFromServer() == 3)
+                    secondPlayerJoined = true;
+            }
             this->wHP = new RemotePlayerReceiver(filename);
             this->wHP->setType(Board::White);
         } else if (indexPlayer == 2) {
@@ -45,6 +50,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->wHP->setType(Board::White);
             this->bHP = new RemotePlayerReceiver(filename);
             this->bHP->setType(Board::Black);
+            bool secondPlayerJoined = true;
         }
     }
 }

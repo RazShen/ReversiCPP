@@ -10,7 +10,7 @@ set(SOURCE_FILES src/Board.cpp src/Board.h src/GameLogic.cpp src/GameLogic.h src
         src/RegularGameLogic.h src/HumanPlayer.h src/HumanPlayer.cpp src/AIPlayer.cpp src/AIPlayer.h src/Player.h
         src/Player.cpp src/Pair.cpp src/Pair.h src/ConsoleDisplay.cpp src/ConsoleDisplay.h src/Game.cpp src/Game.h
         src/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
-        src/RemoteGame.cpp src/RemoteGame.h src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h)
+        src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h)
 
 set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp )
 
