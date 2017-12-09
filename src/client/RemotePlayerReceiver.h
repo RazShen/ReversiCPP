@@ -10,7 +10,6 @@
 
 class RemotePlayerReceiver: public Player {
 public:
- //   RemotePlayerReceiver(const char *serverIP, int serverPort);
     RemotePlayerReceiver(const char* filename);
 
     /**

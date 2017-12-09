@@ -11,7 +11,6 @@
 
 class RemotePlayerSender: public Player {
 public:
-//    RemotePlayerSender(const char *serverIP, int serverPort);
     RemotePlayerSender(const char* filename);
     /**
     * This method asks the user to pick he's selected move.
