@@ -67,6 +67,7 @@ int RemotePlayerReceiver::getMoveFromServer() {
 
 const Pair
 RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display) {
+    display->waitingForOppToPlay();
     int xUser;
     int yUser;
     ssize_t n;

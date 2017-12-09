@@ -56,8 +56,6 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     }
 }
 
-
-
 void Game::run() {
     bool noMoreActionsB = false;
     bool noMoreActionW = false;

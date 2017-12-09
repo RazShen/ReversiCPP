@@ -150,3 +150,6 @@ void ConsoleDisplay::waitingForOppToConnect() {
 void ConsoleDisplay::connectedToServer() {
     cout << "Connected to server" << endl;
 }
+void ConsoleDisplay::waitingForOppToPlay() {
+    cout << "Waiting for other player's move..." << endl;
+}

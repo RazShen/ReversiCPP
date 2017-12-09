@@ -109,6 +109,7 @@ public:
     void noPossiblePlayerMove(Board::Status stat);
     void waitingForOppToConnect();
     void connectedToServer();
+    void waitingForOppToPlay();
 
 };
 
