@@ -98,10 +98,12 @@ void RemotePlayerSender::noMove(Display *display) {
     display->noPossiblePlayerMove(this->getType());
     display->pressAnyKey();
     getline(cin, anyKey);
-    do
-    {
-        cout << '\n' << "Press a key to continue...";
-    } while (cin.get() != '\n');
+    getline(cin, anyKey);
+
+//    do
+//    {
+//        cout << '\n' << "Press a key to continue...";
+//    } while (cin.get() != '\n');
     display->newLine();
     update(-1, -1);
 }

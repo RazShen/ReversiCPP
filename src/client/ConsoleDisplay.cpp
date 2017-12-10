@@ -163,5 +163,5 @@ void ConsoleDisplay::waitingForOppToPlay() {
 }
 
 void ConsoleDisplay::pressAnyKey() {
-    cout << "Waiting for other player's move..." << endl;
+    cout << "Press any key to continue..." << endl;
 }
