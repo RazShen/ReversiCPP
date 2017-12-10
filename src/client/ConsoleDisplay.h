@@ -80,7 +80,7 @@ public:
     /**
      * this method prints any Key To Exit Massage.
      */
-    void anyKeyToExitMassage();
+    void exitMassage();
     /**
      * this method prints black win.
      */

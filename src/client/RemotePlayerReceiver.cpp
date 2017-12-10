@@ -78,6 +78,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     }
     Pair inputUser = Pair(xUser, yUser);
     if(!gl->checkInput(inputUser, positions, moves, display)) {
+        display->exitMassage();
         exit(1);
     }
     return inputUser;

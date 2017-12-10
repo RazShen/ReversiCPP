@@ -111,7 +111,7 @@ void ConsoleDisplay::noValidOption() {
     cout << "No valid option" << endl;
 }
 
-void ConsoleDisplay::anyKeyToExitMassage() {
+void ConsoleDisplay::exitMassage() {
     cout << "Game Over" << endl;
 }
 

@@ -45,7 +45,7 @@ int main() {
 //        rG.run();
 //    }
 
-    display->anyKeyToExitMassage();
+    display->exitMassage();
     delete (display);
     return 0;
 }

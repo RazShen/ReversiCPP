@@ -84,7 +84,7 @@ public:
     /**
      * this method prints any Key To Exit Massage.
      */
-    virtual void anyKeyToExitMassage() = 0;
+    virtual void exitMassage() = 0;
 
     /**
      * this method prints black win.
