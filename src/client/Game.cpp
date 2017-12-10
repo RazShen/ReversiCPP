@@ -60,6 +60,7 @@ void Game::run() {
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+
         Pair userInput;
         int moves = 0;
         Pair pArr[this->gameLogic->getBoardSize() * this->gameLogic->getBoardSize() + 1];
@@ -111,6 +112,7 @@ void Game::run() {
             this->blackTurn = true;
         }
     }
+    this->bHP->finishGame();
 }
 
 Game::~Game() {

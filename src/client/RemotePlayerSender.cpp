@@ -99,18 +99,17 @@ void RemotePlayerSender::noMove(Display *display) {
     display->pressAnyKey();
     getline(cin, anyKey);
     getline(cin, anyKey);
-
-//    do
-//    {
-//        cout << '\n' << "Press a key to continue...";
-//    } while (cin.get() != '\n');
     display->newLine();
     update(-1, -1);
 }
 
 void RemotePlayerSender::finishGame() {
-    int result = -2;
+    int result = -6;
     ssize_t n;
+    n = write(this->clientSocket, &result, sizeof(result));
+    if (n == -1) {
+        throw "Error reading result from socket";
+    }
     n = write(this->clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
