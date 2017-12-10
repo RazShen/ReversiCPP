@@ -8,13 +8,13 @@
 #include <iostream>
 #include "Game.h"
 #include "AIPlayer.h"
-#include "client/RemotePlayerSender.h"
+#include "RemotePlayerSender.h"
 
 
 using namespace std;
 
 Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
-    const char *filename = "client/cconfig.txt";
+    const char *filename = "cconfig.txt";
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;

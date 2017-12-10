@@ -14,7 +14,7 @@
 #include "Board.h"
 #include "ConsoleDisplay.h"
 #include "RegularGameLogic.h"
-#include "client/RemotePlayerReceiver.h"
+#include "RemotePlayerReceiver.h"
 #include <string>
 
 /**

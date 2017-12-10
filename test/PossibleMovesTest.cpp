@@ -5,9 +5,9 @@
 
 
 #include "gtest/gtest.h"
-#include "../src/Board.h"
-#include "../src/GameLogic.h"
-#include "../src/RegularGameLogic.h"
+#include "../src/client/Board.h"
+#include "../src/client/GameLogic.h"
+#include "../src/client/RegularGameLogic.h"
 
 /**
  * This test test the possible moves

@@ -6,7 +6,7 @@
 #define EX4_REMOTEPLAYERSENDER_H
 
 
-#include "../Board.h"
+#include "Board.h"
 #include "RemotePlayerReceiver.h"
 
 class RemotePlayerSender : public Player {

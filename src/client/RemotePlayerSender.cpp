@@ -12,6 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits>
+#include <cstdlib>
 
 using namespace std;
 
@@ -96,7 +97,11 @@ void RemotePlayerSender::noMove(Display *display) {
     string anyKey;
     display->noPossiblePlayerMove(this->getType());
     display->pressAnyKey();
-    std::getline(cin, anyKey);
+    getline(cin, anyKey);
+    do
+    {
+        cout << '\n' << "Press a key to continue...";
+    } while (cin.get() != '\n');
     display->newLine();
     update(-1, -1);
 }

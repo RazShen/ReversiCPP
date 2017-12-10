@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <limits>
+#include <cstdlib>
 #include "HumanPlayer.h"
 
 using namespace std;
@@ -35,6 +36,10 @@ HumanPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::Status o
 void HumanPlayer::noMove(Display *display) {
     string anyKey;
     display->noPossiblePlayerMove(this->getType());
-    std::getline(cin, anyKey);
+    getline(cin, anyKey);
+    do
+    {
+        cout << '\n' << "Press a key to continue...";
+    } while (cin.get() != '\n');
     display->newLine();
 }
