@@ -12,9 +12,9 @@ set(SOURCE_FILES src/client/Board.cpp src/client/Board.h src/client/GameLogic.cp
         src/client/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
         src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h)
 
-set(TEST_FILES test/BoardTest.cpp test/GameLogicTest.cpp test/PossibleMovesTest.cpp )
+set(TEST_FILES src/client/test/BoardTest.cpp src/client/test/GameLogicTest.cpp src/client/test/PossibleMovesTest.cpp)
 
-add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} test/gtest_main.cpp)
+add_executable(ex4 ${SOURCE_FILES} ${TEST_FILES} src/client/test/gtest_main.cpp)
 add_executable(ServerForReversi ${SOURCE_FILES} src/server/mainS.cpp)
 add_executable(Reversi ${SOURCE_FILES} src/client/main.cpp)
 target_link_libraries(ex4 gtest gtest_main pthread)

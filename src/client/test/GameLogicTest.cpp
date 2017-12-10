@@ -5,8 +5,8 @@
 
 
 #include "gtest/gtest.h"
-#include "../src/client/GameLogic.h"
-#include "../src/client/RegularGameLogic.h"
+#include "../GameLogic.h"
+#include "../RegularGameLogic.h"
 
 /**
  * This class tests the Game logic.
