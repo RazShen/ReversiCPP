@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -76,7 +77,9 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     if (n == -1) {
     }
     Pair inputUser = Pair(xUser, yUser);
-
+    if(!gl->checkInput(inputUser, positions, moves, display)) {
+        exit(1);
+    }
     return inputUser;
 }
 
