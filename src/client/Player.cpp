@@ -67,7 +67,6 @@ Player::Player(const char *filename) {
             writable = new char[buffer.size() + 1];
             copy(buffer.begin(), buffer.end(), writable);
             writable[buffer.size()] = '\0';
-
         }
         settings >> buffer;
         if (buffer == "Port") {
@@ -89,5 +88,9 @@ void Player::setClientSocket(int socket) {
 }
 
 void Player::finishGame() {
+
+}
+
+Player::~Player() {
 
 }

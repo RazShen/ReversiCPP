@@ -10,6 +10,10 @@
 
 class RemotePlayerReceiver : public Player {
 public:
+    /**
+     * Constructor by a file name.
+     * @param filename
+     */
     RemotePlayerReceiver(const char *filename);
 
     /**
@@ -39,6 +43,10 @@ public:
      * @param display a given display og the game
      */
     void noMove(Display *display);
+    /**
+     * Destructor for player.
+     */
+    ~RemotePlayerReceiver();
 };
 
 

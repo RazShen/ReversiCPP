@@ -116,3 +116,7 @@ void RemotePlayerSender::finishGame() {
     }
     close(this->clientSocket);
 }
+
+RemotePlayerSender::~RemotePlayerSender() {
+    delete(this->serverIP);
+}

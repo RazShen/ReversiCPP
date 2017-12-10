@@ -100,4 +100,7 @@ void RemotePlayerReceiver::noMove(Display *display) {
     return;
 }
 
+RemotePlayerReceiver::~RemotePlayerReceiver() {
+    delete(this->serverIP);
+}
 

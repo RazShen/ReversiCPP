@@ -11,6 +11,11 @@
 
 class RemotePlayerSender : public Player {
 public:
+    /**
+     * Constructor by a file name
+     *
+     * @param filename
+     */
     RemotePlayerSender(const char *filename);
 
     /**
@@ -52,6 +57,10 @@ public:
      * @param display a given display of the game
      */
     void noMove(Display *display);
+    /**
+     * Destructor for player.
+     */
+    ~RemotePlayerSender();
 };
 
 

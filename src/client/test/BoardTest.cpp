@@ -5,7 +5,7 @@
 
 
 #include "gtest/gtest.h"
-#include "../src/client/Board.h"
+#include "../Board.h"
 
 /**
  * This class tests the Board.

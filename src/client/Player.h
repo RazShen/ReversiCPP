@@ -93,6 +93,10 @@ public:
      * finish game method
      */
     virtual void finishGame();
+    /**
+     * Destructor for player.
+     */
+    virtual ~Player();
 protected:
     Board::Status type;
     const char *serverIP;

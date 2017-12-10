@@ -12,13 +12,22 @@ public:
         InProgress, EndGame
     };
 
+    /**
+     * Constructor for server.
+     * @param port
+     */
     Server(int port);
 
+    /**
+     * Start the server
+     */
     void start();
 
+    /**
+     * Stop the server.
+     */
     void stop();
 
-    bool endGame(int player);
 
 private:
     int port;
