@@ -34,6 +34,7 @@ void Server::start() {
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(port);
     if (bind(serverSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
+        this->stop();
         throw "Error on binding";
     }
     // Start listening to incoming connections
@@ -48,16 +49,20 @@ void Server::start() {
         // Accept a new client connection
         int player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
-        if (player1 == -1)
+        if (player1 == -1) {
+            this->stop();
             throw "Error on accept";
+        }
 
         cout << "Waiting for O player to connect..." << endl;
         initializingPlayer(player1, 1);
         // Accept a new client connection
         int player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
-        if (player2 == -1)
+        if (player2 == -1) {
+            this->stop();
             throw "Error on accept";
+        }
 
         initializingPlayer(player2, 2);
         initializingPlayer(player1, 3);
@@ -98,7 +103,6 @@ bool Server::transferMessage(int sender, int receiver) {
     if (checkTransfer <= 0) {
         return false;
     }
-    cout <<   arg1<<   arg2<<endl;
     // end of game
     if (arg1 == -6 && arg2 == -6) {
         return false;

@@ -39,7 +39,6 @@ public:
      * @param display a given display og the game
      */
     void noMove(Display *display);
-
 };
 
 

@@ -41,7 +41,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
                     secondPlayerJoined = true;
             }
             this->wHP = new RemotePlayerReceiver(filename);
-            this->wHP->connectToServer();
+            //this->wHP->connectToServer();
             this->wHP->setType(Board::White);
             this->wHP->setClientSocket(this->bHP->getClientSocket());
         } else if (indexPlayer == 2) {
@@ -50,7 +50,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->wHP->setType(Board::White);
             this->bHP = new RemotePlayerReceiver(filename);
             this->bHP->setType(Board::Black);
-            this->bHP->connectToServer();
+            //this->bHP->connectToServer();
             this->bHP->setClientSocket(this->wHP->getClientSocket());
         }
     }
@@ -60,7 +60,6 @@ void Game::run() {
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
     while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
-
         Pair userInput;
         int moves = 0;
         Pair pArr[this->gameLogic->getBoardSize() * this->gameLogic->getBoardSize() + 1];
@@ -113,6 +112,7 @@ void Game::run() {
         }
     }
     this->bHP->finishGame();
+    
 }
 
 Game::~Game() {

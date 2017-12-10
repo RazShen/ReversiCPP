@@ -76,6 +76,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     if (n == -1) {
     }
     Pair inputUser = Pair(xUser, yUser);
+
     return inputUser;
 }
 
@@ -94,4 +95,5 @@ void RemotePlayerReceiver::noMove(Display *display) {
     }
     return;
 }
+
 

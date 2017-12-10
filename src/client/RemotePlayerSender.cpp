@@ -114,4 +114,5 @@ void RemotePlayerSender::finishGame() {
     if (n == -1) {
         throw "Error reading result from socket";
     }
+    close(this->clientSocket);
 }
