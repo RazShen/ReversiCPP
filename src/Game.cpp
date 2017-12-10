@@ -14,7 +14,7 @@
 using namespace std;
 
 Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
-    const char* filename = "client/cconfig.txt";
+    const char *filename = "client/cconfig.txt";
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
@@ -37,7 +37,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
             while (!secondPlayerJoined) {
-                if(this->bHP->getMoveFromServer() == 3)
+                if (this->bHP->getMoveFromServer() == 3)
                     secondPlayerJoined = true;
             }
             this->wHP = new RemotePlayerReceiver(filename);

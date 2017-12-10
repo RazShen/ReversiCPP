@@ -13,11 +13,10 @@
 #include <fstream>
 #include <cstdlib>
 
-#define MaxDataSize 20
-
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
-Server::Server(int port): port(port), serverSocket(0) {
+
+Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
 }
 
@@ -45,40 +44,42 @@ void Server::start() {
     struct sockaddr_in playerAddress2;
     socklen_t playerAddressLen1;
     socklen_t playerAddressLen2;
-    int player1,player2;
+    int player1, player2;
     do {
         cout << "Waiting for X player to connect..." << endl;
         // Accept a new client connection
-        player1 = accept(serverSocket, (struct sockaddr *)&playerAddress1, &playerAddressLen1);
+        player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
         if (player1 == -1)
             throw "Error on accept";
 
         cout << "Waiting for O player to connect..." << endl;
-        initializingPlayer(player1,1);
+        initializingPlayer(player1, 1);
         // Accept a new client connection
-        player2 = accept(serverSocket, (struct sockaddr *)&playerAddress2, &playerAddressLen2);
+        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
         if (player2 == -1)
             throw "Error on accept";
-     //   initializingPlayer(player1,1);
 
-        initializingPlayer(player2,2);
-        initializingPlayer(player1,3);
+        initializingPlayer(player2, 2);
+        initializingPlayer(player1, 3);
         handleClients(player1, player2);
         // Close communication with the client
         close(player1);
         close(player2);
+        break;
     } while (!endGame(player1) && !endGame(player2));
 }
-void Server:: initializingPlayer(int playerSocket, int playerNum) {
+
+void Server::initializingPlayer(int playerSocket, int playerNum) {
     ssize_t x = write(playerSocket, &playerNum, sizeof(playerNum));
-    if(x == -1) {
+    if (x == -1) {
         cout << "Error writing to socket" << endl;
         exit(1);
     }
 
 }
+
 void Server::handleClients(int player1, int player2) {
     int sender = player1;
     int receiver = player2;
@@ -89,6 +90,7 @@ void Server::handleClients(int player1, int player2) {
         receiver = temp;
     }
 }
+
 bool Server::transferMessage(int sender, int receiver) {
     int arg1, arg2;
     ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));

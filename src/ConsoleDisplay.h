@@ -101,15 +101,31 @@ public:
      * this method prints that there is no more moves for both player.
      */
     void noMoreMovesForAll();
-    /*
+    /**
      * Waiting for the opponent move.
      */
     void waitForMove();
 
+    /**
+     * this method prints that a player has no possible moves
+     * @param stat a given player
+     */
     void noPossiblePlayerMove(Board::Status stat);
+    /**
+     * this method prints that the player is waiting for opponent to connect
+     */
     void waitingForOppToConnect();
+    /**
+     * this method prints connected to server
+     */
     void connectedToServer();
+    /**
+     * this method prints the waiting for opponent player to play
+     */
     void waitingForOppToPlay();
+    /**
+     * this methos prints press any key to continue
+     */
     void pressAnyKey();
 };
 

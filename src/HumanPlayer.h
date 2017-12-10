@@ -15,12 +15,13 @@
 /*
  * This class features a human player class.
  */
-class HumanPlayer: public Player {
+class HumanPlayer : public Player {
 public:
     /**
      * Constructor for the human player.
      */
     HumanPlayer(Board::Status);
+
     /**
     * This method asks the user to pick he's selected move.
     * @param positions possible moves.
@@ -30,9 +31,13 @@ public:
     * @param display display.
     * @return user's decided move.
     */
-    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
+    const Pair getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display);
 
-    void noMove(Display* display);
+    /**
+    * this method appears when the player has no move
+     * @param display a given display of the game
+     */
+    void noMove(Display *display);
 };
 
 

@@ -37,8 +37,8 @@ int main() {
         }
     } while (isNotValidInput);
 
-        Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
-        game.run();
+    Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
+    game.run();
 
 //    } else {
 //        RemoteGame rG = RemoteGame(new RegularGameLogic(boardSize, GameLogic::Regular), display);

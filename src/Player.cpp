@@ -50,17 +50,17 @@ void Player::noMove(Display *display) {
 }
 
 
-Player::Player(const char* filename) {
+Player::Player(const char *filename) {
     string buffer;
     ifstream settings;
     settings.open(filename);
-    char * writable;
+    char *writable;
     //const char * buffer2;
-    if(!settings) {
+    if (!settings) {
         throw "Can't open file, aborting";
     }
     while (!settings.eof()) {
-        if(buffer == "IP") {
+        if (buffer == "IP") {
             settings >> buffer; // buffer is now :
             settings >> buffer; // buffer equals the ip number
             //buffer2 = buffer.c_str();
@@ -89,5 +89,5 @@ void Player::setClientSocket(int socket) {
 }
 
 void Player::finishGame() {
-    
+
 }

@@ -10,7 +10,7 @@ ConsoleDisplay::ConsoleDisplay() {}
 
 void ConsoleDisplay::printBoard(Board *board) {
     int size = board->getSize();
-    Board::Status ** cells = board->getMatrix();
+    Board::Status **cells = board->getMatrix();
     int i, j;
     char symbol = ' ';
     cout << " |";
@@ -138,12 +138,12 @@ void ConsoleDisplay::noMoreMovesForAll() {
 void ConsoleDisplay::waitForMove() {
     cout << "Waiting for other player's move..." << endl;
 }
+
 void ConsoleDisplay::noPossiblePlayerMove(Board::Status stat) {
-    cout << "No possible moves for " ;
+    cout << "No possible moves for ";
     if (stat == Board::Black) {
         cout << "X" << endl;
-    }
-    else {
+    } else {
         cout << "O" << endl;
     }
     cout << "Play passes back to other player" << endl;
@@ -153,12 +153,15 @@ void ConsoleDisplay::noPossiblePlayerMove(Board::Status stat) {
 void ConsoleDisplay::waitingForOppToConnect() {
     cout << "Waiting for other player to join..." << endl;
 }
+
 void ConsoleDisplay::connectedToServer() {
     cout << "Connected to server" << endl;
 }
+
 void ConsoleDisplay::waitingForOppToPlay() {
     cout << "Waiting for other player's move..." << endl;
 }
+
 void ConsoleDisplay::pressAnyKey() {
     cout << "Waiting for other player's move..." << endl;
 }

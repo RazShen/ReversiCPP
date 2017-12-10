@@ -80,7 +80,7 @@ public:
      * @param stat type of the player
      */
     void setType(Board::Status stat);
-    ;
+
     int getClientSocket();
     void setClientSocket(int socket);
     virtual void finishGame();

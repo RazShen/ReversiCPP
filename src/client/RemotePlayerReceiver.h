@@ -8,9 +8,9 @@
 
 #include "../Player.h"
 
-class RemotePlayerReceiver: public Player {
+class RemotePlayerReceiver : public Player {
 public:
-    RemotePlayerReceiver(const char* filename);
+    RemotePlayerReceiver(const char *filename);
 
     /**
     * This method asks the user to pick he's selected move.
@@ -21,11 +21,24 @@ public:
     * @param display display.
     * @return user's decided move.
     */
-    const Pair getMove(Pair positions[], int moves, GameLogic* gl, Board::Status opponentStat, Display* display);
+    const Pair getMove(Pair positions[], int moves, GameLogic *gl, Board::Status opponentStat, Display *display);
 
+    /**
+     * this method connects the player to the server
+     */
     void connectToServer();
+
+    /**
+     * this method get move from server
+     * @return the number that we got from the server
+     */
     int getMoveFromServer();
-    void noMove(Display* display);
+
+    /**
+     * this method appears when the player has no move
+     * @param display a given display og the game
+     */
+    void noMove(Display *display);
 
 };
 
