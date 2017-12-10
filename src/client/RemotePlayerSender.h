@@ -57,6 +57,10 @@ public:
      * @param display a given display of the game
      */
     void noMove(Display *display);
+    /**
+     * Destructor for player.
+     */
+    ~RemotePlayerSender();
 };
 
 
