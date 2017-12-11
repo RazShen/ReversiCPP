@@ -114,4 +114,4 @@ void RemotePlayerSender::finishGame() {
     close(this->clientSocket);
 }
 
-RemotePlayerSender::~RemotePlayerSender() = default;
+RemotePlayerSender::~RemotePlayerSender() {}

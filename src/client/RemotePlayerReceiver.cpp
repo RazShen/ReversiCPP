@@ -93,5 +93,5 @@ void RemotePlayerReceiver::noMove(Display *display) {
     }
 }
 
-RemotePlayerReceiver::~RemotePlayerReceiver() = default;
+RemotePlayerReceiver::~RemotePlayerReceiver(){}
 
