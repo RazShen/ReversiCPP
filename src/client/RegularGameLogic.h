@@ -1,5 +1,8 @@
-//ID: 311130777
-//Name: Raz Shenkman
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX3WITHTESTS_REGULARGAMELOGIC_H
 #define EX3WITHTESTS_REGULARGAMELOGIC_H

@@ -1,6 +1,8 @@
-//
-// Created by raz on 12/5/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX4_REMOTEPLAYERSENDER_H
 #define EX4_REMOTEPLAYERSENDER_H

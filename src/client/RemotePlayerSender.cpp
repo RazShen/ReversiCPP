@@ -1,6 +1,7 @@
-//
-// Created by raz on 12/5/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 
 
 #include "RemotePlayerSender.h"
@@ -29,7 +30,7 @@ void RemotePlayerSender::connectToServer() {
     }
     // Convert the ip string to a network address
     struct in_addr address;
-    if (!inet_aton(serverIP, &address)) {
+    if (!inet_aton(serverIP.c_str(), &address)) {
         throw "Can't parse IP address";
     }
     // Get a hostent structure for the given host address
@@ -118,5 +119,5 @@ void RemotePlayerSender::finishGame() {
 }
 
 RemotePlayerSender::~RemotePlayerSender() {
-    delete(this->serverIP);
+
 }

@@ -3,7 +3,7 @@
  * Raz Shenkman 311130777
  */
 
-
+#define MAXLINE 20
 #include <iostream>
 #include "Player.h"
 #include <fstream>
@@ -42,7 +42,6 @@ int Player::getMoveFromServer() {
 }
 
 void Player::update(int arg1, int arg2) {
-    return;
 }
 
 void Player::noMove(Display *display) {
@@ -51,32 +50,53 @@ void Player::noMove(Display *display) {
 
 
 Player::Player(const char *filename) {
+    int serverPort1;
+    char portBuf[MAXLINE];
     string buffer;
+    char ip[MAXLINE];
+    char address[MAXLINE];
     ifstream settings;
     settings.open(filename);
-    char *writable;
     //const char * buffer2;
     if (!settings) {
         throw "Can't open file, aborting";
     }
-    while (!settings.eof()) {
-        if (buffer == "IP") {
-            settings >> buffer; // buffer is now :
-            settings >> buffer; // buffer equals the ip number
-            //buffer2 = buffer.c_str();
-            writable = new char[buffer.size() + 1];
-            copy(buffer.begin(), buffer.end(), writable);
-            writable[buffer.size()] = '\0';
-        }
-        settings >> buffer;
-        if (buffer == "Port") {
-            settings >> buffer; // buffer is now :
-            settings >> buffer; // buffer is now the port number
-            this->serverPort = atoi(buffer.c_str());
-        }
+//    while (!settings.eof()) {
+//        if (buffer == "IP") {
+//            settings >> buffer; // buffer is now :
+//            settings >> buffer; // buffer equals the ip number
+//            //buffer2 = buffer.c_str();
+//            writable = new char[buffer.size() + 1];
+//            copy(buffer.begin(), buffer.end(), writable);
+//            writable[buffer.size()] = '\0';
+//        }
+//        settings >> buffer;
+//        if (buffer == "Port") {
+//            settings >> buffer; // buffer is now :
+//            settings >> buffer; // buffer is now the port number
+//            this->serverPort = atoi(buffer.c_str());
+//        }
+//    }
+    getline(settings,buffer);
+    sscanf(buffer.c_str(), "%s : %s", ip , address);
+    if (!strcmp(ip, "IP")) {
+        this->serverIP = address;
+    } else {
+        settings.close();
+        throw "cannot parse IP";
     }
+    getline(settings,buffer);
+    sscanf(buffer.c_str(), "%s : %d", portBuf , &serverPort1);
+    if (!strcmp(portBuf, "Port")) {
+        this->serverPort = serverPort1;
+    } else {
+        settings.close();
+        throw "cannot parse Port";
+    }
+
+
     settings.close();
-    this->serverIP = writable;
+    //this->serverIP = writable;
 }
 
 int Player::getClientSocket() {
