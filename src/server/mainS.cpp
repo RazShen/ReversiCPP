@@ -1,35 +1,36 @@
-//
-// Created by raz on 12/2/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 
+#define MAXLINE 20
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-
+#include <cstring>
 #include "Server.h"
 
 using namespace std;
 
 int main() {
-    int serverPort;
+    int serverPort1, serverPort2;
     string buffer;
+    char portBuf[MAXLINE];
     ifstream settings;
     settings.open("sconfig.txt");
     if(!settings){
         throw "Can't open file, aborting";
     }
-    while (!settings.eof()) {
-        settings >> buffer;
-        if (buffer == "Port") {
-            settings >> buffer; // buffer is now ":"
-            settings >> buffer;
-            serverPort = atoi(buffer.c_str());
-        }
+    getline(settings,buffer);
+    sscanf(buffer.c_str(), "%s : %d", portBuf , &serverPort1);
+    if (!strcmp(portBuf, "Port")) {
+        serverPort2 = serverPort1;
+    } else {
+        settings.close();
+        throw "cannot parse the port";
     }
     settings.close();
-
-
-    Server server(serverPort);
+    Server server(serverPort2);
     try {
         server.start();
     } catch (const char *msg) {

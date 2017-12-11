@@ -99,7 +99,7 @@ public:
     virtual ~Player();
 protected:
     Board::Status type;
-    const char *serverIP;
+    string serverIP;
     int serverPort;
     int clientSocket;
 };

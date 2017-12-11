@@ -1,6 +1,8 @@
-//
-// Created by tomer on 12/2/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX4_REMOTEPLAYERRECEIVER_H
 #define EX4_REMOTEPLAYERRECEIVER_H

@@ -1,6 +1,8 @@
-//
-// Created by tomer on 12/2/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #include "RemotePlayerReceiver.h"
 #include <sys/socket.h>
@@ -13,9 +15,6 @@
 
 using namespace std;
 
-//RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort): serverIP(serverIP),
-//                    serverPort(serverPort), clientSocket(0) {
-//}
 
 RemotePlayerReceiver::RemotePlayerReceiver(const char *filename) : Player(filename) {
 
@@ -29,7 +28,7 @@ void RemotePlayerReceiver::connectToServer() {
     }
     // Convert the ip string to a network address
     struct in_addr address;
-    if (!inet_aton(serverIP, &address)) {
+    if (!inet_aton(serverIP.c_str(), &address)) {
         throw "Can't parse IP address";
     }
     // Get a hostent structure for the given host address
@@ -101,6 +100,6 @@ void RemotePlayerReceiver::noMove(Display *display) {
 }
 
 RemotePlayerReceiver::~RemotePlayerReceiver() {
-    delete(this->serverIP);
+
 }
 

@@ -24,6 +24,7 @@ const Pair AIPlayer::getMove(Pair positions[], int moves, GameLogic *gl, Board::
         int maxScore = score;
         // scan the opponent moves.
         if (numOpponentMoves == 0) {
+            delete (newGL);
             return Pair(positions[i].getRow() + 1, positions[i].getCol() + 1);
         } else {
             for (int j = 0; j < numOpponentMoves; j++) {

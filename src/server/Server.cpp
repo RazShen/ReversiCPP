@@ -1,6 +1,7 @@
-//
-// Created by raz on 12/2/17.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 
 #include "Server.h"
 #include <sys/socket.h>
@@ -8,10 +9,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
 #include <cstdlib>
-#include <fstream>
-#include <cstdlib>
+
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
@@ -40,14 +39,15 @@ void Server::start() {
     // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
     // Define the client socket's structures
+    struct sockaddr_in playerAddress1;
+    struct sockaddr_in playerAddress2;
+    socklen_t playerAddressLen1 = 0;
+    socklen_t playerAddressLen2 = 0;
+    int player1, player2;
     while (true) {
-        struct sockaddr_in playerAddress1;
-        struct sockaddr_in playerAddress2;
-        socklen_t playerAddressLen1 = 0;
-        socklen_t playerAddressLen2 = 0;
         cout << "Waiting for X player to connect..." << endl;
         // Accept a new client connection
-        int player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
+        player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
         if (player1 == -1) {
             this->stop();
@@ -57,7 +57,7 @@ void Server::start() {
         cout << "Waiting for O player to connect..." << endl;
         initializingPlayer(player1, 1);
         // Accept a new client connection
-        int player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
+        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
         cout << "Player O connected." << endl;
         if (player2 == -1) {
             this->stop();
