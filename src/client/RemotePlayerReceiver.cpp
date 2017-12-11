@@ -74,14 +74,6 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     if (n == -1) {
         throw "Error reading result from socket";
     }
-
-//    n = read(clientSocket, &xUser, sizeof(xUser));
-//    if (n == -1) {
-//    }
-//    n = read(clientSocket, &yUser, sizeof(yUser));
-//    if (n == -1) {
-//    }
-//    Pair inputUser = Pair(xUser, yUser);
     if(!gl->checkInput(inputUser, positions, moves, display)) {
         display->exitMassage();
         exit(1);
@@ -99,19 +91,7 @@ void RemotePlayerReceiver::noMove(Display *display) {
     if (n == -1) {
         throw "Error reading result from socket";
     }
-//
-//    n = read(clientSocket, &xUser, sizeof(xUser));
-//    if (n == -1) {
-//        throw "Error reading result from socket";
-//    }
-//    n = read(clientSocket, &yUser, sizeof(yUser));
-//    if (n == -1) {
-//        throw "Error reading result from socket";
-//    }
-    return;
 }
 
-RemotePlayerReceiver::~RemotePlayerReceiver() {
-
-}
+RemotePlayerReceiver::~RemotePlayerReceiver() = default;
 

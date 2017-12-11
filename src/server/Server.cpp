@@ -49,20 +49,20 @@ void Server::start() {
         cout << "Waiting for connections..." << endl;
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
-        cout << "Player X connected." << endl;
         if (player1 == -1) {
             this->stop();
             throw "Error on accept";
         }
+        cout << "Player X connected." << endl;
 
         initializingPlayer(player1, 1);
         // Accept a new client connection
         player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
-        cout << "Player O connected." << endl;
         if (player2 == -1) {
             this->stop();
             throw "Error on accept";
         }
+        cout << "Player O connected." << endl;
 
         initializingPlayer(player2, 2);
         initializingPlayer(player1, 3);
@@ -94,44 +94,21 @@ void Server::handleClients(int player1, int player2) {
 }
 
 bool Server::transferMessage(int sender, int receiver) {
-    int arg1, arg2;
     Pair pair;
     try {
         ssize_t checkTransfer = read(sender, &pair, sizeof(pair));
         if (checkTransfer <= 0) {
             return false;
         }
-
-//        ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
-//        if (checkTransfer <= 0) {
-//            return false;
-//        }
-//        checkTransfer = read(sender, &arg2, sizeof(arg2));
-//        if (checkTransfer <= 0) {
-//            return false;
-//        }
+        // end of game
         if (pair.getCol() == -6 && pair.getCol() == -6) {
             return false;
         }
-        // end of game
-//        if (arg1 == -6 && arg2 == -6) {
-//            return false;
-//        }
         checkTransfer = write(receiver, &pair, sizeof(pair));
         if (checkTransfer <= 0) {
             return false;
         }
-//
-//        checkTransfer = write(receiver, &arg1, sizeof(arg1));
-//        if (checkTransfer <= 0) {
-//            return false;
-//        }
-//        checkTransfer = write(receiver, &arg2, sizeof(arg2));
-//        if (checkTransfer <= 0) {
-//            return false;
-//        }
     } catch(exception e) {
-        cout <<"exeption";
         return false;
     }
     return true;
