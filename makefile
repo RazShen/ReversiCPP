@@ -2,6 +2,8 @@ CC = g++
 VERSION = -std=c++98
 CLIENT_CPP_FILES = ./src/client/*.cpp
 CLIENT_H_FILES = ./src/client/*.h
+PAIR_H = ./src/client/Pair.h
+PAIR_C = ./src/client/Pair.cpp
 SERVER_H_FILES = ./src/server/*.h
 SERVER_CPP_FILES = ./src/server/*.cpp
 CLIENT_O_FILES = ./obj/client_obj/*
@@ -14,8 +16,8 @@ client_exe: $(CLIENT_CPP_FILES) $(CLIENT_H_FILES)
 	mv *.o obj/client_obj
 	$(CC) $(VERSION) $(CLIENT_O_FILES) -o exe/client_exe
 
-server_exe: $(SERVER_CPP_FILES) $(SERVER_H_FILES)
-	$(CC) $(VERSION) -c $(SERVER_CPP_FILES)
+server_exe: $(SERVER_CPP_FILES) $(SERVER_H_FILES) $(PAIR_C) $(PAIR_H)
+	$(CC) $(VERSION) -c $(SERVER_CPP_FILES) -c $(PAIR_C)
 	mv *.o obj/server_obj
 	$(CC) $(VERSION) $(SERVER_O_FILES) -o exe/server_exe
 
