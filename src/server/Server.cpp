@@ -4,6 +4,7 @@
  */
 
 #include "Server.h"
+#include "../client/Pair.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -45,7 +46,7 @@ void Server::start() {
     socklen_t playerAddressLen2 = 0;
     int player1, player2;
     while (true) {
-        cout << "Waiting for X player to connect..." << endl;
+        cout << "Waiting for connections..." << endl;
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         cout << "Player X connected." << endl;
@@ -54,7 +55,6 @@ void Server::start() {
             throw "Error on accept";
         }
 
-        cout << "Waiting for O player to connect..." << endl;
         initializingPlayer(player1, 1);
         // Accept a new client connection
         player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
@@ -95,24 +95,43 @@ void Server::handleClients(int player1, int player2) {
 
 bool Server::transferMessage(int sender, int receiver) {
     int arg1, arg2;
-    ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
-    if (checkTransfer <= 0) {
-        return false;
-    }
-    checkTransfer = read(sender, &arg2, sizeof(arg2));
-    if (checkTransfer <= 0) {
-        return false;
-    }
-    // end of game
-    if (arg1 == -6 && arg2 == -6) {
-        return false;
-    }
-    checkTransfer = write(receiver, &arg1, sizeof(arg1));
-    if (checkTransfer <= 0) {
-        return false;
-    }
-    checkTransfer = write(receiver, &arg2, sizeof(arg2));
-    if (checkTransfer <= 0) {
+    Pair pair;
+    try {
+        ssize_t checkTransfer = read(sender, &pair, sizeof(pair));
+        if (checkTransfer <= 0) {
+            return false;
+        }
+
+//        ssize_t checkTransfer = read(sender, &arg1, sizeof(arg1));
+//        if (checkTransfer <= 0) {
+//            return false;
+//        }
+//        checkTransfer = read(sender, &arg2, sizeof(arg2));
+//        if (checkTransfer <= 0) {
+//            return false;
+//        }
+        if (pair.getCol() == -6 && pair.getCol() == -6) {
+            return false;
+        }
+        // end of game
+//        if (arg1 == -6 && arg2 == -6) {
+//            return false;
+//        }
+        checkTransfer = write(receiver, &pair, sizeof(pair));
+        if (checkTransfer <= 0) {
+            return false;
+        }
+//
+//        checkTransfer = write(receiver, &arg1, sizeof(arg1));
+//        if (checkTransfer <= 0) {
+//            return false;
+//        }
+//        checkTransfer = write(receiver, &arg2, sizeof(arg2));
+//        if (checkTransfer <= 0) {
+//            return false;
+//        }
+    } catch(exception e) {
+        cout <<"exeption";
         return false;
     }
     return true;

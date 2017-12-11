@@ -55,14 +55,20 @@ void RemotePlayerSender::connectToServer() {
 void RemotePlayerSender::update(int arg1, int arg2) {
     ssize_t numToSend;
     // Write 2 numbers t
-    numToSend = write(clientSocket, &arg1, sizeof(arg1));
+    Pair pair(arg1,arg2);
+    numToSend = write(clientSocket, &pair, sizeof(pair));
     if (numToSend == -1) {
         throw "Error writing arg1 to socket";
-    }
-    numToSend = write(clientSocket, &arg2, sizeof(arg2));
-    if (numToSend == -1) {
-        throw "Error writing arg2 to socket";
-    }
+    }    
+    
+//    numToSend = write(clientSocket, &arg1, sizeof(arg1));
+//    if (numToSend == -1) {
+//        throw "Error writing arg1 to socket";
+//    }
+//    numToSend = write(clientSocket, &arg2, sizeof(arg2));
+//    if (numToSend == -1) {
+//        throw "Error writing arg2 to socket";
+//    }
 }
 
 const Pair
@@ -99,22 +105,33 @@ void RemotePlayerSender::noMove(Display *display) {
     display->noPossiblePlayerMove(this->getType());
     display->pressAnyKey();
     getline(cin, anyKey);
-    getline(cin, anyKey);
+    if(anyKey == "\n") {
+        cout<< "\n";
+        getline(cin, anyKey);
+    }
     display->newLine();
     update(-1, -1);
 }
 
 void RemotePlayerSender::finishGame() {
+    Pair pair1(-6,-6);
+    
+    
     int result = -6;
     ssize_t n;
-    n = write(this->clientSocket, &result, sizeof(result));
+
+    n = write(this->clientSocket, &pair1, sizeof(pair1));
     if (n == -1) {
         throw "Error reading result from socket";
     }
-    n = write(this->clientSocket, &result, sizeof(result));
-    if (n == -1) {
-        throw "Error reading result from socket";
-    }
+//    n = write(this->clientSocket, &result, sizeof(result));
+//    if (n == -1) {
+//        throw "Error reading result from socket";
+//    }
+//    n = write(this->clientSocket, &result, sizeof(result));
+//    if (n == -1) {
+//        throw "Error reading result from socket";
+//    }
     close(this->clientSocket);
 }
 
