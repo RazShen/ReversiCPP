@@ -8,7 +8,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <cstring>
-
 #include "Server.h"
 
 using namespace std;

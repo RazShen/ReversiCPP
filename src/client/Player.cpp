@@ -7,7 +7,6 @@
 #include <iostream>
 #include "Player.h"
 #include <fstream>
-#include <cstdlib>
 #include <cstring>
 
 using namespace std;

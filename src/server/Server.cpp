@@ -9,10 +9,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
 #include <cstdlib>
-#include <fstream>
-#include <cstdlib>
+
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10

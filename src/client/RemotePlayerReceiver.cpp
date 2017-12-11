@@ -15,9 +15,6 @@
 
 using namespace std;
 
-//RemotePlayerReceiver::RemotePlayerReceiver(const char *serverIP, int serverPort): serverIP(serverIP),
-//                    serverPort(serverPort), clientSocket(0) {
-//}
 
 RemotePlayerReceiver::RemotePlayerReceiver(const char *filename) : Player(filename) {
 
