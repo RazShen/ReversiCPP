@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(ex4)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pthread")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
 add_subdirectory(lib/googletest-release-1.8.0)
 include_directories(lib/googletest-release-1.8.0/googletest/include)
@@ -10,7 +10,7 @@ set(SOURCE_FILES src/client/Board.cpp src/client/Board.h src/client/GameLogic.cp
         src/client/RegularGameLogic.h src/client/HumanPlayer.h src/client/HumanPlayer.cpp src/client/AIPlayer.cpp src/client/AIPlayer.h src/client/Player.h
         src/client/Player.cpp src/client/Pair.cpp src/client/Pair.h src/client/ConsoleDisplay.cpp src/client/ConsoleDisplay.h src/client/Game.cpp src/client/Game.h
         src/client/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
-        src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h)
+        src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h src/server/CommandManager.cpp src/server/CommandManager.h src/server/Command.h src/server/PrintCommand.cpp)
 
 set(TEST_FILES src/client/test/BoardTest.cpp src/client/test/GameLogicTest.cpp src/client/test/PossibleMovesTest.cpp)
 
