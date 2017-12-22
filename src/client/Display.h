@@ -141,6 +141,16 @@ public:
     * this methos prints press any key to continue
     */
     virtual void pressAnyKey() = 0;
+
+    virtual void printClientMenu()  = 0;
+
+    virtual void gameNotExist()  = 0;
+
+    virtual void gameAlreadyExist()  = 0;
+
+    virtual void gameNotOption()  = 0;
+
+
 };
 
 #endif //EX3WITHTESTS_DISPLAY_H

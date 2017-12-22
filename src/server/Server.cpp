@@ -109,7 +109,7 @@ bool Server::transferMessage(int sender, int receiver) {
             return false;
         }
     } catch(exception e) {
-        return false;
+            return false;
     }
     return true;
 }

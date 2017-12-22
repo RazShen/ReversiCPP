@@ -165,3 +165,22 @@ void ConsoleDisplay::waitingForOppToPlay() {
 void ConsoleDisplay::pressAnyKey() {
     cout << "Press any key to continue..." << endl;
 }
+
+void ConsoleDisplay::printClientMenu() {
+    cout << "please choose operation number. If you choose 1 or 3, enter name of game: " << endl;
+    cout << "1.'start' to start a new game." << endl;
+    cout << "2.'list' to view the list of waiting games." << endl;
+    cout << "3.'join' to join a waiting game." << endl;
+}
+
+void ConsoleDisplay::gameNotExist() {
+    cout << "Error! The game doesn't exist." << endl;
+}
+
+void ConsoleDisplay::gameAlreadyExist() {
+    cout << "Error! The game already exists." << endl;
+}
+
+void ConsoleDisplay::gameNotOption() {
+    cout << "Invalid option! Please choose again." << endl;
+}

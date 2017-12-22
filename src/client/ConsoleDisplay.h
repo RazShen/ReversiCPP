@@ -127,6 +127,14 @@ public:
      * this methos prints press any key to continue
      */
     void pressAnyKey();
+
+    void printClientMenu();
+
+    void gameNotExist();
+
+    void gameAlreadyExist();
+
+    void gameNotOption();
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H

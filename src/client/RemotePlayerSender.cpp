@@ -97,7 +97,7 @@ void RemotePlayerSender::noMove(Display *display) {
     display->pressAnyKey();
     getline(cin, anyKey);
     if(anyKey == "\n") {
-        cout<< "\n";
+        cout << "\n";
         getline(cin, anyKey);
     }
     display->newLine();
