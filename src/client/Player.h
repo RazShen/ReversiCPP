@@ -52,7 +52,7 @@ public:
     /**
      * virtual function for a remote player
      */
-    virtual void connectToServer();
+    virtual void connectToServer(Display* display);
     /**
      * this method updates thr player move
      * @param arg1 a given num

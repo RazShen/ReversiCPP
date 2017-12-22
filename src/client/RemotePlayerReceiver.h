@@ -32,7 +32,7 @@ public:
     /**
      * this method connects the player to the server
      */
-    void connectToServer();
+    void connectToServer(Display* display);
 
     /**
      * this method get move from server

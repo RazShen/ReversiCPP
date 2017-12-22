@@ -150,6 +150,8 @@ public:
 
     virtual void gameNotOption()  = 0;
 
+    virtual void EnterNameOfGame()  = 0;
+
 
 };
 

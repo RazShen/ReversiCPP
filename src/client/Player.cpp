@@ -31,7 +31,7 @@ Player::Player(const char *serverIP, int serverPort) {
 }
 
 
-void Player::connectToServer() {
+void Player::connectToServer(Display* display) {
 
 }
 

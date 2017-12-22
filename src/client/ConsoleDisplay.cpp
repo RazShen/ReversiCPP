@@ -167,10 +167,10 @@ void ConsoleDisplay::pressAnyKey() {
 }
 
 void ConsoleDisplay::printClientMenu() {
-    cout << "please choose operation number. If you choose 1 or 3, enter name of game: " << endl;
-    cout << "1.'start' to start a new game." << endl;
-    cout << "2.'list' to view the list of waiting games." << endl;
-    cout << "3.'join' to join a waiting game." << endl;
+    cout << "please choose operation number and a name of the game (for 1,3) " << endl;
+    cout << "1 for starting a new game." << endl;
+    cout << "2 for viewing the list of waiting games." << endl;
+    cout << "3 for joining a waiting game." << endl;
 }
 
 void ConsoleDisplay::gameNotExist() {
@@ -184,3 +184,8 @@ void ConsoleDisplay::gameAlreadyExist() {
 void ConsoleDisplay::gameNotOption() {
     cout << "Invalid option! Please choose again." << endl;
 }
+
+void ConsoleDisplay::EnterNameOfGame() {
+    cout << "please enter the name of your game" << endl;
+}
+

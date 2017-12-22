@@ -135,6 +135,9 @@ public:
     void gameAlreadyExist();
 
     void gameNotOption();
+
+    void EnterNameOfGame();
+
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H

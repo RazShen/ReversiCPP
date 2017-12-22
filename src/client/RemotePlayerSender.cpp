@@ -22,7 +22,7 @@ RemotePlayerSender::RemotePlayerSender(const char *filename) : Player(filename) 
 
 }
 
-void RemotePlayerSender::connectToServer() {
+void RemotePlayerSender::connectToServer(Display* display) {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -50,6 +50,7 @@ void RemotePlayerSender::connectToServer() {
     if (connect(clientSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
+    playerMenu(display);
 }
 
 void RemotePlayerSender::update(int arg1, int arg2) {
@@ -115,3 +116,66 @@ void RemotePlayerSender::finishGame() {
 }
 
 RemotePlayerSender::~RemotePlayerSender() {}
+
+void RemotePlayerSender::playerMenu(Display * display) {
+
+    string command, name;
+    int operation, n;
+    bool inputILegal = true;
+    ConsoleDisplay printer ;
+    // printing client's menu before joining game
+    while(inputILegal) {
+        printer.printClientMenu();
+        // get the operation of the client
+        cin >> operation;
+
+        if(operation == 1 || operation == 3) {
+            printer.EnterNameOfGame();
+            cin >> name;
+        }
+        // translating the command from a number into string
+        command = ParseOperation(operation, name);
+        // sending the command to the server
+        n = write(clientSocket, &command, command.size());
+        if (n <= 0) {
+            throw "Error writing command to socket";
+        }
+        // reading the servers answer from the socket
+        n = read(clientSocket, &command, command.size());
+        // for problems with reading from the socket
+        if (n <= 0) {
+            throw "Error writing command to socket";
+        }
+
+        // in option "join" - entering a name that isn't on the list
+        if (command == "NotExist") {
+            printer.gameNotExist();
+            continue;
+            // in option "start" - entering a name that is already on the list
+        } else if(command == "AlreadyExist") {
+            printer.gameAlreadyExist();
+            continue;
+            // in case user entered an option not from the menu
+        } else if(command == "NotOption") {
+            printer.gameNotOption();
+            continue;
+        }
+        // if the input was legal
+        inputILegal = false;
+    }
+
+
+}
+
+string RemotePlayerSender::ParseOperation(int operation, string name) {
+    switch(operation) {
+        case 1:
+            return "start " + name;
+        case 2:
+            return "list_games";
+        case 3:
+            return "join " + name;
+        default:
+            return "NotOption";
+    }
+}

@@ -28,7 +28,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
         //create a new player that connect to the server
         this->bHP = new RemotePlayerSender(filename);
         //connect to server
-        this->bHP->connectToServer();
+        this->bHP->connectToServer(display);
         // get from the server if the player is Black or White 1 for X , 2 for O.
         int indexPlayer = this->bHP->getMoveFromServer();
         bool secondPlayerJoined = false;

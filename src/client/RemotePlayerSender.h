@@ -46,7 +46,7 @@ public:
     /**
  * this method connects the player to the server
  */
-    void connectToServer();
+    void connectToServer(Display *display);
 
     /**
      * this method get move from server
@@ -59,11 +59,15 @@ public:
      * @param display a given display of the game
      */
     void noMove(Display *display);
+
     /**
      * Destructor for player.
      */
     ~RemotePlayerSender();
-};
 
+    void playerMenu(Display* display);
+
+    string ParseOperation(int operation, string name);
+};
 
 #endif //EX4_REMOTEPLAYERSENDER_H

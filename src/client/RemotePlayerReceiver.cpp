@@ -20,7 +20,7 @@ RemotePlayerReceiver::RemotePlayerReceiver(const char *filename) : Player(filena
 
 }
 
-void RemotePlayerReceiver::connectToServer() {
+void RemotePlayerReceiver::connectToServer(Display* display) {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
