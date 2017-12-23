@@ -133,6 +133,7 @@ void RemotePlayerSender::playerMenu(Display * display) {
             printer.EnterNameOfGame();
             cin >> name;
         }
+        //
         // translating the command from a number into string
         command = ParseOperation(operation, name);
         // sending the command to the server
