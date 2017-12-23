@@ -152,6 +152,8 @@ public:
 
     virtual void EnterNameOfGame()  = 0;
 
+    virtual void printString(string stringToPrint) = 0;
+
 
 };
 

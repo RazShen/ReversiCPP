@@ -138,6 +138,9 @@ public:
 
     void EnterNameOfGame();
 
+    void printString(string stringToPrint);
+
+
 };
 
 #endif //EX3WITHTESTS_CONSOLEDISPLAY_H

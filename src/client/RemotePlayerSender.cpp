@@ -119,54 +119,48 @@ RemotePlayerSender::~RemotePlayerSender() {}
 
 void RemotePlayerSender::playerMenu(Display * display) {
 
-    string command, name;
+    string command, roomName;
     int operation, n;
     bool inputILegal = true;
-    ConsoleDisplay printer ;
     // printing client's menu before joining game
     while(inputILegal) {
-        printer.printClientMenu();
+        display->printClientMenu();
         // get the operation of the client
         cin >> operation;
 
         if(operation == 1 || operation == 3) {
-            printer.EnterNameOfGame();
-            cin >> name;
+            display->EnterNameOfGame();
+            cin >> roomName;
         }
-        //
         // translating the command from a number into string
-        command = ParseOperation(operation, name);
+        command = ParseOperation(operation, roomName);
         // sending the command to the server
-        n = write(clientSocket, &command, command.size());
-        if (n <= 0) {
-            throw "Error writing command to socket";
-        }
+        writeToServer(command);
         // reading the servers answer from the socket
-        n = read(clientSocket, &command, command.size());
-        // for problems with reading from the socket
-        if (n <= 0) {
-            throw "Error writing command to socket";
-        }
+        command = readFromServer();
 
         // in option "join" - entering a name that isn't on the list
         if (command == "NotExist") {
-            printer.gameNotExist();
+            display->gameNotExist();
             continue;
             // in option "start" - entering a name that is already on the list
         } else if(command == "AlreadyExist") {
-            printer.gameAlreadyExist();
+            display->gameAlreadyExist();
             continue;
             // in case user entered an option not from the menu
         } else if(command == "NotOption") {
-            printer.gameNotOption();
+            display->gameNotOption();
             continue;
         }
         // if the input was legal
         inputILegal = false;
+        if(command == "Started") {
+            string print = "The room: " + roomName + "was created!";
+            display->printString(print);
+        }
     }
-
-
 }
+
 
 string RemotePlayerSender::ParseOperation(int operation, string name) {
     switch(operation) {
@@ -179,4 +173,34 @@ string RemotePlayerSender::ParseOperation(int operation, string name) {
         default:
             return "NotOption";
     }
+}
+
+
+void RemotePlayerSender::writeToServer(string command) {
+    unsigned long stringLength = command.length();
+    int n;
+    n = (int) write(clientSocket, &stringLength, sizeof(int));
+    if (n == -1)
+        throw "Error writing string length";
+    for (int i = 0; i < stringLength; i++) {
+        n = (int) write(clientSocket, &command[i], sizeof(char));
+        if (n == -1)
+            throw "Error writing";
+    }
+}
+
+string RemotePlayerSender::readFromServer() {
+    int stringLength, n;
+    n = (int) read(clientSocket, &stringLength, sizeof(int));
+    if (n == -1)
+        throw "Error reading string length";
+    char *command = new char[stringLength];
+    for (int i = 0; i < stringLength; i++) {
+        n = (int) read(clientSocket, &command[i], sizeof(char));
+        if (n == -1)
+            throw "Error reading message!";
+    }
+    string strCommand(command);
+    delete(command);
+    return strCommand;
 }

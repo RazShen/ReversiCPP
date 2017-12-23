@@ -188,4 +188,6 @@ void ConsoleDisplay::gameNotOption() {
 void ConsoleDisplay::EnterNameOfGame() {
     cout << "please enter the name of your game" << endl;
 }
-
+void ConsoleDisplay::printString(string stringToPrint) {
+    cout << stringToPrint << endl;
+}

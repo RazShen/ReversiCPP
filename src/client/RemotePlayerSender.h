@@ -68,6 +68,12 @@ public:
     void playerMenu(Display* display);
 
     string ParseOperation(int operation, string name);
+
+    void writeToServer(string command);
+
+    string readFromServer();
+
+
 };
 
 #endif //EX4_REMOTEPLAYERSENDER_H
