@@ -14,7 +14,7 @@
 
 class StartNewGameC : public Command {
 public:
-    void execute(vector<string> args, vector<Game> games, int client = 0);
-    void execute(vector<string> args, int client = 0) {};
+
+    void execute(vector<string> args, int client);
 };
 #endif //EX4_STARTNEWGAMEC_H

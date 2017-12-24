@@ -4,6 +4,6 @@
 
 #include "GetListOfGamesC.h"
 
-void GetListOfGamesC::execute(vector<string> args, vector<Game> games, int client) {
-
+void GetListOfGamesC::execute(vector<string> args, int client) {
+    //create list of room names and if it's not running put in vector to send
 }
