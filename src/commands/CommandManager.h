@@ -13,12 +13,12 @@
 
 class CommandsManager {
 public:
-    CommandsManager(Server* server);
+    CommandsManager(Server* serverC);
     ~CommandsManager();
     void executeCommand(string command, vector<string> args);
 private:
     map<string, Command *> commandsMap;
-    Server& server;
+    Server* server;
 };
 
 #endif //EX4_COMMANDMANAGER_H

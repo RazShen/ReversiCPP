@@ -9,9 +9,9 @@
 #include "PlayMoveC.h"
 #include "CloseSpecificGameC.h"
 #include "GetListOfGamesC.h"
-#include "../server/Server.h"
 
-CommandsManager::CommandsManager(Server* server) this->server(server){
+
+CommandsManager::CommandsManager(Server* serverC): server(serverC){
     commandsMap["start"] = new StartNewGameC();
     commandsMap["list_games"] = new GetListOfGamesC();
     commandsMap["join"] = new JoinSpecificGameC();
