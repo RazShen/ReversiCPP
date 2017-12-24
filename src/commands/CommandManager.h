@@ -13,7 +13,7 @@
 
 class CommandsManager {
 public:
-    CommandsManager(Server* serverC);
+    CommandsManager(Server serverC);
     ~CommandsManager();
     void executeCommand(string command, vector<string> args);
 private:

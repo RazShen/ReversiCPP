@@ -23,7 +23,9 @@ public:
 
     const string &getInformation() const;
 
-    vector<Room*> &getRooms() const;
+
+    vector<Room*> getRooms() const;
+
 
 private:
     int socket = 0;

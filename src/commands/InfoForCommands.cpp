@@ -20,11 +20,11 @@ const string &InfoForCommands::getInformation() const {
     return this->information;
 }
 
-vector &InfoForCommands::getRooms() const {
+vector<Room*> InfoForCommands::getRooms() const {
     return this->rooms;
 }
 
-void InfoForCommands::setRooms(vector &rooms) {
+void InfoForCommands::setRooms(vector<Room*> &rooms) {
     this->rooms = rooms;
 }
 
