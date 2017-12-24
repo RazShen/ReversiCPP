@@ -8,15 +8,17 @@
 
 #include <map>
 #include "Command.h"
+#include "../server/Server.h"
 
 
 class CommandsManager {
 public:
-    CommandsManager();
+    CommandsManager(Server* server);
     ~CommandsManager();
     void executeCommand(string command, vector<string> args);
 private:
     map<string, Command *> commandsMap;
+    Server& server;
 };
 
 #endif //EX4_COMMANDMANAGER_H

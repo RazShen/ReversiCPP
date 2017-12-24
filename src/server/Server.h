@@ -8,6 +8,10 @@
 #define EX3WITHTESTS_SERVER_H
 
 
+#include <vector>
+#include "../commands/Room.h"
+#include "../commands/CommandManager.h"
+
 class Server {
 public:
     enum GameStatus {
@@ -34,7 +38,8 @@ public:
 private:
     int port;
     int serverSocket;
-
+    vector<Room*> rooms;
+    CommandsManager cmdManager;
     /**
      * this method handles 2 clients and transfer their massages through function transferMassage
      * @param clientSocket1 a first client socket 
