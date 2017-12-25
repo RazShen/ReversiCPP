@@ -20,9 +20,11 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     // user inputted a bad name
     if (!badName) {
         answerToUser = "AlreadyExist";
+        writeToClient(answerToUser, client);
     } else {
         // send "started"
-        answerToUser = "AlreadyExist";
+        answerToUser = "Started";
+        writeToClient(answerToUser, client);
     }
     //string startString = STARTMESSAGE;
     write(client, &startString, sizeof(string));

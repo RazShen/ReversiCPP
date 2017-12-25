@@ -5,7 +5,7 @@
 #ifndef EX4_COMMAND_H
 #define EX4_COMMAND_H
 #include <vector>
-#include "iostream"
+#include <iostream>
 #include "../server/ServerGames.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -15,6 +15,7 @@ using namespace std;
 class Command {
 public:
     virtual void execute(vector<string> args, int client, ServerGames* serverGamesI) = 0;
+    void writeToClient(string inputForClient, int clientSocket);
     virtual ~Command() {}
 };
 #endif //EX4_COMMAND_H
