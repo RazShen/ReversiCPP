@@ -12,7 +12,8 @@ set(SOURCE_FILES src/client/Board.cpp src/client/Board.h src/client/GameLogic.cp
         src/client/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
         src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h src/commands/CommandManager.cpp src/commands/CommandManager.h src/commands/Command.h
         src/commands/StartNewGameC.cpp src/commands/StartNewGameC.h src/commands/GetListOfGamesC.cpp src/commands/GetListOfGamesC.h src/commands/JoinSpecificGameC.cpp
-        src/commands/JoinSpecificGameC.h src/commands/PlayMoveC.cpp src/commands/PlayMoveC.h src/commands/CloseSpecificGameC.cpp src/commands/CloseSpecificGameC.h src/commands/Room.cpp src/commands/Room.h)
+        src/commands/JoinSpecificGameC.h src/commands/PlayMoveC.cpp src/commands/PlayMoveC.h src/commands/CloseSpecificGameC.cpp src/commands/CloseSpecificGameC.h src/commands/Room.cpp src/commands/Room.h
+        src/server/ServerGames.cpp src/server/ServerGames.h)
 
 set(TEST_FILES src/client/test/BoardTest.cpp src/client/test/GameLogicTest.cpp src/client/test/PossibleMovesTest.cpp)
 
