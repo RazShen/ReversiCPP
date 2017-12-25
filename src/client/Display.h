@@ -154,6 +154,7 @@ public:
 
     virtual void printString(string stringToPrint) = 0;
 
+    virtual void printAvailableGames(vector<string> availableGamesNames) = 0;
 
 };
 

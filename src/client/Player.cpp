@@ -8,6 +8,7 @@
 #include "Player.h"
 #include <fstream>
 #include <cstring>
+#include <vector>
 
 using namespace std;
 
@@ -112,4 +113,21 @@ void Player::finishGame() {
 
 Player::~Player() {
 
+}
+
+vector<string> Player::parseStringBySpace(string str) {
+    vector<string>result;
+    string parser = " ";
+    while(str.size()){
+        unsigned long index = str.find(parser);
+        if(index!= string::npos){
+            result.push_back(str.substr(0,index));
+            str = str.substr(index+parser.size());
+            if(str.size()==0)result.push_back(str);
+        }else{
+            result.push_back(str);
+            str = "";
+        }
+    }
+    return result;
 }

@@ -117,8 +117,7 @@ void RemotePlayerSender::finishGame() {
 
 RemotePlayerSender::~RemotePlayerSender() {}
 
-void RemotePlayerSender::playerMenu(Display * display) {
-
+void RemotePlayerSender::playerMenu(Display* display) {
     string command, roomName;
     int operation, n;
     bool inputILegal = true;
@@ -138,7 +137,12 @@ void RemotePlayerSender::playerMenu(Display * display) {
         writeToServer(command);
         // reading the servers answer from the socket
         command = readFromServer();
-
+        if (operation == 2) {
+            // print the list of rooms
+            vector<string> listOfRooms = parseStringBySpace(command);
+            display->printAvailableGames(listOfRooms);
+            playerMenu(display);
+        }
         // in option "join" - entering a name that isn't on the list
         if (command == "notAvailableGame") {
             display->notAvailableGame();

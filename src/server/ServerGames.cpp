@@ -61,6 +61,7 @@ string ServerGames::sendListGames() {
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end() && !it->isRunning()) {
         list += it->getRoomName() + " ";
+        it++;
     }
     return list;
 }

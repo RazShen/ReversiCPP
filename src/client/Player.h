@@ -8,6 +8,7 @@
 #define EX3WITHTESTS_PLAYER_H
 
 
+#include <vector>
 #include "Pair.h"
 #include "Board.h"
 #include "GameLogic.h"
@@ -93,6 +94,7 @@ public:
      * finish game method
      */
     virtual void finishGame();
+    vector<string> parseStringBySpace(string str);
     /**
      * Destructor for player.
      */

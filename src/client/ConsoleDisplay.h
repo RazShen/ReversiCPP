@@ -8,6 +8,7 @@
 #define EX3WITHTESTS_CONSOLEDISPLAY_H
 
 
+#include <vector>
 #include "Board.h"
 #include "Display.h"
 
@@ -140,6 +141,7 @@ public:
 
     void printString(string stringToPrint);
 
+    void printAvailableGames(vector<string> availableGamesNames);
 
 };
 

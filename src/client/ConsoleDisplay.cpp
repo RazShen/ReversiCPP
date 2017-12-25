@@ -191,3 +191,17 @@ void ConsoleDisplay::EnterNameOfGame() {
 void ConsoleDisplay::printString(string stringToPrint) {
     cout << stringToPrint << endl;
 }
+
+void ConsoleDisplay::printAvailableGames(vector<string> availableGamesNames) {
+    if (availableGamesNames.size() == 1) {
+        cout << "No available games to join" << endl;
+    } else {
+        vector<string>::iterator it = availableGamesNames.begin();
+        while (it != availableGamesNames.end()) {
+            cout << *it << endl;
+            it++;
+        }
+
+    }
+}
+
