@@ -61,6 +61,7 @@ private:
      * @return if it works, false otherwise
      */
     bool transferMessage(int sender, int receiver);
+    void handleBeforeClient(int clientSocket);
 
 };
 

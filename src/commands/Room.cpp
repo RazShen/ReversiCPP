@@ -4,20 +4,26 @@
 
 #include "Room.h"
 
+Room::Room(int playerSocket, const string &name) {
+    playerSocket1 = playerSocket;
+    playerSocket2 = 0;
+    nameOfRoom = name;
+    this->started = false;
+}
+
 const string &Room::getRoomName() const {
     return this->nameOfRoom;
 }
 
-int Room::getSocket1() const {
-    return this->socket1;
+int Room::getOtherSocket (int playerSocket) {
+    if(playerSocket == playerSocket1)
+        return playerSocket2;
+    else
+        return this->playerSocket1;
 }
 
-int Room::getSocket2() const {
-    return this->socket2;
-}
-
-bool Room::isIsRunning() const {
-    return this->isRunning;
+bool Room::isRunning() {
+    return this->started;
 }
 
 void Room::setRoomName(const string &roomName) {
@@ -25,13 +31,18 @@ void Room::setRoomName(const string &roomName) {
 }
 
 void Room::setSocket1(int socket1) {
-    this->socket1 = socket1;
+    this->playerSocket1 = socket1;
 }
 
-void Room::setSocket2(int socket2) {
-    this->socket2 = socket2;
+void Room::startGame() {
+    //initialise player
+    this->started = true;
+
 }
 
-void Room::setIsRunning(bool isRunning) {
-    this->isRunning = isRunning;
+void Room::connectPlayer2(int playerSocket) {
+    this->playerSocket2 = playerSocket;
+
 }
+
+
