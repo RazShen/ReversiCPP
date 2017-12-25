@@ -37,16 +37,20 @@ void ServerGames::deleteGame(string gameName) {
 }
 
 void ServerGames::joinToGame(string gameName, int clientSocket) {
-
-
+    if(isGameInList(gameName)) {
+        Room *roomToJoin = getGame(gameName);
+        roomToJoin->connectPlayer2(clientSocket);
+        roomToJoin->startGame();
+    }
 }
 
-void ServerGames::sendListGames(int clientSocket) {
+string ServerGames::sendListGames(int clientSocket) {
     string list = "The available games are: ";
     vector<Room>::iterator it = gamesList.begin();
-    while (it != gamesList.end()) {
-        list += it->getRoomName();
+    while (it != gamesList.end() && !it->isRunning()) {
+        list += it->getRoomName() + " ";
     }
+    return list;
 }
 
 int ServerGames::size() {

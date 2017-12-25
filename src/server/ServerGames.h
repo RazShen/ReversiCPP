@@ -18,7 +18,7 @@ public:
     void addGame(string gameName, int clientSocket);
     bool isGameInList(string gameName);
     void joinToGame(string gameName, int clientSocket);
-    void sendListGames(int clientSocket);
+    string sendListGames(int clientSocket);
     int size();
 
 };
