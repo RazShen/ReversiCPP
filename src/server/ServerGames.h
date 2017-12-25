@@ -11,6 +11,8 @@
 class ServerGames {
 private:
     vector<Room> gamesList;
+    int runningRooms;
+    int notRunningRooms;
 public:
     ServerGames();
     Room* getGame(string gameName);
@@ -20,7 +22,8 @@ public:
     void joinToGame(string gameName, int clientSocket);
     void sendListGames(int clientSocket);
     int size();
-
+    int getNumOfRunningRooms();
+    int getNumOfNotRunningRooms();
 };
 
 

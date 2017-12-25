@@ -7,9 +7,10 @@
 #include "StartNewGameC.h"
 
 
-void StartNewGameC::execute(vector<string> args, int client) {
+void StartNewGameC::execute(vector<string> args, int client, ServerGames* serverGames) {
     // arg[01] is the room name
     string startString;
     //string startString = STARTMESSAGE;
     write(client, &startString, sizeof(string));
+
 }

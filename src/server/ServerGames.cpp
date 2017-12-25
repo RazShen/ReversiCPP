@@ -62,3 +62,12 @@ bool ServerGames::isGameInList(string gameName) {
     }
     return false;
 }
+
+
+int ServerGames::getNumOfRunningRooms() {
+    return this->runningRooms;
+}
+
+int ServerGames::getNumOfNotRunningRooms() {
+    return this->notRunningRooms;
+}

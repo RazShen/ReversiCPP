@@ -4,13 +4,21 @@
 
 #include <unistd.h>
 #include <vector>
+#include <cstdio>
 #include "PlayMoveC.h"
 
 
-void PlayMoveC::execute(vector<string> args, int client) {
+void PlayMoveC::execute(vector<string> args, int client, ServerGames* serverGames) {
     // get arg[0] as row get arg[1] as column
     string moveString;
-    //Pair p = Pair((int) args[0])
+    int row, column, i =0;
+    sscanf(args[0].c_str(), "%d", &row);
+    sscanf(args[1].c_str(), "%d", &column);
+    Pair p = Pair(row, column);
+    // send this pair to the other player in the room
+    for (i; i < serverGames->getNumOfRunningRooms(); i++) {
+    //tu    if (client == serverGames->getGame())
+    }
     //string moveString = "Play " + args[0] + " " + args[1];
     write(client, &moveString, sizeof(string));
 }

@@ -10,7 +10,7 @@
 #include "GetListOfGamesC.h"
 
 
-CommandsManager::CommandsManager(Server serverC): server(&serverC){
+CommandsManager::CommandsManager(ServerGames* serverG): serverGames(serverG){
     commandsMap["start"] = new StartNewGameC();
     commandsMap["list_games"] = new GetListOfGamesC();
     commandsMap["join"] = new JoinSpecificGameC();
@@ -19,8 +19,9 @@ CommandsManager::CommandsManager(Server serverC): server(&serverC){
 }
 
 void CommandsManager::executeCommand(string command, vector<string> args) {
+    int client = 0;
     Command *commandObj = commandsMap[command];
-    commandObj->execute(args);
+    commandObj->execute(args,client, this->serverGames);
 }
 
 CommandsManager::~CommandsManager() {

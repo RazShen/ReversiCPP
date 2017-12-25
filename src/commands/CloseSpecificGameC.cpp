@@ -6,6 +6,6 @@
 #include "Command.h"
 
 
-void CloseSpecificGameC::execute(vector<string> args, int client) {
+void CloseSpecificGameC::execute(vector<string> args, int client, ServerGames* serverGames) {
 
 }

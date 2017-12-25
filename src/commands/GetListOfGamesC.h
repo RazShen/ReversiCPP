@@ -12,7 +12,7 @@
 
 class GetListOfGamesC : public Command {
 public:
-    void execute(vector<string> args, int client = 0);
+    void execute(vector<string> args, int client = 0, ServerGames* serverGames);
 };
 
 
