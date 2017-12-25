@@ -140,8 +140,8 @@ void RemotePlayerSender::playerMenu(Display * display) {
         command = readFromServer();
 
         // in option "join" - entering a name that isn't on the list
-        if (command == "NotExist") {
-            display->gameNotExist();
+        if (command == "notAvailableGame") {
+            display->notAvailableGame();
             continue;
             // in option "start" - entering a name that is already on the list
         } else if(command == "AlreadyExist") {

@@ -173,8 +173,8 @@ void ConsoleDisplay::printClientMenu() {
     cout << "3 for joining a waiting game." << endl;
 }
 
-void ConsoleDisplay::gameNotExist() {
-    cout << "Error! The game doesn't exist." << endl;
+void ConsoleDisplay::notAvailableGame() {
+    cout << "Error! not a valid game name." << endl;
 }
 
 void ConsoleDisplay::gameAlreadyExist() {

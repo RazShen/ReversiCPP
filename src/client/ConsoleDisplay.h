@@ -130,7 +130,7 @@ public:
 
     void printClientMenu();
 
-    void gameNotExist();
+    void notAvailableGame();
 
     void gameAlreadyExist();
 

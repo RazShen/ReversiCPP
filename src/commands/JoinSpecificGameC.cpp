@@ -6,7 +6,6 @@
 
 
 void JoinSpecificGameC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
-    int i = 0;
     // go over all the rooms and find the room in arg[1]
 
 }

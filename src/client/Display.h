@@ -144,7 +144,7 @@ public:
 
     virtual void printClientMenu()  = 0;
 
-    virtual void gameNotExist()  = 0;
+    virtual void notAvailableGame()  = 0;
 
     virtual void gameAlreadyExist()  = 0;
 
