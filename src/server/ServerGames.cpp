@@ -11,7 +11,6 @@
 ServerGames::ServerGames() {}
 
 Room* ServerGames::getGame(string gameName) {
-
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
@@ -50,6 +49,13 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
     }
 }
 
+bool ServerGames::isGameRunning(string gameName) {
+    bool isItRunning = false;
+    if (getGame(gameName)->isRunning()) {
+        isItRunning = true;
+    }
+    return isItRunning;
+}
 string ServerGames::sendListGames(int clientSocket) {
     string list = "The available games are: ";
     vector<Room>::iterator it = gamesList.begin();

@@ -22,7 +22,8 @@ public:
     string sendListGames(int clientSocket);
     int size();
     void initializingPlayer(int playerSocket, int playerNum);
-    };
+    bool isGameRunning(string gameName);
+};
 
 
 #endif //EX4_SERVERGAMES_H
