@@ -8,29 +8,28 @@
 
 using namespace std;
 
-struct Room {
+class Room {
 public:
+    Room(int playerSocket, const string &name);
     const string &getRoomName() const;
 
-    int getSocket1() const;
+    int getOtherSocket(int playerSocket);
 
-    int getSocket2() const;
+    void connectPlayer2(int playerSocket);
 
-    bool isIsRunning() const;
+    bool isRunning();
 
     void setRoomName(const string &roomName);
 
     void setSocket1(int socket1);
 
-    void setSocket2(int socket2);
-
-    void setIsRunning(bool isRunning);
+    void startGame();
 
 private:
     string nameOfRoom;
-    int socket1;
-    int socket2;
-    bool isRunning = false;
+    int playerSocket1;
+    int playerSocket2;
+    bool started;
 };
 
 

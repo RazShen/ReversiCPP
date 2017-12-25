@@ -15,6 +15,7 @@
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
+#define THREADS_NUM 10
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
@@ -54,8 +55,8 @@ void Server::start() {
             throw "Error on accept";
         }
         cout << "Player X connected." << endl;
-
         initializingPlayer(player1, 1);
+
         // Accept a new client connection
         player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
         if (player2 == -1) {
@@ -63,9 +64,10 @@ void Server::start() {
             throw "Error on accept";
         }
         cout << "Player O connected." << endl;
-
         initializingPlayer(player2, 2);
         initializingPlayer(player1, 3);
+
+        //have a connection
         handleClients(player1, player2);
     }
 }
@@ -76,7 +78,6 @@ void Server::initializingPlayer(int playerSocket, int playerNum) {
         cout << "Error writing to socket" << endl;
         exit(1);
     }
-
 }
 
 void Server::handleClients(int player1, int player2) {
@@ -116,5 +117,9 @@ bool Server::transferMessage(int sender, int receiver) {
 
 void Server::stop() {
     close(serverSocket);
+}
+
+void Server::handleBeforeClient(int clientSocket) {
+
 }
 
