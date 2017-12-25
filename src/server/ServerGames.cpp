@@ -56,7 +56,7 @@ bool ServerGames::isGameRunning(string gameName) {
     }
     return isItRunning;
 }
-string ServerGames::sendListGames(int clientSocket) {
+string ServerGames::sendListGames() {
     string list = "The available games are: ";
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end() && !it->isRunning()) {

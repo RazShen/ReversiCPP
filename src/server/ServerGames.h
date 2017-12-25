@@ -19,7 +19,7 @@ public:
     void addGame(string gameName, int clientSocket);
     bool isGameInList(string gameName);
     void joinToGame(string gameName, int clientSocket);
-    string sendListGames(int clientSocket);
+    string sendListGames();
     int size();
     void initializingPlayer(int playerSocket, int playerNum);
     bool isGameRunning(string gameName);
