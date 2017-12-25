@@ -13,7 +13,7 @@ private:
     vector<Room> gamesList;
 public:
     ServerGames();
-    Room getGame(string gameName);
+    Room* getGame(string gameName);
     void deleteGame(string gameName);
     void addGame(string gameName, int clientSocket);
     bool isGameInList(string gameName);

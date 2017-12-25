@@ -7,15 +7,15 @@
 
 ServerGames::ServerGames() {}
 
-Room ServerGames::getGame(string gameName) {
+Room* ServerGames::getGame(string gameName) {
 
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
-            return *it;
+            return &(*it);
         }
     }
-    return *it;
+    return &(*it);
 }
 
 void ServerGames::addGame(string gameName, int clientSocket) {
@@ -26,7 +26,13 @@ void ServerGames::addGame(string gameName, int clientSocket) {
 }
 
 void ServerGames::deleteGame(string gameName) {
-
+    //delete thread.
+    //earse from game list
+    // delete room (after new)
+    Room* roomToDelete = getGame(gameName);
+    if(isGameInList(gameName)) {
+        delete(roomToDelete);
+    }
 
 }
 
@@ -36,7 +42,11 @@ void ServerGames::joinToGame(string gameName, int clientSocket) {
 }
 
 void ServerGames::sendListGames(int clientSocket) {
-
+    string list = "The available games are: ";
+    vector<Room>::iterator it = gamesList.begin();
+    while (it != gamesList.end()) {
+        list += it->getRoomName();
+    }
 }
 
 int ServerGames::size() {
