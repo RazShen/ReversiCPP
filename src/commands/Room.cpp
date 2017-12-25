@@ -18,8 +18,10 @@ const string &Room::getRoomName() const {
 int Room::getOtherSocket (int playerSocket) {
     if(playerSocket == playerSocket1)
         return playerSocket2;
-    else
+    else if(playerSocket == playerSocket2) {
         return this->playerSocket1;
+    }
+    return 0;
 }
 
 bool Room::isRunning() {
@@ -37,12 +39,8 @@ void Room::setSocket1(int socket1) {
 void Room::startGame() {
     //initialise player
     this->started = true;
-
 }
 
 void Room::connectPlayer2(int playerSocket) {
     this->playerSocket2 = playerSocket;
-
 }
-
-

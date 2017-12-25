@@ -24,7 +24,8 @@ public:
     int size();
     int getNumOfRunningRooms();
     int getNumOfNotRunningRooms();
-};
+    void initializingPlayer(int playerSocket, int playerNum);
+    };
 
 
 #endif //EX4_SERVERGAMES_H
