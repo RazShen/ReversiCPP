@@ -34,6 +34,7 @@ public:
      */
     void stop();
 
+    vector<string> parseStringBySpace(string str);
 
 private:
     int port;

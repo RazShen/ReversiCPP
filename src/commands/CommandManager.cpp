@@ -16,6 +16,7 @@ CommandsManager::CommandsManager(ServerGames* serverG): serverGames(serverG){
     commandsMap["join"] = new JoinSpecificGameC();
     commandsMap["Play"] = new PlayMoveC();
     commandsMap["close"] = new CloseSpecificGameC();
+
 }
 
 void CommandsManager::executeCommand(string command, vector<string> args) {

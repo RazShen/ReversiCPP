@@ -11,7 +11,7 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     int i = 0;
     bool badName = false;
     // arg[01] is the room name
-    string startString = args[0], answerToUser;
+    string startString = args[1], answerToUser;
     for (i; i < serverGamesI->size(); i++) {
         if (serverGamesI->isGameInList(startString)) {
             badName = true;
@@ -26,7 +26,4 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
         answerToUser = "Started";
         writeToClient(answerToUser, client);
     }
-    //string startString = STARTMESSAGE;
-    write(client, &startString, sizeof(string));
-
 }
