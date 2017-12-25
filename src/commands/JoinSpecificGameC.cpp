@@ -5,11 +5,7 @@
 #include "JoinSpecificGameC.h"
 
 
-void JoinSpecificGameC::execute(vector<string> args, vector<Game> games, int client) {
+void JoinSpecificGameC::execute(vector<string> args, int client) {
     int i = 0;
-    for(i; i < games.size(); i++) {
-     //   if(games[i].getStatus() == 0 && games[i].getName() == args[0]) {
-            ////////////
-     //    }
-    }
+    // go over all the rooms and find the room in arg[0]
 }
