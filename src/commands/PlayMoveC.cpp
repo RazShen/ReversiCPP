@@ -8,7 +8,7 @@
 #include "PlayMoveC.h"
 
 
-void PlayMoveC::execute(vector<string> args, int client, ServerGames* serverGames) {
+void PlayMoveC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
     // get arg[0] as row get arg[1] as column
     string moveString;
     int row, column, i =0;
@@ -16,7 +16,7 @@ void PlayMoveC::execute(vector<string> args, int client, ServerGames* serverGame
     sscanf(args[1].c_str(), "%d", &column);
     Pair p = Pair(row, column);
     // send this pair to the other player in the room
-    for (i; i < serverGames->getNumOfRunningRooms(); i++) {
+    for (i; i < serverGamesI->size(); i++) {
     //tu    if (client == serverGames->getGame())
     }
     //string moveString = "Play " + args[0] + " " + args[1];

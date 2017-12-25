@@ -14,7 +14,7 @@ using namespace std;
 
 class Command {
 public:
-    virtual void execute(vector<string> args, int client = 0, ServerGames* serverGames) = 0;
+    virtual void execute(vector<string> args, int client, ServerGames* serverGamesI) = 0;
     virtual ~Command() {}
 };
 #endif //EX4_COMMAND_H

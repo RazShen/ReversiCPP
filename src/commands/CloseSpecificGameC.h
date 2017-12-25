@@ -12,7 +12,7 @@
 
 class CloseSpecificGameC : public Command {
 public:
-    void execute(vector<string> args, int client, ServerGames* serverGames);
+    void execute(vector<string> args, int client, ServerGames* serverGamesI);
 };
 
 #endif //EX4_CLOSESPECIFICGAMEC_H

@@ -7,9 +7,23 @@
 #include "StartNewGameC.h"
 
 
-void StartNewGameC::execute(vector<string> args, int client, ServerGames* serverGames) {
+void StartNewGameC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
+    int i = 0;
+    bool badName = false;
     // arg[01] is the room name
-    string startString;
+    string startString = args[0], answerToUser;
+    for (i; i < serverGamesI->size(); i++) {
+        if (serverGamesI->isGameInList(startString)) {
+            badName = true;
+        }
+    }
+    // user inputted a bad name
+    if (!badName) {
+        answerToUser = "AlreadyExist";
+    } else {
+        // send "started"
+        answerToUser = "AlreadyExist";
+    }
     //string startString = STARTMESSAGE;
     write(client, &startString, sizeof(string));
 
