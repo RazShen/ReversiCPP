@@ -157,6 +157,9 @@ void RemotePlayerSender::playerMenu(Display * display) {
         if(command == "Started") {
             string print = "The room: " + roomName + "was created!";
             display->printString(print);
+        } else if (command == "JoiningGame") {
+            string print = "You joined room:" + roomName + " !";
+            display->printString(print);
         }
     }
 }
