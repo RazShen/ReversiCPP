@@ -3,14 +3,13 @@
 //
 
 #include <vector>
-#include <unistd.h>
 #include "StartNewGameC.h"
 
 
 void StartNewGameC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
     int i = 0;
     bool badName = false;
-    // arg[01] is the room name
+    // arg[1] is the room name
     string startString = args[1], answerToUser;
     for (i; i < serverGamesI->size(); i++) {
         if (serverGamesI->isGameInList(startString)) {
@@ -25,5 +24,6 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
         // send "started"
         answerToUser = "Started";
         writeToClient(answerToUser, client);
+        serverGamesI->addGame(startString, client);
     }
 }

@@ -64,7 +64,6 @@ int ServerGames::size() {
 }
 
 bool ServerGames::isGameInList(string gameName) {
-
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) return true;
@@ -73,13 +72,6 @@ bool ServerGames::isGameInList(string gameName) {
     return false;
 }
 
-int ServerGames::getNumOfRunningRooms() {
-    return this->runningRooms;
-}
-
-int ServerGames::getNumOfNotRunningRooms() {
-    return this->notRunningRooms;
-}
 
 void ServerGames::initializingPlayer(int playerSocket, int playerNum) {
     ssize_t x = write(playerSocket, &playerNum, sizeof(playerNum));
