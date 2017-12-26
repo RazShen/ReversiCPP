@@ -53,8 +53,7 @@ void Server::start() {
             this->stop();
             throw "Error on accept";
         }
-        cout << "Player X connected." << endl;
- //       initializingPlayer(player1, 1);
+        cout << "Player connected." << endl;
         handleBeforeClient(player1, commandManager);
 //        // Accept a new client connection
 //        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
@@ -122,8 +121,6 @@ void Server::handleBeforeClient(int clientSocket, CommandManager commandManager)
     string input = readFromClient(clientSocket);
     cout << input << endl;
     vector<string> inputtedStringInVec = parseStringBySpace(input);
-    cout << inputtedStringInVec[0] << endl;
-    cout << inputtedStringInVec[1] << endl;
     string wantedCommand = inputtedStringInVec[0];
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
 }

@@ -10,9 +10,6 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     int i = 0;
     bool badName = false;
     // arg[1] is the room name
-    cout << "start New" << endl;
-    cout << args[0];
-    cout << args[1];
     string gameName = args[1];
     string answerToUser;
     for (i; i < serverGamesI->size(); i++) {
