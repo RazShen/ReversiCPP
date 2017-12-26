@@ -30,6 +30,7 @@ private:
     int playerSocket1;
     int playerSocket2;
     bool started;
+    pthread_t pthread;
 };
 
 
