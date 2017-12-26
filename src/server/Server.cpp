@@ -54,13 +54,16 @@ void Server::start() {
             throw "Error on accept";
         }
         cout << "Player connected." << endl;
+        cout << "started handling" << endl;
         handleBeforeClient(player1, commandManager);
-//        // Accept a new client connection
+        cout << "ended handling" << endl;
+        // Accept a new client connection
 //        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
 //        if (player2 == -1) {
 //            this->stop();
 //            throw "Error on accept";
 //        }
+//        handleBeforeClient(player2, commandManager);
 //        cout << "Player O connected." << endl;
 //        initializingPlayer(player2, 2);
 //        initializingPlayer(player1, 3);
@@ -122,11 +125,13 @@ void Server::handleBeforeClient(int clientSocket, CommandManager commandManager)
     cout << input << endl;
     vector<string> inputtedStringInVec = parseStringBySpace(input);
     string wantedCommand = inputtedStringInVec[0];
+    cout << wantedCommand << endl;
+    cout << "executing" << endl;
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
 }
 
-vector<string> Server::parseStringBySpace(string str) {
-    vector<string>result;
+vector<string>  Server::parseStringBySpace(string str) {
+    vector<string> result;
     string parser = " ";
     while(str.size()){
         unsigned long index = str.find(parser);
@@ -139,7 +144,6 @@ vector<string> Server::parseStringBySpace(string str) {
             str = "";
         }
     }
-    
     return result;
 }
 

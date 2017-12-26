@@ -14,7 +14,7 @@ using namespace std;
 
 class Command {
 public:
-    virtual void execute(vector<string> args, int client, ServerGames* serverGamesI) = 0;
+    virtual void execute(const vector<string>& args, int client, ServerGames* serverGamesI) = 0;
     void writeToClient(string inputForClient, int clientSocket);
     virtual ~Command() {}
 };

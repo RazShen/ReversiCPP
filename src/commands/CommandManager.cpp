@@ -19,7 +19,7 @@ CommandManager::CommandManager(ServerGames* serverG): serverGames(serverG){
 
 }
 
-void CommandManager::executeCommand(string command, vector<string> args, int client) {
+void CommandManager::executeCommand(string command, const vector<string>& args, int client) {
     Command *commandObj = commandsMap[command];
     cout << command << " excutecomman   " << endl;
     commandObj->execute(args,client, this->serverGames);

@@ -8,7 +8,7 @@
 #include "PlayMoveC.h"
 
 
-void PlayMoveC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
+void PlayMoveC::execute(const vector<string>& args, int client, ServerGames* serverGamesI) {
     // get arg[0] as row get arg[1] as column
     string moveString;
     int row, column, i =0;

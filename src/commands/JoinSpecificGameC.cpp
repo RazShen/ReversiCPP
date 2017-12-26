@@ -5,7 +5,7 @@
 #include "JoinSpecificGameC.h"
 
 
-void JoinSpecificGameC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
+void JoinSpecificGameC::execute(const vector<string>& args, int client, ServerGames* serverGamesI) {
     // go over all the rooms and find the room in arg[1]
     string wantedGameToJoin = args[1];
     string answerToUser = "notAvailableGame";
@@ -26,4 +26,3 @@ void JoinSpecificGameC::execute(vector<string> args, int client, ServerGames* se
         writeToClient(answerToUser, client);
     }
 }
-

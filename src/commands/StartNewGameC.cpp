@@ -6,7 +6,7 @@
 #include "StartNewGameC.h"
 
 
-void StartNewGameC::execute(vector<string> args, int client, ServerGames* serverGamesI) {
+void StartNewGameC::execute(const vector<string>& args, int client, ServerGames* serverGamesI) {
     int i = 0;
     bool badName = false;
     // arg[1] is the room name
