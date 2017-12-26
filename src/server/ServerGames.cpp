@@ -4,6 +4,7 @@
 #include <cstring>
 #include <iostream>
 #include "ServerGames.h"
+#include "../client/Pair.h"
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -45,7 +46,7 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
         initializingPlayer(clientSocket2, 2);
         initializingPlayer(roomToJoin->getOtherSocket(clientSocket2), 3);
         roomToJoin->startGame();
-
+        this->handleClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2);
     }
 }
 
@@ -86,4 +87,39 @@ void ServerGames::initializingPlayer(int playerSocket, int playerNum) {
         cout << "Error writing to socket" << endl;
         exit(1);
     }
+}
+
+void ServerGames::handleClients(int player1, int player2) {
+    int sender = player1;
+    int receiver = player2;
+    int temp;
+    while (transferMessage(sender, receiver)) {
+        temp = sender;
+        sender = receiver;
+        receiver = temp;
+    }
+    // Close communication with the client
+    close(player1);
+    close(player2);
+}
+
+bool ServerGames::transferMessage(int sender, int receiver) {
+    Pair pair;
+    try {
+        ssize_t checkTransfer = read(sender, &pair, sizeof(pair));
+        if (checkTransfer <= 0) {
+            return false;
+        }
+        // end of game
+        if (pair.getCol() == -6 && pair.getCol() == -6) {
+            return false;
+        }
+        checkTransfer = write(receiver, &pair, sizeof(pair));
+        if (checkTransfer <= 0) {
+            return false;
+        }
+    } catch(exception e) {
+        return false;
+    }
+    return true;
 }

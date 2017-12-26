@@ -25,5 +25,5 @@ void JoinSpecificGameC::execute(vector<string> args, int client, ServerGames* se
         // game doesn't exist
         writeToClient(answerToUser, client);
     }
-
 }
+
