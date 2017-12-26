@@ -10,20 +10,24 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     int i = 0;
     bool badName = false;
     // arg[1] is the room name
-    string startString = args[1], answerToUser;
+    cout << "start New" << endl;
+    cout << args[0];
+    cout << args[1];
+    string gameName = args[1];
+    string answerToUser;
     for (i; i < serverGamesI->size(); i++) {
-        if (serverGamesI->isGameInList(startString)) {
+        if (serverGamesI->isGameInList(gameName)) {
             badName = true;
         }
     }
     // user inputted a bad name
-    if (!badName) {
+    if (badName) {
         answerToUser = "AlreadyExist";
         writeToClient(answerToUser, client);
     } else {
         // send "started"
         answerToUser = "Started";
         writeToClient(answerToUser, client);
-        serverGamesI->addGame(startString, client);
+        serverGamesI->addGame(gameName, client);
     }
 }

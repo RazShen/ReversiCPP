@@ -137,6 +137,7 @@ void RemotePlayerSender::playerMenu(Display* display) {
             writeToServer(command);
             // reading the servers answer from the socket
             command = readFromServer();
+            cout << command << endl;
             if (operation == 2) {
                 // print the list of rooms
                 vector<string> listOfRooms = parseStringBySpace(command);
@@ -205,6 +206,7 @@ string RemotePlayerSender::readFromServer() {
     n = (int) read(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error reading string length";
+    cout << stringLength << "read" << endl;
     char *command = new char[stringLength];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));

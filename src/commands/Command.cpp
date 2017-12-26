@@ -6,8 +6,11 @@
 #include "Command.h"
 
 void Command::writeToClient(string inputForClient, int clientSocket) {
-    unsigned long stringLength = inputForClient.length();
+    int stringLength = inputForClient.length();
     int n;
+    cout << stringLength << endl;
+    cout << inputForClient << endl;
+
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error writing string length";
