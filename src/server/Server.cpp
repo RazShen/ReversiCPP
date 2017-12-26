@@ -124,7 +124,6 @@ void Server::handleBeforeClient(int clientSocket, CommandManager commandManager)
     vector<string> inputtedStringInVec = parseStringBySpace(input);
     string wantedCommand = inputtedStringInVec[0];
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
-    cout << 7 << endl;
 }
 
 vector<string> Server::parseStringBySpace(string str) {
