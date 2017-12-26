@@ -10,7 +10,7 @@
 #include "GetListOfGamesC.h"
 
 
-CommandsManager::CommandsManager(ServerGames* serverG): serverGames(serverG){
+CommandManager::CommandManager(ServerGames* serverG): serverGames(serverG){
     commandsMap["start"] = new StartNewGameC();
     commandsMap["list_games"] = new GetListOfGamesC();
     commandsMap["join"] = new JoinSpecificGameC();
@@ -19,13 +19,12 @@ CommandsManager::CommandsManager(ServerGames* serverG): serverGames(serverG){
 
 }
 
-void CommandsManager::executeCommand(string command, vector<string> args) {
-    int client = 0;
+void CommandManager::executeCommand(string command, vector<string> args, int client) {
     Command *commandObj = commandsMap[command];
     commandObj->execute(args,client, this->serverGames);
 }
 
-CommandsManager::~CommandsManager() {
+CommandManager::~CommandManager() {
     map<string, Command *>::iterator it;
     for (it = commandsMap.begin(); it != commandsMap.end(); it++) {
         delete it->second;

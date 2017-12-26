@@ -9,7 +9,8 @@
 
 
 #include <vector>
-#include "../commands/Room.h"
+#include "ServerGames.h"
+#include "../commands/CommandManager.h"
 
 
 class Server {
@@ -39,7 +40,7 @@ public:
 private:
     int port;
     int serverSocket;
-    vector<Room*> rooms;
+    ServerGames* serverGames;
 
     /**
      * this method handles 2 clients and transfer their massages through function transferMassage
@@ -62,8 +63,8 @@ private:
      * @return if it works, false otherwise
      */
     bool transferMessage(int sender, int receiver);
-    void handleBeforeClient(int clientSocket);
-
+    void handleBeforeClient(int clientSocket, CommandManager commandManager);
+    string readFromClient(int clientSocket);
 };
 
 

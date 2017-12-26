@@ -194,7 +194,7 @@ void ConsoleDisplay::printString(string stringToPrint) {
 
 void ConsoleDisplay::printAvailableGames(vector<string> availableGamesNames) {
     if (availableGamesNames.size() == 1) {
-        cout << "No available games to join" << endl;
+        printString("No available games to join");
     } else {
         vector<string>::iterator it = availableGamesNames.begin();
         while (it != availableGamesNames.end()) {
@@ -203,5 +203,6 @@ void ConsoleDisplay::printAvailableGames(vector<string> availableGamesNames) {
         }
 
     }
+    newLine();
 }
 

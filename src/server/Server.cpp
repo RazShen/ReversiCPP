@@ -5,14 +5,9 @@
 
 #include "Server.h"
 #include "../client/Pair.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
 #include <string.h>
-#include <iostream>
 #include <cstdlib>
-#include <sstream>
-#include <iterator>
+
 
 
 using namespace std;
@@ -21,10 +16,12 @@ using namespace std;
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
+    this->serverGames = new ServerGames();
 }
 
 
 void Server::start() {
+    CommandManager commandManager = CommandManager(this->serverGames);
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -58,7 +55,7 @@ void Server::start() {
         }
         cout << "Player X connected." << endl;
         initializingPlayer(player1, 1);
-
+        handleBeforeClient(player1, commandManager);
         // Accept a new client connection
         player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
         if (player2 == -1) {
@@ -68,7 +65,7 @@ void Server::start() {
         cout << "Player O connected." << endl;
         initializingPlayer(player2, 2);
         initializingPlayer(player1, 3);
-
+        handleBeforeClient(player2, commandManager);
         //have a connection
         handleClients(player1, player2);
     }
@@ -121,8 +118,13 @@ void Server::stop() {
     close(serverSocket);
 }
 
-void Server::handleBeforeClient(int clientSocket) {
-
+void Server::handleBeforeClient(int clientSocket, CommandManager commandManager) {
+    // in this method we get the user input and run the command by command manager
+    string input = readFromClient(clientSocket);
+    vector<string> inputtedStringInVec = parseStringBySpace(input);
+    string wantedCommand = inputtedStringInVec[0];
+    commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
+    cout << 7 << endl;
 }
 
 vector<string> Server::parseStringBySpace(string str) {
@@ -140,6 +142,22 @@ vector<string> Server::parseStringBySpace(string str) {
         }
     }
     return result;
+}
+
+string Server::readFromClient(int clientSocket) {
+    int stringLength, n;
+    n = (int) read(clientSocket, &stringLength, sizeof(int));
+    if (n == -1)
+        throw "Error reading string length";
+    char *command = new char[stringLength];
+    for (int i = 0; i < stringLength; i++) {
+        n = (int) read(clientSocket, &command[i], sizeof(char));
+        if (n == -1)
+            throw "Error reading message!";
+    }
+    string strCommand(command);
+    delete(command);
+    return strCommand;
 }
 
 

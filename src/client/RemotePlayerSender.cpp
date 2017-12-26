@@ -126,44 +126,48 @@ void RemotePlayerSender::playerMenu(Display* display) {
         display->printClientMenu();
         // get the operation of the client
         cin >> operation;
-
         if(operation == 1 || operation == 3) {
             display->EnterNameOfGame();
             cin >> roomName;
         }
-        // translating the command from a number into string
-        command = ParseOperation(operation, roomName);
-        // sending the command to the server
-        writeToServer(command);
-        // reading the servers answer from the socket
-        command = readFromServer();
-        if (operation == 2) {
-            // print the list of rooms
-            vector<string> listOfRooms = parseStringBySpace(command);
-            display->printAvailableGames(listOfRooms);
-            playerMenu(display);
-        }
-        // in option "join" - entering a name that isn't on the list
-        if (command == "notAvailableGame") {
-            display->notAvailableGame();
-            continue;
-            // in option "start" - entering a name that is already on the list
-        } else if(command == "AlreadyExist") {
-            display->gameAlreadyExist();
-            continue;
-            // in case user entered an option not from the menu
-        } else if(command == "NotOption") {
-            display->gameNotOption();
-            continue;
-        }
-        // if the input was legal
-        inputILegal = false;
-        if(command == "Started") {
-            string print = "The room: " + roomName + "was created!";
-            display->printString(print);
-        } else if (command == "JoiningGame") {
-            string print = "You joined room:" + roomName + " !";
-            display->printString(print);
+        if (operation == 1 || operation == 2 || operation == 3) {
+            // translating the command from a number into string
+            command = ParseOperation(operation, roomName);
+            // sending the command to the server
+            writeToServer(command);
+            // reading the servers answer from the socket
+            command = readFromServer();
+            if (operation == 2) {
+                // print the list of rooms
+                vector<string> listOfRooms = parseStringBySpace(command);
+                display->printAvailableGames(listOfRooms);
+                continue;
+            } else if (command == "notAvailableGame") {
+                // in option "join" - entering a name that isn't on the list
+                display->notAvailableGame();
+                continue;
+                // in option "start" - entering a name that is already on the list
+            } else if (command == "AlreadyExist") {
+                display->gameAlreadyExist();
+                continue;
+                // in case user entered an option not from the menu
+            } else if (command == "NotOption") {
+                display->gameNotOption();
+                continue;
+            }
+            if (command == "Started") {
+                // The input was legal
+                inputILegal = false;
+                string print = "The room: " + roomName + "was created!";
+                display->printString(print);
+            } else if (command == "JoiningGame") {
+                // The input was legal
+                inputILegal = false;
+                string print = "You joined room:" + roomName + " !";
+                display->printString(print);
+            }
+        } else {
+            display->printString("No such option, try again");
         }
     }
 }

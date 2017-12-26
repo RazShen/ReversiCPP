@@ -8,15 +8,14 @@
 
 #include <map>
 #include "Command.h"
-#include "../server/Server.h"
 #include "../server/ServerGames.h"
 
 
-class CommandsManager {
+class CommandManager {
 public:
-    CommandsManager(ServerGames* serverG);
-    ~CommandsManager();
-    void executeCommand(string command, vector<string> args);
+    CommandManager(ServerGames* serverG);
+    ~CommandManager();
+    void executeCommand(string command, vector<string> args, int client);
 private:
     map<string, Command *> commandsMap;
     ServerGames* serverGames;
