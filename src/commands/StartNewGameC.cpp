@@ -12,11 +12,14 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     // arg[1] is the room name
     string gameName = args[1];
     string answerToUser;
-    for (i; i < serverGamesI->size(); i++) {
-        if (serverGamesI->isGameInList(gameName)) {
-            badName = true;
-        }
+    if (serverGamesI->isGameInList(gameName)) {
+        badName = true;
     }
+//    for (i; i < serverGamesI->size(); i++) {
+//        if (serverGamesI->isGameInList(gameName)) {
+//            badName = true;
+//        }
+//    }
     // user inputted a bad name
     if (badName) {
         answerToUser = "AlreadyExist";

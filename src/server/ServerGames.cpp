@@ -68,14 +68,21 @@ string ServerGames::sendListGames() {
 }
 
 int ServerGames::size() {
+    if(gamesList.empty()) {
+        return 0;
+    }
+    //int size = gamesList.size();
     return (int) gamesList.size();
+    //return size;
 }
 
 bool ServerGames::isGameInList(string gameName) {
-    vector<Room>::iterator it = gamesList.begin();
-    while (it != gamesList.end()) {
-        if (gameName == it->getRoomName()) return true;
-        it++;
+    if(!gamesList.empty()) {
+        vector<Room>::iterator it = gamesList.begin();
+        while (it != gamesList.end()) {
+            if (gameName == it->getRoomName()) return true;
+            it++;
+        }
     }
     return false;
 }

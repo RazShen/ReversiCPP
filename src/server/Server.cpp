@@ -58,8 +58,8 @@ void Server::start() {
         }
         cout << "Player connected." << endl;
         cout << "started handling" << endl;
-        pthread_t currThread;
-//        int rc = pthread_create(&currThread, NULL, &Server::handleAccept, &player1);
+//        pthread_t currThread;
+//        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &player1);
 //        if (rc != 0) {
 //            cout << "Error: unable to create thread, " << rc << endl;
 //            exit(-1);
@@ -68,16 +68,7 @@ void Server::start() {
 
         handleBeforeClient(player1);
         cout << "ended handling" << endl;
-        // Accept a new client connection
-//        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
-//        if (player2 == -1) {
-//            this->stop();
-//            throw "Error on accept";
-//        }
-//        handleBeforeClient(player2, commandManager);
-//        cout << "Player O connected." << endl;
-//        initializingPlayer(player2, 2);
-//        initializingPlayer(player1, 3);
+
 //        //have a connection
 //        handleClients(player1, player2);
     }
@@ -138,7 +129,6 @@ void Server::handleBeforeClient(int clientSocket) {
     vector<string> inputtedStringInVec = parseStringBySpace(input);
     string wantedCommand = inputtedStringInVec[0];
     cout << wantedCommand << endl;
-    cout << "executing" << endl;
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
 }
 
