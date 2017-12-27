@@ -124,12 +124,20 @@ void Server::stop() {
 void Server::handleBeforeClient(int clientSocket) {
     CommandManager commandManager = CommandManager(this->serverGames);
     // in this method we get the user input and run the command by command manager
-    string input = "";
+    string input = "", wantedCommand;
+    vector<string> inputtedStringInVec;
     input = readFromClient(clientSocket);
     cout << "handleBeforeClient read:" << input << endl;
-    vector<string> inputtedStringInVec = parseStringBySpace(input);
-    cout << "Parse of vector handleBeforeClient read:" << inputtedStringInVec[0] << "    "  << inputtedStringInVec[1] << endl;
-    string wantedCommand = inputtedStringInVec[0];
+    if (input != "list_games") {
+        cout << "down in !list_games" << endl;
+        inputtedStringInVec = parseStringBySpace(input);
+        cout << "Parse of vector handleBeforeClient read:" << inputtedStringInVec.at(0) << "    "  << inputtedStringInVec.at(1) << endl;
+        wantedCommand = inputtedStringInVec.at(0);
+    } else {
+        cout << "down in list_games" << endl;
+        wantedCommand = input;
+        inputtedStringInVec.push_back(input);
+    }
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
 }
 
@@ -156,7 +164,7 @@ string Server::readFromClient(int clientSocket) {
     cout << "readFromClient read stringLength: " << stringLength << endl;
     if (n == -1)
         throw "Error reading string length";
-    char *command = new char[stringLength+1];
+    char *command = new char[stringLength + 1];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));
         if (n == -1)

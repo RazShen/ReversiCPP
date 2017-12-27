@@ -211,7 +211,7 @@ string RemotePlayerSender::readFromServer() {
     if (n == -1)
         throw "Error reading string length";
     cout << stringLength << " readFromServerNum" << endl;
-    char *command = new char[stringLength+1];
+    char *command = new char[stringLength + 1];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));
         if (n == -1)

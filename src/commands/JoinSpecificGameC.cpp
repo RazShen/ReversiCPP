@@ -12,11 +12,12 @@ void JoinSpecificGameC::execute(vector<string> args, int client, ServerGames* se
     if (serverGamesI->isGameInList(wantedGameToJoin)) {
         // game exist
         if (!serverGamesI->isGameRunning(wantedGameToJoin)) {
+            cout << "JoinSpecificGameC -- game isn't running and game in list:  " << endl;
             // game exist and isn't running
             // join the game
             answerToUser = "JoiningGame";
-            serverGamesI->joinToGame(wantedGameToJoin, client);
             writeToClient(answerToUser, client);
+            serverGamesI->joinToGame(wantedGameToJoin, client);
         } else {
             //game exist but running
             writeToClient(answerToUser, client);

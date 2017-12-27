@@ -10,7 +10,6 @@ void Command::writeToClient(string inputForClient, int clientSocket) {
     int n;
     cout << "command- writeToclient got string length :" << stringLength << endl;
     cout << "command- writeToclient got string:" << inputForClient << endl;
-
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error writing string length";
