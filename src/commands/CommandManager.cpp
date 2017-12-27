@@ -5,7 +5,6 @@
 #include "CommandManager.h"
 #include "StartNewGameC.h"
 #include "JoinSpecificGameC.h"
-#include "PlayMoveC.h"
 #include "CloseSpecificGameC.h"
 #include "GetListOfGamesC.h"
 
@@ -14,7 +13,6 @@ CommandManager::CommandManager(ServerGames* serverG): serverGames(serverG){
     commandsMap["start"] = new StartNewGameC();
     commandsMap["list_games"] = new GetListOfGamesC();
     commandsMap["join"] = new JoinSpecificGameC();
-    commandsMap["Play"] = new PlayMoveC();
     commandsMap["close"] = new CloseSpecificGameC();
 
 }

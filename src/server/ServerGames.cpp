@@ -59,6 +59,10 @@ bool ServerGames::isGameRunning(string gameName) {
 }
 string ServerGames::sendListGames() {
     string list = "The available games are: ";
+    if (this->gamesList.empty()) {
+        list = "No available games to join";
+        return list;
+    }
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end() && !it->isRunning()) {
         list += it->getRoomName() + " ";
