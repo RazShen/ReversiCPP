@@ -37,6 +37,7 @@ public:
 
     vector<string> parseStringBySpace(string str);
     static void *handleAccept(void *tempArgs);
+    void handleBeforeClient(int clientSocket);
 
 
 private:
@@ -65,7 +66,6 @@ private:
      * @return if it works, false otherwise
      */
     bool transferMessage(int sender, int receiver);
-    void handleBeforeClient(int clientSocket);
     void* handleClientHelper(void *tempArgs);
     string readFromClient(int clientSocket);
 

@@ -158,7 +158,7 @@ void RemotePlayerSender::playerMenu(Display* display) {
             if (command == "Started") {
                 // The input was legal
                 inputILegal = false;
-                string print = "The room: " + roomName + " was created!";
+                string print = "The room: '" + roomName + "' was created!";
                 display->printString(print);
             } else if (command == "JoiningGame") {
                 // The input was legal

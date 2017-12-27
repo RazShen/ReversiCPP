@@ -15,7 +15,7 @@ class CommandManager {
 public:
     CommandManager(ServerGames* serverG);
     ~CommandManager();
-    void executeCommand(string command, const vector<string>& args, int client);
+    void executeCommand(string command, vector<string> args, int client);
 private:
     map<string, Command *> commandsMap;
     ServerGames* serverGames;

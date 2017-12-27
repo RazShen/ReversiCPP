@@ -59,14 +59,14 @@ void Server::start() {
         cout << "Player connected." << endl;
         cout << "started handling" << endl;
         pthread_t currThread;
-        int rc = pthread_create(&currThread, NULL, &Server::handleAccept, &player1);
-        if (rc != 0) {
-            cout << "Error: unable to create thread, " << rc << endl;
-            exit(-1);
-        }
-        connectionThreads.push_back(currThread);
+//        int rc = pthread_create(&currThread, NULL, &Server::handleAccept, &player1);
+//        if (rc != 0) {
+//            cout << "Error: unable to create thread, " << rc << endl;
+//            exit(-1);
+//        }
+//        connectionThreads.push_back(currThread);
 
-        //handleBeforeClient(player1);
+        handleBeforeClient(player1);
         cout << "ended handling" << endl;
         // Accept a new client connection
 //        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
