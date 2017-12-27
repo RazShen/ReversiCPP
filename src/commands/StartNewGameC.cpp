@@ -23,12 +23,12 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     // user inputted a bad name
     if (badName) {
         answerToUser = "AlreadyExist";
-        cout << "start new game got as game name:" << gameName << "and it's not valid" << endl;
+        cout << "start new game got as game name:" << gameName << "   and it's not valid" << endl;
         writeToClient(answerToUser, client);
     } else {
         // send "started"
         answerToUser = "Started";
-        cout << "start new game got as game name:" << gameName << "and it's valid "<< endl;
+        cout << "start new game got as game name:" << gameName << "   and it's valid "<< endl;
         writeToClient(answerToUser, client);
         serverGamesI->addGame(gameName, client);
     }
