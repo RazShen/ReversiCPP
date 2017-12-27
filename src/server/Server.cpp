@@ -7,12 +7,16 @@
 #include "../client/Pair.h"
 #include <string.h>
 #include <cstdlib>
+#include <pthread.h>
+
 
 
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 #define THREADS_NUM 10
+vector<pthread_t> connectionThreads;
+
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
@@ -21,7 +25,6 @@ Server::Server(int port) : port(port), serverSocket(0) {
 
 
 void Server::start() {
-    CommandManager commandManager = CommandManager(this->serverGames);
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -55,7 +58,15 @@ void Server::start() {
         }
         cout << "Player connected." << endl;
         cout << "started handling" << endl;
-        handleBeforeClient(player1, commandManager);
+        pthread_t currThread;
+        int rc = pthread_create(&currThread, NULL, &Server::handleAccept, &player1);
+        if (rc != 0) {
+            cout << "Error: unable to create thread, " << rc << endl;
+            exit(-1);
+        }
+        connectionThreads.push_back(currThread);
+
+        //handleBeforeClient(player1);
         cout << "ended handling" << endl;
         // Accept a new client connection
 //        player2 = accept(serverSocket, (struct sockaddr *) &playerAddress2, &playerAddressLen2);
@@ -119,7 +130,8 @@ void Server::stop() {
     close(serverSocket);
 }
 
-void Server::handleBeforeClient(int clientSocket, CommandManager commandManager) {
+void Server::handleBeforeClient(int clientSocket) {
+    CommandManager commandManager = CommandManager(this->serverGames);
     // in this method we get the user input and run the command by command manager
     string input = readFromClient(clientSocket);
     cout << input << endl;
@@ -139,7 +151,7 @@ vector<string>  Server::parseStringBySpace(string str) {
             result.push_back(str.substr(0,index));
             str = str.substr(index+parser.size());
             if(str.size()==0)result.push_back(str);
-        }else{
+        }else {
             result.push_back(str);
             str = "";
         }
@@ -161,8 +173,11 @@ string Server::readFromClient(int clientSocket) {
     string strCommand(command);
     delete(command);
     return strCommand;
-
 }
 
-
+void *Server::handleAccept(void *tempArgs) {
+    int clientSocket = *((int *) tempArgs);
+    ((Server *) tempArgs)->handleBeforeClient(clientSocket);
+    return tempArgs;
+}
 

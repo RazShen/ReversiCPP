@@ -36,6 +36,8 @@ public:
     void stop();
 
     vector<string> parseStringBySpace(string str);
+    static void *handleAccept(void *tempArgs);
+
 
 private:
     int port;
@@ -63,9 +65,12 @@ private:
      * @return if it works, false otherwise
      */
     bool transferMessage(int sender, int receiver);
-    void handleBeforeClient(int clientSocket, CommandManager commandManager);
+    void handleBeforeClient(int clientSocket);
+    void* handleClientHelper(void *tempArgs);
     string readFromClient(int clientSocket);
-};
+
+
+    };
 
 
 #endif //EX3WITHTESTS_SERVER_H
