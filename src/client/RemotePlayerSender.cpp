@@ -139,20 +139,23 @@ void RemotePlayerSender::playerMenu(Display* display) {
             command = readFromServer();
             if (operation == 2) {
                 // print the list of rooms
-                vector<string> listOfRooms = parseStringBySpace(command);
-                display->printAvailableGames(listOfRooms);
+                display->printAvailableGames(command);
+                connectToServer(display);
                 continue;
             } else if (command == "notAvailableGame") {
                 // in option "join" - entering a name that isn't on the list
                 display->notAvailableGame();
+                connectToServer(display);
                 continue;
                 // in option "start" - entering a name that is already on the list
             } else if (command == "AlreadyExist") {
                 display->gameAlreadyExist();
+                connectToServer(display);
                 continue;
                 // in case user entered an option not from the menu
             } else if (command == "NotOption") {
                 display->gameNotOption();
+                connectToServer(display);
                 continue;
             }
             if (command == "Started") {

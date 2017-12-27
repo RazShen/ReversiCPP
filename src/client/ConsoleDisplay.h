@@ -141,7 +141,7 @@ public:
 
     void printString(string stringToPrint);
 
-    void printAvailableGames(vector<string> availableGamesNames);
+    void printAvailableGames(string availableGamesNames);
 
 };
 
