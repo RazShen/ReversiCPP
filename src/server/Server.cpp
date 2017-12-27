@@ -124,7 +124,8 @@ void Server::stop() {
 void Server::handleBeforeClient(int clientSocket) {
     CommandManager commandManager = CommandManager(this->serverGames);
     // in this method we get the user input and run the command by command manager
-    string input = readFromClient(clientSocket);
+    string input = "";
+    input = readFromClient(clientSocket);
     cout << "handleBeforeClient read:" << input << endl;
     vector<string> inputtedStringInVec = parseStringBySpace(input);
     cout << "Parse of vector handleBeforeClient read:" << inputtedStringInVec[0] << "    "  << inputtedStringInVec[1] << endl;
@@ -152,14 +153,16 @@ vector<string>  Server::parseStringBySpace(string str) {
 string Server::readFromClient(int clientSocket) {
     int stringLength, n;
     n = (int) read(clientSocket, &stringLength, sizeof(int));
+    cout << "readFromClient read stringLength: " << stringLength << endl;
     if (n == -1)
         throw "Error reading string length";
-    char *command = new char[stringLength];
+    char *command = new char[stringLength+1];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));
         if (n == -1)
             throw "Error reading message!";
     }
+    command[stringLength] = '\0';
     string strCommand(command);
     cout << "server  read from client" << command << endl;
     delete(command);
