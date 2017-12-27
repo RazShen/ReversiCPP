@@ -141,33 +141,35 @@ void RemotePlayerSender::playerMenu(Display* display) {
                 // print the list of rooms
                 display->printAvailableGames(command);
                 connectToServer(display);
-                continue;
+                break;
             } else if (command == "notAvailableGame") {
                 // in option "join" - entering a name that isn't on the list
                 display->notAvailableGame();
                 connectToServer(display);
-                continue;
+                break;
                 // in option "start" - entering a name that is already on the list
             } else if (command == "AlreadyExist") {
                 display->gameAlreadyExist();
                 connectToServer(display);
-                continue;
+                break;
                 // in case user entered an option not from the menu
             } else if (command == "NotOption") {
                 display->gameNotOption();
                 connectToServer(display);
-                continue;
+                break;
             }
             if (command == "Started") {
                 // The input was legal
                 inputILegal = false;
                 string print = "The room: '" + roomName + "' was created!";
                 display->printString(print);
+                break;
             } else if (command == "JoiningGame") {
                 // The input was legal
                 inputILegal = false;
                 string print = "You joined room:" + roomName + " !";
                 display->printString(print);
+                break;
             }
         } else {
             display->printString("No such option, try again");
