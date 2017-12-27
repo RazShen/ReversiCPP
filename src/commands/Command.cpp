@@ -8,8 +8,8 @@
 void Command::writeToClient(string inputForClient, int clientSocket) {
     int stringLength = inputForClient.length();
     int n;
-    cout << stringLength << endl;
-    cout << inputForClient << endl;
+    cout << "command- writeToclient got string length :" << stringLength << endl;
+    cout << "command- writeToclient got string" << stringLength << endl;
 
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1)

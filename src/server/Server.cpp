@@ -125,10 +125,10 @@ void Server::handleBeforeClient(int clientSocket) {
     CommandManager commandManager = CommandManager(this->serverGames);
     // in this method we get the user input and run the command by command manager
     string input = readFromClient(clientSocket);
-    cout << input << endl;
+    cout << "handleBeforeClient read:" << input << endl;
     vector<string> inputtedStringInVec = parseStringBySpace(input);
+    cout << "Parse of vector handleBeforeClient read:" << inputtedStringInVec[0] << "    "  << inputtedStringInVec[1] << endl;
     string wantedCommand = inputtedStringInVec[0];
-    cout << wantedCommand << endl;
     commandManager.executeCommand(wantedCommand, inputtedStringInVec, clientSocket);
 }
 
@@ -161,8 +161,10 @@ string Server::readFromClient(int clientSocket) {
             throw "Error reading message!";
     }
     string strCommand(command);
+    cout << "server  read from client" << command << endl;
     delete(command);
     return strCommand;
+
 }
 
 void *Server::handleAccept(void *tempArgs) {
