@@ -15,7 +15,6 @@
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 #define THREADS_NUM 10
-vector<pthread_t> connectionThreads;
 
 
 Server::Server(int port) : port(port), serverSocket(0) {
@@ -58,14 +57,14 @@ void Server::start() {
         }
         cout << "Player connected." << endl;
         cout << "started handling" << endl;
-        pthread_t currThread;
-        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &player1);
-        if (rc != 0) {
-            cout << "Error: unable to create thread, " << rc << endl;
-            exit(-1);
-        }
-        connectionThreads.push_back(currThread);
- //       handleBeforeClient(player1);
+//        pthread_t currThread;
+//        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &player1);
+//        if (rc != 0) {
+//            cout << "Error: unable to create thread, " << rc << endl;
+//            exit(-1);
+//        }
+//        connectionThreads.push_back(currThread);
+       handleBeforeClient(player1);
         cout << "ended handling" << endl;
 
 //        //have a connection

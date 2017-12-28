@@ -44,6 +44,8 @@ private:
     int port;
     int serverSocket;
     ServerGames* serverGames;
+    vector<pthread_t> connectionThreads;
+
 
     /**
      * this method handles 2 clients and transfer their massages through function transferMassage
