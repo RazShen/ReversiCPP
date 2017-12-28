@@ -79,16 +79,23 @@ bool ServerGames::isGameRunning(string gameName) {
     return isItRunning;
 }
 string ServerGames::sendListGames() {
+    bool allRun = true;
     string list = "The available games are: ";
-    if (!this->hasAtLeastOneRunningGame()) {
+    if (gamesList.empty()) {
         list = "No available games to join.";
         return list;
     }
     vector<Room>::iterator it = gamesList.begin();
-    while (it != gamesList.end() && !it->isRunning()) {
-        cout << "added room to list of rooms:" << it->getRoomName() << endl;
-        list += ", " + it->getRoomName();
+    while (it != gamesList.end()) {
+        if(!it->isRunning()) {
+            cout << "added room to list of rooms:" << it->getRoomName() << endl;
+            list += " " + it->getRoomName();
+            allRun = false;
+        }
         it++;
+    }
+    if(allRun) {
+        list = "No available games to join.";
     }
     return list;
 }
