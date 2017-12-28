@@ -220,9 +220,4 @@ vector<Room>::iterator ServerGames::getGameIterator(string gameName) {
     return it;
 
 
-
-
-
-
-    return vector<Room>();
 }

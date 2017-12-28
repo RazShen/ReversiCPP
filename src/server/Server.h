@@ -31,7 +31,18 @@ public:
             return server;
         }
     };
+    struct serverS {
+    private:
+        Server* s;
+    public:
+        serverS(Server* serv) {
+            s = serv;
+        }
+        Server* getServer() {
+            return s;
+        }
 
+    };
     enum GameStatus {
         InProgress, EndGame
     };
@@ -57,12 +68,14 @@ public:
     static void *handleAccept2(void *structOfserver);
     void handleBeforeClient(int clientSocket);
     void closeThreads(vector<pthread_t> threads);
-
+    static void *changeShouldStop(void *args);
+    void stopServer();
+    bool shouldStop;
 private:
     int port;
     int serverSocket;
     vector<pthread_t> connectionThreads;
-    bool shouldstop;
+    
 
 
     /**

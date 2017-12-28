@@ -19,7 +19,7 @@ using namespace std;
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
-
+    this->shouldStop = false;
 }
 
 
@@ -47,8 +47,18 @@ void Server::start() {
     socklen_t playerAddressLen1 = 0;
     socklen_t playerAddressLen2 = 0;
     int player1, player2;
-    while (true) {
+    pthread_t currThread2;
+    serverS serv = serverS(this);
+    int bc = pthread_create(&currThread2, NULL, Server::changeShouldStop, &serv);
+    if (bc != 0) {
+        cout << "Error: unable to create thread, " << bc << endl;
+        exit(-1);
+    }
+    while (!shouldStop) {
         cout << "Waiting for connections..." << endl;
+        if (shouldStop) {
+            cout << "exit" << endl;
+        }
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         if (player1 == -1) {
@@ -67,7 +77,9 @@ void Server::start() {
         connectionThreads.push_back(currThread);
        //handleBeforeClient(player1);
         cout << "ended handlebeforeclientThread" << endl;
-
+        if (shouldStop) {
+            cout << "exit" << endl;
+        }
 //        //have a connection
 //        handleClients(player1, player2);
     }
@@ -192,4 +204,22 @@ void *Server::handleAccept2(void *structOfserver) {
     ((Server *) sAC.getServer())->handleBeforeClient(sAC.getClientS());
     cout << "Finished handleAccept" << endl;
     return structOfserver;
+}
+
+void Server::stopServer() {
+    this->shouldStop = true;
+    cout <<  2 << endl;
+}
+
+void* Server::changeShouldStop(void *args) {
+    Server* server = (Server*) args;
+    cout << "type ""exit"" then press ENTER to stop the server and all the running games" << endl;
+    string input = "";
+    do {
+        if (input == "exit") {
+            cout << 1 << endl;
+            server->shouldStop = true;
+        }
+        cin >> input;
+    } while (true);
 }
