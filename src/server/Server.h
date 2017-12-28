@@ -15,6 +15,23 @@
 
 class Server {
 public:
+    struct serverAndClient {
+    private:
+        Server* server;
+        int clientS;
+    public:
+        serverAndClient(Server* s, int client) {
+            server = s;
+            clientS = client;
+        }
+        int getClientS() {
+            return clientS;
+        }
+        Server* getServer() {
+            return server;
+        }
+    };
+
     enum GameStatus {
         InProgress, EndGame
     };
@@ -37,6 +54,7 @@ public:
 
     vector<string> parseStringBySpace(string str);
     static void *handleAccept(void *tempArgs);
+    static void *handleAccept2(void *structOfserver);
     void handleBeforeClient(int clientSocket);
 
 

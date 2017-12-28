@@ -19,7 +19,7 @@ using namespace std;
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
-   
+
 }
 
 
@@ -56,16 +56,17 @@ void Server::start() {
             throw "Error on accept";
         }
         cout << "Player connected." << endl;
-        cout << "started handling" << endl;
-//        pthread_t currThread;
-//        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &player1);
-//        if (rc != 0) {
-//            cout << "Error: unable to create thread, " << rc << endl;
-//            exit(-1);
-//        }
-//        connectionThreads.push_back(currThread);
-       handleBeforeClient(player1);
-        cout << "ended handling" << endl;
+        cout << "started handlebeforeclientThread" << endl;
+        pthread_t currThread;
+        serverAndClient sAC = serverAndClient(this, player1);
+        int rc = pthread_create(&currThread, NULL, Server::handleAccept2, &sAC);
+        if (rc != 0) {
+            cout << "Error: unable to create thread, " << rc << endl;
+            exit(-1);
+        }
+        connectionThreads.push_back(currThread);
+       //handleBeforeClient(player1);
+        cout << "ended handlebeforeclientThread" << endl;
 
 //        //have a connection
 //        handleClients(player1, player2);
@@ -178,8 +179,17 @@ string Server::readFromClient(int clientSocket) {
 }
 
 void *Server::handleAccept(void *tempArgs) {
+    cout << "Entered handleAccept" << endl;
     int clientSocket = *((int *) tempArgs);
+    cout << "got clientSocket in handleAccept:   " << clientSocket << endl;
     ((Server *) tempArgs)->handleBeforeClient(clientSocket);
     return tempArgs;
 }
 
+void *Server::handleAccept2(void *structOfserver) {
+    cout << "Entered handleAccept" << endl;
+    serverAndClient sAC = *((serverAndClient *) structOfserver);
+    ((Server *) sAC.getServer())->handleBeforeClient(sAC.getClientS());
+    cout << "Finished handleAccept" << endl;
+    return structOfserver;
+}
