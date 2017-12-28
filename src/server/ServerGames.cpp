@@ -184,6 +184,9 @@ void* ServerGames::wrapHandleClients(void *args) {
 }
 
 bool ServerGames::hasAtLeastOneRunningGame() {
+    if (this->gamesList.empty()) {
+        return false;
+    }
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (it->isRunning()) {
