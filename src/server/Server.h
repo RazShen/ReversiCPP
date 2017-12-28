@@ -62,6 +62,7 @@ private:
     int port;
     int serverSocket;
     vector<pthread_t> connectionThreads;
+    bool shouldstop;
 
 
     /**

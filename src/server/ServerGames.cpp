@@ -37,9 +37,12 @@ void ServerGames::deleteGame(string gameName) {
     //delete thread.
     //earse from game list
     // delete room (after new)
-    Room roomToDelete = *getGame(gameName);
+    Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
-        delete(&roomToDelete);
+        pthread_cancel(roomToDelete->getThread());
+        gamesList.erase(getGameIterator(gameName));
+        //delete room from list
+        delete(roomToDelete);
     }
 }
 
@@ -149,6 +152,7 @@ bool ServerGames::transferMessage(int sender, int receiver) {
         }
         // end of game
         if (pair.getCol() == -6 && pair.getCol() == -6) {
+            //finish thread
             return false;
         }
         checkTransfer = write(receiver, &pair, sizeof(pair));
@@ -194,4 +198,24 @@ bool ServerGames::hasAtLeastOneRunningGame() {
         }
     }
     return false;
+}
+
+vector<Room>::iterator ServerGames::getGameIterator(string gameName) {
+    vector<Room>::iterator it = gamesList.begin();
+    while (it != gamesList.end()) {
+        if (gameName == it->getRoomName()) {
+            cout << "ServerGames::getGame is now returning the room of game" << endl;
+            return it;
+        }
+        it++;
+    }
+    cout << "finishing ServerGames::getGame, it didn't return the room of game " << endl;
+    return it;
+
+
+
+
+
+
+    return vector<Room>();
 }

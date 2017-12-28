@@ -48,3 +48,7 @@ void Room::connectPlayer2(int playerSocket) {
 void Room::setThread(pthread_t pthread1) {
     pthread = pthread1;
 }
+
+pthread_t Room::getThread() {
+    return pthread;
+}

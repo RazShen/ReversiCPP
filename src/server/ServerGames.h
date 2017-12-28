@@ -54,6 +54,8 @@ public:
     void initializingPlayer(int playerSocket, int playerNum);
     bool isGameRunning(string gameName);
     static void* wrapHandleClients(void* args);
+    vector<Room>::iterator getGameIterator(string gameName);
+
 };
 
 
