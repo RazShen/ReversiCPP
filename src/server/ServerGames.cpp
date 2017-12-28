@@ -136,9 +136,8 @@ bool ServerGames::transferMessage(int sender, int receiver) {
 }
 
 ServerGames *ServerGames::getInstance() {
-    if (instance == 0)
-    {
-        instance = new ServerGames;
+    if (!instance) {
+        instance = new ServerGames();
     }
     return instance;
 }
@@ -146,3 +145,9 @@ ServerGames *ServerGames::getInstance() {
 ServerGames *ServerGames::instance = NULL;
 
 
+ServerGames::~ServerGames() {
+    if (!instance) {
+        return;
+    }
+    delete(instance);
+}

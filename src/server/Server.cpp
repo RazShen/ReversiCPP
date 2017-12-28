@@ -19,7 +19,7 @@ using namespace std;
 
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
-    this->serverGames = new ServerGames();
+   
 }
 
 
@@ -120,8 +120,8 @@ void Server::stop() {
 }
 
 void Server::handleBeforeClient(int clientSocket) {
-
-    CommandManager commandManager = CommandManager(this->serverGames);
+    ServerGames* sG = ServerGames::getInstance();
+    CommandManager commandManager = CommandManager(sG);
     // in this method we get the user input and run the command by command manager
     string input = "", wantedCommand;
     vector<string> inputtedStringInVec;

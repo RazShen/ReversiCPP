@@ -10,8 +10,11 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     int i = 0;
     bool badName = false;
     // arg[1] is the room name
-    string gameName = args[1];
+    cout << "startnewgame got command as:    " << args.at(0) << endl;
+    string gameName = args.at(1);
+    cout << "startnewgame got gamename as:    " << gameName<< endl;
     string answerToUser;
+    cout << "startnewgame calls isGameInList" << endl;
     if (serverGamesI->isGameInList(gameName)) {
         badName = true;
     }

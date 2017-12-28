@@ -43,7 +43,6 @@ public:
 private:
     int port;
     int serverSocket;
-    ServerGames* serverGames;
     vector<pthread_t> connectionThreads;
 
 
