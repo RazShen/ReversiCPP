@@ -77,14 +77,14 @@ bool ServerGames::isGameRunning(string gameName) {
 }
 string ServerGames::sendListGames() {
     string list = "The available games are: ";
-    if (this->gamesList.empty()) {
+    if (!this->hasAtLeastOneRunningGame()) {
         list = "No available games to join.";
         return list;
     }
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end() && !it->isRunning()) {
-        cout << it->getRoomName() << endl;
-        list += it->getRoomName() + " ";
+        cout << "added room to list of rooms:" << it->getRoomName() << endl;
+        list += ", " + it->getRoomName();
         it++;
     }
     return list;
@@ -181,4 +181,14 @@ void* ServerGames::wrapHandleClients(void *args) {
     twoClients tC = * ((twoClients *) args);
     ((ServerGames*) tC.getServerGames())->handleClients(tC.getClient1(), tC.getClient2());
     return args;
+}
+
+bool ServerGames::hasAtLeastOneRunningGame() {
+    vector<Room>::iterator it = gamesList.begin();
+    while (it != gamesList.end()) {
+        if (it->isRunning()) {
+            return true;
+        }
+    }
+    return false;
 }

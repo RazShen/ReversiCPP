@@ -18,7 +18,7 @@ private:
     vector<Room> gamesList;
     void handleClients(int player1, int player2);
     bool transferMessage(int sender, int receiver);
-
+    bool hasAtLeastOneRunningGame();
 public:
     struct twoClients {
     private:
