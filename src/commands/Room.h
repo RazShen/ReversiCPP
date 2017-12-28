@@ -25,6 +25,8 @@ public:
 
     void startGame();
 
+    void setThread(pthread_t pthread);
+
 private:
     string nameOfRoom;
     int playerSocket1;

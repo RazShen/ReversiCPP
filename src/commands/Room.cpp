@@ -44,3 +44,7 @@ void Room::startGame() {
 void Room::connectPlayer2(int playerSocket) {
     this->playerSocket2 = playerSocket;
 }
+
+void Room::setThread(pthread_t pthread1) {
+    pthread = pthread1;
+}

@@ -12,12 +12,16 @@
 ServerGames::ServerGames() {}
 
 vector<Room>::iterator ServerGames::getGame(string gameName) {
+    cout << "started ServerGames::getGame " << endl;
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
+            cout << "ServerGames::getGame is now returning the room of game" << endl;
             return it;
         }
+        it++;
     }
+    cout << "finishing ServerGames::getGame, it didn't return the room of game " << endl;
     return it;
 }
 
@@ -46,15 +50,29 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
         initializingPlayer(clientSocket2, 2);
         initializingPlayer(roomToJoin.getOtherSocket(clientSocket2), 3);
         roomToJoin.startGame();
-        this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
+       // this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
+        pthread_t currThread;
+        twoClients sAC = twoClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2, this);
+        int rc = pthread_create(&currThread, NULL, ServerGames::wrapHandleClients, &sAC);
+        if (rc != 0) {
+            cout << "Error: unable to create thread, " << rc << endl;
+            exit(-1);
+        }
+        roomToJoin.setThread(currThread);
+
+        //connectionThreads.push_back(currThread);
     }
 }
 
 bool ServerGames::isGameRunning(string gameName) {
+    cout << "started ServerGames::isGameRunning " << endl;
     bool isItRunning = false;
+    cout << "ServerGames::isGameRunning called getGame" << endl;
     if (getGame(gameName)->isRunning()) {
+        cout << "ServerGames::isGameRunning the game is running" << endl;
         isItRunning = true;
     }
+    cout << "end ServerGames::isGameRunning" << endl;
     return isItRunning;
 }
 string ServerGames::sendListGames() {
@@ -81,13 +99,21 @@ int ServerGames::size() {
 }
 
 bool ServerGames::isGameInList(string gameName) {
+    cout << "ServerGames::isGameInList user gameName :   " << gameName << endl;
     if(!gamesList.empty()) {
+        cout << "ServerGames::isGameInList gamelist isn't empty" << endl;
+        cout << "ServerGames::isGameInList started iterating gamelist" << endl;
         vector<Room>::iterator it = gamesList.begin();
         while (it != gamesList.end()) {
-            if (gameName == it->getRoomName()) return true;
+            if (gameName == it->getRoomName()) {
+                cout <<  "ServerGames::isGameInList return true- game in list " << endl;
+                return true;
+            }
             it++;
         }
+        cout << "ServerGames::isGameInList finished iterating gamelist" << endl;
     }
+    cout << "ServerGames::isGameInList the game isn't in the list"<< endl;
     return false;
 }
 
@@ -144,10 +170,15 @@ ServerGames *ServerGames::getInstance() {
 
 ServerGames *ServerGames::instance = NULL;
 
-
 ServerGames::~ServerGames() {
     if (!instance) {
         return;
     }
     delete(instance);
+}
+
+void* ServerGames::wrapHandleClients(void *args) {
+    twoClients tC = * ((twoClients *) args);
+    ((ServerGames*) tC.getServerGames())->handleClients(tC.getClient1(), tC.getClient2());
+    return args;
 }
