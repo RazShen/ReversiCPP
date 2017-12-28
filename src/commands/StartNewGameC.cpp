@@ -15,11 +15,6 @@ void StartNewGameC::execute(vector<string> args, int client, ServerGames* server
     if (serverGamesI->isGameInList(gameName)) {
         badName = true;
     }
-//    for (i; i < serverGamesI->size(); i++) {
-//        if (serverGamesI->isGameInList(gameName)) {
-//            badName = true;
-//        }
-//    }
     // user inputted a bad name
     if (badName) {
         answerToUser = "AlreadyExist";

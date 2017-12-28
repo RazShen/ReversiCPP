@@ -11,14 +11,14 @@
 
 ServerGames::ServerGames() {}
 
-Room* ServerGames::getGame(string gameName) {
+vector<Room>::iterator ServerGames::getGame(string gameName) {
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
-            return &(*it);
+            return it;
         }
     }
-    return &(*it);
+    return it;
 }
 
 void ServerGames::addGame(string gameName, int clientSocket) {
@@ -33,20 +33,20 @@ void ServerGames::deleteGame(string gameName) {
     //delete thread.
     //earse from game list
     // delete room (after new)
-    Room* roomToDelete = getGame(gameName);
+    Room roomToDelete = *getGame(gameName);
     if(isGameInList(gameName)) {
-        delete(roomToDelete);
+        delete(&roomToDelete);
     }
 }
 
 void ServerGames::joinToGame(string gameName, int clientSocket2) {
     if(isGameInList(gameName) && !getGame(gameName)->isRunning()) {
-        Room *roomToJoin = getGame(gameName);
-        roomToJoin->connectPlayer2(clientSocket2);
+        Room roomToJoin = *getGame(gameName);
+        roomToJoin.connectPlayer2(clientSocket2);
         initializingPlayer(clientSocket2, 2);
-        initializingPlayer(roomToJoin->getOtherSocket(clientSocket2), 3);
-        roomToJoin->startGame();
-        this->handleClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2);
+        initializingPlayer(roomToJoin.getOtherSocket(clientSocket2), 3);
+        roomToJoin.startGame();
+        this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
     }
 }
 
@@ -60,11 +60,12 @@ bool ServerGames::isGameRunning(string gameName) {
 string ServerGames::sendListGames() {
     string list = "The available games are: ";
     if (this->gamesList.empty()) {
-        list = "No available games to join";
+        list = "No available games to join.";
         return list;
     }
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end() && !it->isRunning()) {
+        cout << it->getRoomName() << endl;
         list += it->getRoomName() + " ";
         it++;
     }
@@ -75,9 +76,8 @@ int ServerGames::size() {
     if(gamesList.empty()) {
         return 0;
     }
-    //int size = gamesList.size();
-    return (int) gamesList.size();
-    //return size;
+    int size = gamesList.size();
+    return size;
 }
 
 bool ServerGames::isGameInList(string gameName) {

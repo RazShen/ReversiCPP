@@ -15,7 +15,7 @@ private:
     bool transferMessage(int sender, int receiver);
 public:
     ServerGames();
-    Room* getGame(string gameName);
+    vector<Room>::iterator getGame(string gameName);
     void deleteGame(string gameName);
     void addGame(string gameName, int clientSocket);
     bool isGameInList(string gameName);
