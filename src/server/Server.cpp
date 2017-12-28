@@ -48,17 +48,13 @@ void Server::start() {
     socklen_t playerAddressLen2 = 0;
     int player1, player2;
     pthread_t currThread2;
-    serverS serv = serverS(this);
-    int bc = pthread_create(&currThread2, NULL, Server::changeShouldStop, &serv);
+    int bc = pthread_create(&currThread2, NULL, Server::changeShouldStop, this);
     if (bc != 0) {
         cout << "Error: unable to create thread, " << bc << endl;
         exit(-1);
     }
     while (!shouldStop) {
         cout << "Waiting for connections..." << endl;
-        if (shouldStop) {
-            cout << "exit" << endl;
-        }
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         if (player1 == -1) {
@@ -77,9 +73,6 @@ void Server::start() {
         connectionThreads.push_back(currThread);
        //handleBeforeClient(player1);
         cout << "ended handlebeforeclientThread" << endl;
-        if (shouldStop) {
-            cout << "exit" << endl;
-        }
 //        //have a connection
 //        handleClients(player1, player2);
     }
@@ -129,6 +122,12 @@ bool Server::transferMessage(int sender, int receiver) {
 }
 
 void Server::stop() {
+    // close threads
+    vector<pthread_t>::iterator it = connectionThreads.begin();
+    while (it != connectionThreads.end()) {
+        pthread_cancel(*it);
+        it++;
+    }
     close(serverSocket);
 }
 
@@ -208,7 +207,6 @@ void *Server::handleAccept2(void *structOfserver) {
 
 void Server::stopServer() {
     this->shouldStop = true;
-    cout <<  2 << endl;
 }
 
 void* Server::changeShouldStop(void *args) {
@@ -218,7 +216,9 @@ void* Server::changeShouldStop(void *args) {
     do {
         if (input == "exit") {
             cout << 1 << endl;
-            server->shouldStop = true;
+            server->stopServer();
+            server->stop();
+            break;
         }
         cin >> input;
     } while (true);
