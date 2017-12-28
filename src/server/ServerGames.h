@@ -10,11 +10,18 @@
 
 class ServerGames {
 private:
+    static ServerGames *instance;
+    ServerGames();
+    ServerGames(const ServerGames &other);
+    ~ServerGames();
+
     vector<Room> gamesList;
     void handleClients(int player1, int player2);
     bool transferMessage(int sender, int receiver);
 public:
-    ServerGames();
+
+    static ServerGames *getInstance();
+ //   static void deleteInstance();
     vector<Room>::iterator getGame(string gameName);
     void deleteGame(string gameName);
     void addGame(string gameName, int clientSocket);

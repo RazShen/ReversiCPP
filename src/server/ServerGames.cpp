@@ -134,3 +134,15 @@ bool ServerGames::transferMessage(int sender, int receiver) {
     }
     return true;
 }
+
+ServerGames *ServerGames::getInstance() {
+    if (instance == 0)
+    {
+        instance = new ServerGames;
+    }
+    return instance;
+}
+
+ServerGames *ServerGames::instance = NULL;
+
+

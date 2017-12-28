@@ -120,6 +120,7 @@ void Server::stop() {
 }
 
 void Server::handleBeforeClient(int clientSocket) {
+
     CommandManager commandManager = CommandManager(this->serverGames);
     // in this method we get the user input and run the command by command manager
     string input = "", wantedCommand;
