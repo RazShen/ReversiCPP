@@ -43,11 +43,12 @@ public:
     };
     static ServerGames *getInstance();
  //   static void deleteInstance();
-    vector<Room>::iterator getGame(string gameName);
+    Room* getGame(string gameName);
     void deleteGame(string gameName);
     void addGame(string gameName, int clientSocket);
     bool isGameInList(string gameName);
     void joinToGame(string gameName, int clientSocket);
+    Room* getGameByClient(int client1, int client2);
     string sendListGames();
     int size();
     void initializingPlayer(int playerSocket, int playerNum);

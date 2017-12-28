@@ -11,18 +11,18 @@
 
 ServerGames::ServerGames() {}
 
-vector<Room>::iterator ServerGames::getGame(string gameName) {
+Room* ServerGames::getGame(string gameName) {
     cout << "started ServerGames::getGame " << endl;
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
             cout << "ServerGames::getGame is now returning the room of game" << endl;
-            return it;
+            return &(*it);
         }
         it++;
     }
     cout << "finishing ServerGames::getGame, it didn't return the room of game " << endl;
-    return it;
+    return &(*it);
 }
 
 void ServerGames::addGame(string gameName, int clientSocket) {
@@ -45,20 +45,20 @@ void ServerGames::deleteGame(string gameName) {
 
 void ServerGames::joinToGame(string gameName, int clientSocket2) {
     if(isGameInList(gameName) && !getGame(gameName)->isRunning()) {
-        Room roomToJoin = *getGame(gameName);
-        roomToJoin.connectPlayer2(clientSocket2);
+        Room* roomToJoin = getGame(gameName);
+        roomToJoin->connectPlayer2(clientSocket2);
         initializingPlayer(clientSocket2, 2);
-        initializingPlayer(roomToJoin.getOtherSocket(clientSocket2), 3);
-        roomToJoin.startGame();
+        initializingPlayer(roomToJoin->getOtherSocket(clientSocket2), 3);
+        roomToJoin->startGame();
        // this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
         pthread_t currThread;
-        twoClients sAC = twoClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2, this);
+        twoClients sAC = twoClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2, this);
         int rc = pthread_create(&currThread, NULL, ServerGames::wrapHandleClients, &sAC);
         if (rc != 0) {
             cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
         }
-        roomToJoin.setThread(currThread);
+        roomToJoin->setThread(currThread);
 
         //connectionThreads.push_back(currThread);
     }
