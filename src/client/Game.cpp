@@ -41,6 +41,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             delete (this->gameLogic);
             delete (this->bHP);
             exit(1);
+            //
         }
         if (indexPlayer == 1) {
             this->display->connectedToServer();
