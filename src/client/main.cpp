@@ -20,24 +20,24 @@ int main() {
     int boardSize = 8;
     int input = 0;
     bool isNotValidInput;
-    Display *display = new ConsoleDisplay();
-    display->welcome();
+    Display display = ConsoleDisplay();
+    display.welcome();
     do {
-        display->chooseGameOptions();
+        display.chooseGameOptions();
         cin >> input;
         if (cin.fail()) {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
         if (input != 1 && input != 2 && input != 3) {
-            display->noValidOption();
+            display.noValidOption();
             isNotValidInput = true;
         } else {
             isNotValidInput = false;
         }
     } while (isNotValidInput);
 
-    Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, display);
+    Game game = Game(new RegularGameLogic(boardSize, GameLogic::Regular), input, &display);
     game.run();
 
 //    } else {
@@ -45,7 +45,6 @@ int main() {
 //        rG.run();
 //    }
 
-    display->exitMassage();
-    delete (display);
+    display.exitMassage();
     return 0;
 }
