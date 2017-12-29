@@ -20,7 +20,7 @@ RemotePlayerReceiver::RemotePlayerReceiver(const char *filename) : Player(filena
 
 }
 
-void RemotePlayerReceiver::connectToServer(Display* display) {
+void RemotePlayerReceiver::connectToServer(Display *display) {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -51,13 +51,17 @@ void RemotePlayerReceiver::connectToServer(Display* display) {
 }
 
 
-int RemotePlayerReceiver::getMoveFromServer() {
+int RemotePlayerReceiver::getMoveFromServer(Display *display) {
     ssize_t n;
     // Read the result from the server
     int result;
     n = read(clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
+    }
+    if ( n == 0) {
+        display->exitMassage();
+        exit(1);
     }
     return result;
 }
@@ -72,7 +76,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     if (n == -1) {
         throw "Error reading result from socket";
     }
-    if(!gl->checkInput(inputUser, positions, moves, display)) {
+    if ((!gl->checkInput(inputUser, positions, moves, display)) || n == 0) {
         display->exitMassage();
         exit(1);
     }
@@ -83,13 +87,17 @@ void RemotePlayerReceiver::noMove(Display *display) {
     // just getting the pair -5,-5 from server to know opponent has no moves
     int xUser, yUser;
     ssize_t n;
-    Pair pair(xUser,yUser);
+    Pair pair(xUser, yUser);
     display->noPossiblePlayerMove(this->getType());
     n = read(clientSocket, &pair, sizeof(pair));
     if (n == -1) {
         throw "Error reading result from socket";
     }
+    if ( n == 0) {
+        display->exitMassage();
+        exit(1);
+    }
 }
 
-RemotePlayerReceiver::~RemotePlayerReceiver(){}
+RemotePlayerReceiver::~RemotePlayerReceiver() {}
 

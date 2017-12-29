@@ -134,9 +134,9 @@ void RemotePlayerSender::playerMenu(Display* display) {
             // translating the command from a number into string
             command = ParseOperation(operation, roomName);
             // sending the command to the server
-            writeToServer(command);
+            writeToServer(command, display);
             // reading the servers answer from the socket
-            command = readFromServer();
+            command = readFromServer(display);
             if (operation == 2) {
                 // print the list of rooms
                 display->printAvailableGames(command);
@@ -192,7 +192,7 @@ string RemotePlayerSender::ParseOperation(int operation, string name) {
 }
 
 
-void RemotePlayerSender::writeToServer(string command) {
+void RemotePlayerSender::writeToServer(string command, Display* display) {
     int stringLength = command.length();
     cout << "Client command length is:  " << stringLength << endl;
     cout << "Client command is:  " << command << endl;
@@ -200,6 +200,10 @@ void RemotePlayerSender::writeToServer(string command) {
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error writing string length";
+    if (n == 0) {
+        display->exitMassage();
+        exit(1);
+    }
     for (int i = 0; i < stringLength; i++) {
         n = (int) write(clientSocket, &command[i], sizeof(char));
         if (n == -1)
@@ -207,11 +211,15 @@ void RemotePlayerSender::writeToServer(string command) {
     }
 }
 
-string RemotePlayerSender::readFromServer() {
+string RemotePlayerSender::readFromServer(Display* display) {
     int stringLength, n;
     n = (int) read(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error reading string length";
+    if (n == 0) {
+        display->exitMassage();
+        exit(1);
+    }
     cout << stringLength << " readFromServerNum" << endl;
     char *command = new char[stringLength + 1];
     for (int i = 0; i < stringLength; i++) {

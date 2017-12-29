@@ -6,6 +6,7 @@
 
 
 #include <iostream>
+#include <cstdlib>
 #include "Game.h"
 #include "AIPlayer.h"
 #include "RemotePlayerSender.h"
@@ -15,6 +16,8 @@ using namespace std;
 
 Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
     const char *filename = "cconfig.txt";
+    int indexPlayer;
+    bool secondPlayerJoined;
     this->blackTurn = true;
     this->gameLogic = gameLogic;
     this->display = consoleDisplay;
@@ -25,13 +28,20 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
         this->bHP = new HumanPlayer(Board::Black);
         this->wHP = new AIPlayer(Board::White);
     } else if (choose == 3) {
-        //create a new player that connect to the server
-        this->bHP = new RemotePlayerSender(filename);
-        //connect to server
-        this->bHP->connectToServer(display);
-        // get from the server if the player is Black or White 1 for X , 2 for O.
-        int indexPlayer = this->bHP->getMoveFromServer();
-        bool secondPlayerJoined = false;
+        try {
+            //create a new player that connect to the server
+            this->bHP = new RemotePlayerSender(filename);
+            //connect to server
+            this->bHP->connectToServer(display);
+            // get from the server if the player is Black or White 1 for X , 2 for O.
+            indexPlayer = this->bHP->getMoveFromServer();
+            secondPlayerJoined = false;
+        } catch (const char * str) {
+            display->printString(str);
+            delete (this->gameLogic);
+            delete (this->bHP);
+            exit(1);
+        }
         if (indexPlayer == 1) {
             this->display->connectedToServer();
             this->display->waitingForOppToConnect();
@@ -59,57 +69,63 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
 void Game::run() {
     bool noMoreActionsB = false;
     bool noMoreActionW = false;
-    while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
-        Pair userInput;
-        int moves = 0;
-        Pair pArr[this->gameLogic->getBoardSize() * this->gameLogic->getBoardSize() + 1];
-        display->currentBoard();
-        display->printBoard(this->gameLogic->getBoard());
-        if (this->blackTurn) {
-            if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
-                this->bHP->finishGame();
-                return;
-            }
-            this->gameLogic->possibleMoves(pArr, moves, bHP->getType());
-            if (moves == 0) {
-                this->bHP->noMove(this->display);
-                noMoreActionsB = true;
+    try {
+        while (!this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+            Pair userInput;
+            int moves = 0;
+            Pair pArr[this->gameLogic->getBoardSize() * this->gameLogic->getBoardSize() + 1];
+            display->currentBoard();
+            display->printBoard(this->gameLogic->getBoard());
+            if (this->blackTurn) {
+                if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+                    this->bHP->finishGame();
+                    return;
+                }
+                this->gameLogic->possibleMoves(pArr, moves, bHP->getType());
+                if (moves == 0) {
+                    this->bHP->noMove(this->display);
+                    noMoreActionsB = true;
+                } else {
+                    do {
+                        userInput = bHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
+                    } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
+                    this->bHP->update(userInput.getRow(), userInput.getCol());
+                    this->gameLogic->flipCell(userInput, Board::White, Board::Black);
+                    // updating the server after the move according to the type
+                    display->xPlayed();
+                    display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
+                    display->newLine();
+                    noMoreActionsB = false;
+                }
+                this->blackTurn = false;
             } else {
-                do {
-                    userInput = bHP->getMove(pArr, moves, this->gameLogic, Board::White, display);
-                } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
-                this->bHP->update(userInput.getRow(), userInput.getCol());
-                this->gameLogic->flipCell(userInput, Board::White, Board::Black);
-                // updating the server after the move according to the type
-                display->xPlayed();
-                display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
-                display->newLine();
-                noMoreActionsB = false;
+                if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
+                    this->wHP->finishGame();
+                    return;
+                }
+                this->gameLogic->possibleMoves(pArr, moves, wHP->getType());
+                if (moves == 0) {
+                    this->wHP->noMove(this->display);
+                    noMoreActionW = true;
+                } else {
+                    do {
+                        userInput = wHP->getMove(pArr, moves, this->gameLogic, Board::Black, display);
+                    } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
+                    // updating the server after the move according to the type
+                    this->gameLogic->flipCell(userInput, Board::Black, Board::White);
+                    this->wHP->update(userInput.getRow(), userInput.getCol());
+                    display->oPlayed();
+                    display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
+                    display->newLine();
+                    noMoreActionW = false;
+                }
+                this->blackTurn = true;
             }
-            this->blackTurn = false;
-        } else {
-            if (this->gameLogic->checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
-                this->wHP->finishGame();
-                return;
-            }
-            this->gameLogic->possibleMoves(pArr, moves, wHP->getType());
-            if (moves == 0) {
-                this->wHP->noMove(this->display);
-                noMoreActionW = true;
-            } else {
-                do {
-                    userInput = wHP->getMove(pArr, moves, this->gameLogic, Board::Black, display);
-                } while (!this->gameLogic->checkInput(userInput, pArr, moves, display));
-                // updating the server after the move according to the type
-                this->gameLogic->flipCell(userInput, Board::Black, Board::White);
-                this->wHP->update(userInput.getRow(), userInput.getCol());
-                display->oPlayed();
-                display->printPair(Pair(userInput.getRow() - 1, userInput.getCol() - 1));
-                display->newLine();
-                noMoreActionW = false;
-            }
-            this->blackTurn = true;
         }
+    } catch (const char * str) {
+        display->printString(str);
+        delete(this);
+        exit(1);
     }
     this->bHP->finishGame();
     

@@ -38,7 +38,7 @@ public:
      * this method get move from server
      * @return the number that we got from the server
      */
-    int getMoveFromServer();
+    int getMoveFromServer(Display* display);
 
     /**
      * this method appears when the player has no move

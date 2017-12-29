@@ -61,6 +61,10 @@ void Server::start() {
             this->stop();
             throw "Error on accept";
         }
+        if (player1 == 0) {
+            this->stop();
+            throw "Error on accept";
+        }
         cout << "Player connected." << endl;
         cout << "started handlebeforeclientThread" << endl;
         pthread_t currThread;
