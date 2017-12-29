@@ -54,12 +54,12 @@ void RemotePlayerSender::connectToServer(Display* display) {
 }
 
 void RemotePlayerSender::update(int arg1, int arg2) {
-    ssize_t numToSend;
+    ssize_t n;
     // Write 2 numbers t
     Pair pair(arg1,arg2);
-    numToSend = write(clientSocket, &pair, sizeof(pair));
-    if (numToSend == -1) {
-        throw "Error writing arg1 to socket";
+    n = write(clientSocket, &pair, sizeof(pair));
+    if (n == -1 || n == 0) {
+        throw "Error writing message!. Server has been probably shutdown, closing the game";
     }
 }
 
@@ -85,9 +85,8 @@ int RemotePlayerSender::getMoveFromServer() {
     ssize_t n;
     // Read the result from the server
     int result;
-    n = read(clientSocket, &result, sizeof(result));
-    if (n == -1) {
-        throw "Error reading result from socket";
+    if (n == -1 || n == 0) {
+        throw "Error reading message!. Server has been probably shutdown, closing the game";
     }
     return result;
 }
@@ -109,8 +108,8 @@ void RemotePlayerSender::finishGame() {
     Pair pair1(-6,-6);
     ssize_t n;
     n = write(this->clientSocket, &pair1, sizeof(pair1));
-    if (n == -1) {
-        throw "Error reading result from socket";
+    if (n == -1 || n == 0) {
+        throw "Error writing message!. Server has been probably shutdown, closing the game";
     }
     close(this->clientSocket);
 }
@@ -134,9 +133,9 @@ void RemotePlayerSender::playerMenu(Display* display) {
             // translating the command from a number into string
             command = ParseOperation(operation, roomName);
             // sending the command to the server
-            writeToServer(command, display);
+            writeToServer(command);
             // reading the servers answer from the socket
-            command = readFromServer(display);
+            command = readFromServer();
             if (operation == 2) {
                 // print the list of rooms
                 display->printAvailableGames(command);
@@ -192,40 +191,35 @@ string RemotePlayerSender::ParseOperation(int operation, string name) {
 }
 
 
-void RemotePlayerSender::writeToServer(string command, Display* display) {
+void RemotePlayerSender::writeToServer(string command) {
     int stringLength = command.length();
     cout << "Client command length is:  " << stringLength << endl;
     cout << "Client command is:  " << command << endl;
     int n;
     n = (int) write(clientSocket, &stringLength, sizeof(int));
-    if (n == -1)
-        throw "Error writing string length";
-    if (n == 0) {
-        display->exitMassage();
-        exit(1);
+    if (n == -1 || n == 0) {
+        throw "Error writing message!. Server has been probably shutdown, closing the game";
     }
     for (int i = 0; i < stringLength; i++) {
         n = (int) write(clientSocket, &command[i], sizeof(char));
-        if (n == -1)
-            throw "Error writing";
+        if (n == -1 || n == 0) {
+            throw "Error writing message!. Server has been probably shutdown, closing the game";
+        }
     }
 }
 
-string RemotePlayerSender::readFromServer(Display* display) {
+string RemotePlayerSender::readFromServer() {
     int stringLength, n;
     n = (int) read(clientSocket, &stringLength, sizeof(int));
-    if (n == -1)
-        throw "Error reading string length";
-    if (n == 0) {
-        display->exitMassage();
-        exit(1);
+    if (n == -1 || n == 0) {
+        throw "Error reading message!. Server has been probably shutdown, closing the game";
     }
-    cout << stringLength << " readFromServerNum" << endl;
     char *command = new char[stringLength + 1];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));
-        if (n == -1)
-            throw "Error reading message!";
+        if (n == -1 || n == 0) {
+            throw "Error reading message!. Server has been probably shutdown, closing the game";
+        }
     }
     command[stringLength] = '\0';
     string strCommand(command);

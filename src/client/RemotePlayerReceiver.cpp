@@ -12,6 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <iostream>
 
 using namespace std;
 
@@ -56,8 +57,8 @@ int RemotePlayerReceiver::getMoveFromServer(Display *display) {
     // Read the result from the server
     int result;
     n = read(clientSocket, &result, sizeof(result));
-    if (n == -1) {
-        throw "Error reading result from socket";
+    if (n == -1 || n == 0) {
+        throw throw "Error reading message!. Server has been probably shutdown, closing the game";;
     }
     if ( n == 0) {
         display->exitMassage();
@@ -73,8 +74,8 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     ssize_t n;
     Pair inputUser;
     n = read(clientSocket, &inputUser, sizeof(inputUser));
-    if (n == -1) {
-        throw "Error reading result from socket";
+    if (n == -1 || n == 0) {
+        throw "Error reading message!. Server has been probably shutdown, closing the game";
     }
     if ((!gl->checkInput(inputUser, positions, moves, display)) || n == 0) {
         display->exitMassage();
@@ -90,8 +91,8 @@ void RemotePlayerReceiver::noMove(Display *display) {
     Pair pair(xUser, yUser);
     display->noPossiblePlayerMove(this->getType());
     n = read(clientSocket, &pair, sizeof(pair));
-    if (n == -1) {
-        throw "Error reading result from socket";
+    if (n == -1 || n == 0) {
+        throw "Error reading message!. Server has been probably shutdown, closing the game";
     }
     if ( n == 0) {
         display->exitMassage();

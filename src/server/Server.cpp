@@ -133,6 +133,7 @@ void Server::stop() {
         it++;
     }
     close(serverSocket);
+    exit(1);
 }
 
 void Server::handleBeforeClient(int clientSocket) {
