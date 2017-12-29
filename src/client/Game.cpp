@@ -37,7 +37,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             indexPlayer = this->bHP->getMoveFromServer();
             secondPlayerJoined = false;
         } catch (const char * str) {
-            display->printString(str);
+         //   display->printString(str);
             delete (this->gameLogic);
             delete (this->bHP);
             exit(1);
@@ -124,7 +124,7 @@ void Game::run() {
             }
         }
     } catch (const char * str) {
-        display->printString(str);
+        //display->printString(str);
         delete(this);
         exit(1);
     }

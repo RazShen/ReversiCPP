@@ -126,6 +126,12 @@ void RemotePlayerSender::playerMenu(Display* display) {
         display->printClientMenu();
         // get the operation of the client
         cin >> operation;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            // illegal value in purpose
+            operation = -5;
+        }
         if(operation == 1 || operation == 3) {
             display->EnterNameOfGame();
             cin >> roomName;
