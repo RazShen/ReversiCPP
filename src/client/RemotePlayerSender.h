@@ -69,9 +69,9 @@ public:
 
     string ParseOperation(int operation, string name);
 
-    void writeToServer(string command, Display* display);
+    void writeToServer(string command);
 
-    string readFromServer(Display* display);
+    string readFromServer();
 
 
 };

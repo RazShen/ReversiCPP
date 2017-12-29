@@ -20,7 +20,7 @@ int main() {
     int boardSize = 8;
     int input = 0;
     bool isNotValidInput;
-    Display display = ConsoleDisplay();
+    ConsoleDisplay display = ConsoleDisplay();
     display.welcome();
     do {
         display.chooseGameOptions();

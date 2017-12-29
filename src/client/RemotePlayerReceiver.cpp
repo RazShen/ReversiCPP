@@ -58,7 +58,7 @@ int RemotePlayerReceiver::getMoveFromServer(Display *display) {
     int result;
     n = read(clientSocket, &result, sizeof(result));
     if (n == -1 || n == 0) {
-        throw throw "Error reading message!. Server has been probably shutdown, closing the game";;
+        throw "Error reading message!. Server has been probably shutdown, closing the game";;
     }
     if ( n == 0) {
         display->exitMassage();
