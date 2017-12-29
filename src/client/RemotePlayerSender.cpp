@@ -59,7 +59,7 @@ void RemotePlayerSender::update(int arg1, int arg2) {
     Pair pair(arg1,arg2);
     n = write(clientSocket, &pair, sizeof(pair));
     if (n == -1 || n == 0) {
-        throw "Error writing message!. Server has been probably shutdown, closing the game";
+        throw "Error writing message!";
     }
 }
 
@@ -85,6 +85,7 @@ int RemotePlayerSender::getMoveFromServer() {
     ssize_t n;
     // Read the result from the server
     int result;
+    n = (int) read(clientSocket, &result, sizeof(int));
     if (n == -1 || n == 0) {
         throw "Error reading message!. Server has been probably shutdown, closing the game";
     }
