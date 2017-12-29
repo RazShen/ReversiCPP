@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cstdlib>
+pthread_mutex_t mutexCommand;
+
 
 ServerGames::ServerGames() {}
 
@@ -28,7 +30,9 @@ Room* ServerGames::getGame(string gameName) {
 void ServerGames::addGame(string gameName, int clientSocket) {
     if (!isGameInList(gameName)) {
     Room *gameRoom = new Room(clientSocket, gameName);
+    pthread_mutex_trylock(&mutexCommand);
     gamesList.push_back(*gameRoom);
+    pthread_mutex_unlock(&mutexCommand);
     initializingPlayer(clientSocket, 1);
     }
 }
@@ -49,10 +53,13 @@ void ServerGames::deleteGame(string gameName) {
 void ServerGames::joinToGame(string gameName, int clientSocket2) {
     if(isGameInList(gameName) && !getGame(gameName)->isRunning()) {
         Room* roomToJoin = getGame(gameName);
+        pthread_mutex_trylock(&mutexCommand);
         roomToJoin->connectPlayer2(clientSocket2);
         initializingPlayer(clientSocket2, 2);
         initializingPlayer(roomToJoin->getOtherSocket(clientSocket2), 3);
         roomToJoin->startGame();
+        pthread_mutex_unlock(&mutexCommand);
+
        // this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
         pthread_t currThread;
         twoClients sAC = twoClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2, this);
@@ -61,7 +68,9 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
             cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
         }
+        pthread_mutex_trylock(&mutexCommand);
         roomToJoin->setThread(currThread);
+        pthread_mutex_unlock(&mutexCommand);
 
         //connectionThreads.push_back(currThread);
     }
