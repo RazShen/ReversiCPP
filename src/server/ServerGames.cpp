@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cstdlib>
-pthread_mutex_t mutexCommand;
+//pthread_mutex_t mutexCommand;
 
 
 ServerGames::ServerGames() {}

@@ -10,6 +10,7 @@
 
 class ServerGames {
 private:
+    pthread_mutex_t mutexCommand;
     static ServerGames *instance;
     ServerGames();
     ServerGames(const ServerGames &other);
@@ -57,6 +58,4 @@ public:
     vector<Room>::iterator getGameIterator(string gameName);
 
 };
-
-
 #endif //EX4_SERVERGAMES_H
