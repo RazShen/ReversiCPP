@@ -52,3 +52,12 @@ void Room::setThread(pthread_t pthread1) {
 pthread_t Room::getThread() {
     return pthread;
 }
+
+int Room::getPlayerSocket1() {
+    return this->playerSocket1;
+}
+
+int Room::getPlayerSocket2() {
+    return this->playerSocket2;
+}
+

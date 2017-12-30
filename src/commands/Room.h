@@ -28,6 +28,9 @@ public:
     void setThread(pthread_t pthread);
 
     pthread_t getThread();
+    int getPlayerSocket1();
+    int getPlayerSocket2();
+
 
 
 private:
