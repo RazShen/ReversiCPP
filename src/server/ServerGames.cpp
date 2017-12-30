@@ -171,6 +171,7 @@ bool ServerGames::transferMessage(int sender, int receiver) {
         }
         // end of game
         if (pair.getCol() == -6 && pair.getCol() == -6) {
+            deleteGame(findGame(sender, receiver));
             //finish thread
             return false;
         }
@@ -232,4 +233,17 @@ vector<Room>::iterator ServerGames::getGameIterator(string gameName) {
     return it;
 
 
+}
+
+string ServerGames::findGame(int player1, int player2) {
+    vector<Room>::iterator it = gamesList.begin();
+    while (it != gamesList.end()) {
+        if (it->getPlayerSocket1() == player1 || it->getPlayerSocket1() == player1) {
+            if(it->isRunning()) {
+                return it->getRoomName();
+            }
+        }
+        it++;
+    }
+    return "noGame";
 }

@@ -56,6 +56,7 @@ public:
     bool isGameRunning(string gameName);
     static void* wrapHandleClients(void* args);
     vector<Room>::iterator getGameIterator(string gameName);
+    string findGame(int player1, int player2);
 
 };
 #endif //EX4_SERVERGAMES_H
