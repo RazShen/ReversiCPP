@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <iostream>
-
+#define ERROR 30
 using namespace std;
 
 
@@ -58,12 +58,9 @@ int RemotePlayerReceiver::getMoveFromServer(Display *display) {
     int result;
     n = read(clientSocket, &result, sizeof(result));
     if (n == -1 || n == 0) {
-        throw "Error reading message!. Server has been probably shutdown, closing the game";;
+        throw ERROR;
     }
-    if ( n == 0) {
-        display->exitMassage();
-        exit(1);
-    }
+
     return result;
 }
 
@@ -75,7 +72,7 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
     Pair inputUser;
     n = read(clientSocket, &inputUser, sizeof(inputUser));
     if (n == -1 || n == 0) {
-        throw "Error reading message!. Server has been probably shutdown, closing the game";
+        throw ERROR;
     }
     if ((!gl->checkInput(inputUser, positions, moves, display)) || n == 0) {
         display->exitMassage();
@@ -92,11 +89,7 @@ void RemotePlayerReceiver::noMove(Display *display) {
     display->noPossiblePlayerMove(this->getType());
     n = read(clientSocket, &pair, sizeof(pair));
     if (n == -1 || n == 0) {
-        throw "Error reading message!. Server has been probably shutdown, closing the game";
-    }
-    if ( n == 0) {
-        display->exitMassage();
-        exit(1);
+        throw ERROR;
     }
 }
 

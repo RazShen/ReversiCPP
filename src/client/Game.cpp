@@ -36,8 +36,8 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             // get from the server if the player is Black or White 1 for X , 2 for O.
             indexPlayer = this->bHP->getMoveFromServer();
             secondPlayerJoined = false;
-        } catch (const char * str) {
-         //   display->printString(str);
+        } catch (int e) {
+            display->printString("Error reading message!. Server has been probably shutdown, closing the game");
             delete (this->gameLogic);
             delete (this->bHP);
             exit(1);
@@ -123,9 +123,11 @@ void Game::run() {
                 this->blackTurn = true;
             }
         }
-    } catch (const char * str) {
-        //display->printString(str);
-        delete(this);
+    } catch (int e) {
+        display->printString("Error reading message!. Server has been probably shutdown, closing the game");
+        delete (this->gameLogic);
+        delete (this->bHP);
+        delete (this->wHP);
         exit(1);
     }
     this->bHP->finishGame();

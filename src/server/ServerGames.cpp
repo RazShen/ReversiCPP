@@ -101,7 +101,7 @@ string ServerGames::sendListGames() {
     while (it != gamesList.end()) {
         if(!it->isRunning()) {
             cout << "added room to list of rooms:" << it->getRoomName() << endl;
-            list += " " + it->getRoomName();
+            list += "\n                           " + it->getRoomName();
             allRun = false;
         }
         it++;

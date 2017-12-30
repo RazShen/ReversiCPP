@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <limits>
 #include <cstdlib>
-
+#define ERROR 30
 using namespace std;
 
 
@@ -59,7 +59,7 @@ void RemotePlayerSender::update(int arg1, int arg2) {
     Pair pair(arg1,arg2);
     n = write(clientSocket, &pair, sizeof(pair));
     if (n == -1 || n == 0) {
-        throw "Error writing message!";
+        throw ERROR;
     }
 }
 
@@ -87,7 +87,7 @@ int RemotePlayerSender::getMoveFromServer() {
     int result;
     n = (int) read(clientSocket, &result, sizeof(int));
     if (n == -1 || n == 0) {
-        throw "Error reading message!. Server has been probably shutdown, closing the game";
+        throw ERROR;
     }
     return result;
 }
@@ -110,7 +110,7 @@ void RemotePlayerSender::finishGame() {
     ssize_t n;
     n = write(this->clientSocket, &pair1, sizeof(pair1));
     if (n == -1 || n == 0) {
-        throw "Error writing message!. Server has been probably shutdown, closing the game";
+        throw ERROR;
     }
     close(this->clientSocket);
 }
@@ -205,12 +205,12 @@ void RemotePlayerSender::writeToServer(string command) {
     int n;
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1 || n == 0) {
-        throw "Error writing message!. Server has been probably shutdown, closing the game";
+        throw ERROR;
     }
     for (int i = 0; i < stringLength; i++) {
         n = (int) write(clientSocket, &command[i], sizeof(char));
         if (n == -1 || n == 0) {
-            throw "Error writing message!. Server has been probably shutdown, closing the game";
+            throw ERROR;
         }
     }
 }
@@ -219,13 +219,13 @@ string RemotePlayerSender::readFromServer() {
     int stringLength, n;
     n = (int) read(clientSocket, &stringLength, sizeof(int));
     if (n == -1 || n == 0) {
-        throw "Error reading message!. Server has been probably shutdown, closing the game";
+        throw ERROR;
     }
     char *command = new char[stringLength + 1];
     for (int i = 0; i < stringLength; i++) {
         n = (int) read(clientSocket, &command[i], sizeof(char));
         if (n == -1 || n == 0) {
-            throw "Error reading message!. Server has been probably shutdown, closing the game";
+            throw ERROR;
         }
     }
     command[stringLength] = '\0';
