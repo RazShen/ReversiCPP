@@ -56,73 +56,20 @@ void Server::start() {
         cout << "Waiting for connections..." << endl;
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
-        if (player1 == -1) {
+        if (player1 == -1 || player1 == 0) {
             this->stop();
             throw "Error on accept";
         }
-        if (player1 == 0) {
-            this->stop();
-            throw "Error on accept";
-        }
-        cout << "Player connected." << endl;
-        cout << "started handlebeforeclientThread" << endl;
         pthread_t currThread;
         serverAndClient sAC = serverAndClient(this, player1);
-        int rc = pthread_create(&currThread, NULL, Server::handleAccept2, &sAC);
+        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &sAC);
         if (rc != 0) {
-            cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
         }
         connectionThreads.push_back(currThread);
-       //handleBeforeClient(player1);
-        cout << "ended handlebeforeclientThread" << endl;
-//        //have a connection
-//        handleClients(player1, player2);
     }
 }
 
-void Server::initializingPlayer(int playerSocket, int playerNum) {
-    ssize_t x = write(playerSocket, &playerNum, sizeof(playerNum));
-    if (x == -1) {
-        cout << "Error writing to socket" << endl;
-        exit(1);
-    }
-}
-
-void Server::handleClients(int player1, int player2) {
-    int sender = player1;
-    int receiver = player2;
-    int temp;
-    while (transferMessage(sender, receiver)) {
-        temp = sender;
-        sender = receiver;
-        receiver = temp;
-    }
-    // Close communication with the client
-    close(player1);
-    close(player2);
-}
-
-bool Server::transferMessage(int sender, int receiver) {
-    Pair pair;
-    try {
-        ssize_t checkTransfer = read(sender, &pair, sizeof(pair));
-        if (checkTransfer <= 0) {
-            return false;
-        }
-        // end of game
-        if (pair.getCol() == -6 && pair.getCol() == -6) {
-            return false;
-        }
-        checkTransfer = write(receiver, &pair, sizeof(pair));
-        if (checkTransfer <= 0) {
-            return false;
-        }
-    } catch(exception e) {
-            return false;
-    }
-    return true;
-}
 
 void Server::stop() {
     // close threads
@@ -134,7 +81,7 @@ void Server::stop() {
     close(serverSocket);
     exit(1);
 }
-//
+
 void Server::handleBeforeClient(int clientSocket) {
     ServerGames* sG = ServerGames::getInstance();
     CommandManager commandManager = CommandManager(sG);
@@ -193,19 +140,15 @@ string Server::readFromClient(int clientSocket) {
 
 }
 
-void *Server::handleAccept(void *tempArgs) {
-    cout << "Entered handleAccept" << endl;
-    int clientSocket = *((int *) tempArgs);
-    cout << "got clientSocket in handleAccept:   " << clientSocket << endl;
-    ((Server *) tempArgs)->handleBeforeClient(clientSocket);
-    return tempArgs;
-}
+//void *Server::handleAccept(void *tempArgs) {
+//    int clientSocket = *((int *) tempArgs);
+//    ((Server *) tempArgs)->handleBeforeClient(clientSocket);
+//    return tempArgs;
+//}
 
-void *Server::handleAccept2(void *structOfserver) {
-    cout << "Entered handleAccept" << endl;
+void *Server::handleAccept(void *structOfserver) {
     serverAndClient sAC = *((serverAndClient *) structOfserver);
     ((Server *) sAC.getServer())->handleBeforeClient(sAC.getClientS());
-    cout << "Finished handleAccept" << endl;
     return structOfserver;
 }
 
