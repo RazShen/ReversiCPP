@@ -44,12 +44,10 @@ void ServerGames::deleteGame(string gameName) {
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
         pthread_mutex_trylock(&mutexCommand);
-        pthread_cancel(roomToDelete->getThread());
         gamesList.erase(getGameIterator(gameName));
         //delete room from list
         delete(roomToDelete);
         pthread_mutex_unlock(&mutexCommand);
-
     }
 }
 
