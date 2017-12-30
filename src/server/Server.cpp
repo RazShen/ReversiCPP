@@ -134,7 +134,7 @@ void Server::stop() {
     close(serverSocket);
     exit(1);
 }
-
+//
 void Server::handleBeforeClient(int clientSocket) {
     ServerGames* sG = ServerGames::getInstance();
     CommandManager commandManager = CommandManager(sG);
