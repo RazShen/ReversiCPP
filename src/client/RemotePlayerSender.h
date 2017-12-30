@@ -64,16 +64,28 @@ public:
      * Destructor for player.
      */
     ~RemotePlayerSender();
-
+   /**
+    * get the player menu for the user
+    * @param display the given display of the game
+    */
     void playerMenu(Display* display);
-
+    /**
+     * parse operation to string command
+     * @param operation a given opration
+     * @param name og the game
+     * @return the sting that represent the full command
+     */
     string ParseOperation(int operation, string name);
-
+/**
+ * this function write to server a command
+ * @param command a given command
+ */
     void writeToServer(string command);
-
+    /**
+     * this function read from server a command
+     * @return a given command
+     */
     string readFromServer();
-
-
 };
 
 #endif //EX4_REMOTEPLAYERSENDER_H
