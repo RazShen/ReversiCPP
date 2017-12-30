@@ -129,18 +129,41 @@ public:
      */
     void pressAnyKey();
 
+    /**
+     * Print the client menu.
+     */
     void printClientMenu();
 
+    /**
+     * Print that this game isn't available.
+     */
     void notAvailableGame();
 
+    /**
+     * Print that this game already exists.
+     */
     void gameAlreadyExist();
 
+    /**
+     * Print that the input isn't an option.
+     */
     void gameNotOption();
 
+    /**
+     * Print the game has ended
+     */
     void EnterNameOfGame();
 
+    /**
+     * Print an inputted string
+     * @param stringToPrint inputted string
+     */
     void printString(string stringToPrint);
 
+    /**
+     * Print all the available games (the string)
+     * @param availableGamesNames available games
+     */
     void printAvailableGames(string availableGamesNames);
 
 };

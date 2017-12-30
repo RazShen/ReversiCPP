@@ -24,19 +24,34 @@ RemotePlayerReceiver::RemotePlayerReceiver(const char *filename) : Player(filena
 void RemotePlayerReceiver::connectToServer(Display *display) {
     // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == -1) {
-        throw "Error opening socket";
+    try {
+        if (clientSocket == -1) {
+            throw ERROR;
+        }
+    } catch (int e) {
+        display->printString("Error opening socket");
+        exit(1);
     }
     // Convert the ip string to a network address
     struct in_addr address;
-    if (!inet_aton(serverIP.c_str(), &address)) {
-        throw "Can't parse IP address";
+    try {
+        if (!inet_aton(serverIP.c_str(), &address)) {
+            throw ERROR;
+        }
+    } catch (int e) {
+        display->printString("Can't parse IP address");
+        exit(1);
     }
     // Get a hostent structure for the given host address
     struct hostent *server;
     server = gethostbyaddr((const void *) &address, sizeof address, AF_INET);
-    if (server == NULL) {
-        throw "Host is unreachable";
+    try {
+        if (server == NULL) {
+            throw ERROR;
+        }
+    } catch (int e) {
+        display->printString("Host is unreachable");
+        exit(1);
     }
     // Create a structure for the server address
     struct sockaddr_in serverAddress;
@@ -46,8 +61,13 @@ void RemotePlayerReceiver::connectToServer(Display *display) {
     // htons converts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
     // Establish a connection with the TCP server
-    if (connect(clientSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
-        throw "Error connecting to server";
+    try {
+        if (connect(clientSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) == -1) {
+            throw ERROR;
+        }
+    } catch (int e) {
+        display->printString("Error connecting to server");
+        exit(1);
     }
 }
 
