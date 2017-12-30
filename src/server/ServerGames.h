@@ -29,6 +29,21 @@ private:
  * @return if it works, false otherwise
  */
     bool transferMessage(int sender, int receiver);
+    /**
+ * this function returns the iterator of a given game name
+ * @param gameName a given name
+ * @return iterator of the Room
+ */
+    vector<Room>::iterator getGameIterator(string gameName);
+
+    /**
+    * this function find a game by 2 players socket
+    * @param player1 a given player socket 1
+    * @param player2 a given player socket 2
+    * @return the name of the game the the player plays
+    */
+    string findGame(int player1, int player2);
+
     bool hasAtLeastOneRunningGame();
 public:
     struct twoClients {
@@ -84,13 +99,6 @@ public:
      */
     void joinToGame(string gameName, int clientSocket);
     /**
-     * this function gets a game by a client socket
-     * @param client1 a given client Socket 1
-     * @param client2 a given client socket 2
-     * @return the room the is played by the players
-     */
-    Room* getGameByClient(int client1, int client2);
-    /**
      * this function returns the list of the available games
      * @return a string represent the list of the available games
      */
@@ -118,19 +126,8 @@ public:
      * @return arguments
      */
     static void* wrapHandleClients(void* args);
-    /**
-     * this function returns the iterator of a given game name
-     * @param gameName a given name
-     * @return iterator of the Room
-     */
-    vector<Room>::iterator getGameIterator(string gameName);
-    /**
-     * this function find a game by 2 players socket
-     * @param player1 a given player socket 1
-     * @param player2 a given player socket 2
-     * @return the name of the game the the player plays
-     */
-    string findGame(int player1, int player2);
+
+
 
 };
 #endif //EX4_SERVERGAMES_H
