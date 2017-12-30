@@ -6,7 +6,7 @@
 #define EX4_COMMAND_H
 #include <vector>
 #include <iostream>
-#include "../server/ServerGames.h"
+#include "ServerGames.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>

@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "ServerGames.h"
-#include "../commands/CommandManager.h"
+#include "CommandManager.h"
 
 
 class Server {

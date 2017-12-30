@@ -6,7 +6,7 @@
 #define EX4_SERVERGAMES_H
 
 #include <vector>
-#include "../commands/Room.h"
+#include "Room.h"
 
 class ServerGames {
 private:

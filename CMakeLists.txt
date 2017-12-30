@@ -10,10 +10,10 @@ set(SOURCE_FILES src/client/Board.cpp src/client/Board.h src/client/GameLogic.cp
         src/client/RegularGameLogic.h src/client/HumanPlayer.h src/client/HumanPlayer.cpp src/client/AIPlayer.cpp src/client/AIPlayer.h src/client/Player.h
         src/client/Player.cpp src/client/Pair.cpp src/client/Pair.h src/client/ConsoleDisplay.cpp src/client/ConsoleDisplay.h src/client/Game.cpp src/client/Game.h
         src/client/Display.h src/server/Server.cpp src/server/Server.h src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h
-        src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h src/commands/CommandManager.cpp src/commands/CommandManager.h src/commands/Command.h
-        src/commands/StartNewGameC.cpp src/commands/StartNewGameC.h src/commands/GetListOfGamesC.cpp src/commands/GetListOfGamesC.h src/commands/JoinSpecificGameC.cpp
-        src/commands/JoinSpecificGameC.h src/commands/Room.cpp src/commands/Room.h
-        src/server/ServerGames.cpp src/server/ServerGames.h src/commands/Command.cpp)
+        src/client/RemotePlayerSender.cpp src/client/RemotePlayerSender.h src/server/CommandManager.cpp src/server/CommandManager.h src/server/Command.h
+        src/server/StartNewGameC.cpp src/server/StartNewGameC.h src/server/GetListOfGamesC.cpp src/server/GetListOfGamesC.h src/server/JoinSpecificGameC.cpp
+        src/server/JoinSpecificGameC.h src/server/Room.cpp src/server/Room.h
+        src/server/ServerGames.cpp src/server/ServerGames.h src/server/Command.cpp)
 
 set(TEST_FILES src/client/test/BoardTest.cpp src/client/test/GameLogicTest.cpp src/client/test/PossibleMovesTest.cpp)
 

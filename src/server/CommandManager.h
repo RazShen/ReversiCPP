@@ -8,7 +8,7 @@
 
 #include <map>
 #include "Command.h"
-#include "../server/ServerGames.h"
+#include "ServerGames.h"
 
 
 class CommandManager {
