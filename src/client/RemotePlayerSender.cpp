@@ -239,15 +239,17 @@ string RemotePlayerSender::readFromServer() {
     if (n == -1 || n == 0) {
         throw ERROR;
     }
-    char *command = new char[stringLength + 1];
-    for (int i = 0; i < stringLength; i++) {
-        n = (int) read(clientSocket, &command[i], sizeof(char));
-        if (n == -1 || n == 0) {
-            throw ERROR;
+    else {
+        char *command = new char[stringLength + 1];
+        for (int i = 0; i < stringLength; i++) {
+            n = (int) read(clientSocket, &command[i], sizeof(char));
+            if (n == -1 || n == 0) {
+                throw ERROR;
+            }
         }
+        command[stringLength] = '\0';
+        string strCommand(command);
+        delete (command);
+        return strCommand;
     }
-    command[stringLength] = '\0';
-    string strCommand(command);
-    delete(command);
-    return strCommand;
 }
