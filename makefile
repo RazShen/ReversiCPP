@@ -1,4 +1,4 @@
-CC = g++
+CC = g++ -g -pthread
 VERSION = -std=c++98
 CLIENT_CPP_FILES = ./src/client/*.cpp
 CLIENT_H_FILES = ./src/client/*.h
