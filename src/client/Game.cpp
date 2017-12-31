@@ -41,15 +41,22 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             delete (this->gameLogic);
             delete (this->bHP);
             exit(1);
-            //
+            }
         }
         if (indexPlayer == 1) {
             this->display->connectedToServer();
             this->display->waitingForOppToConnect();
             this->bHP->setType(Board::Black);
             while (!secondPlayerJoined) {
-                if (this->bHP->getMoveFromServer() == 3)
-                    secondPlayerJoined = true;
+                try {
+                    if (this->bHP->getMoveFromServer() == 3)
+                        secondPlayerJoined = true;
+                } catch (int e) {
+                    display->printString("Error reading message!. Server has been probably shutdown, closing the game");
+                    delete (this->gameLogic);
+                    delete (this->bHP);
+                    exit(1);
+                }
             }
             this->wHP = new RemotePlayerReceiver(filename);
             //this->wHP->connectToServer();
@@ -64,7 +71,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             //this->bHP->connectToServer();
             this->bHP->setClientSocket(this->wHP->getClientSocket());
         }
-    }
+
 }
 
 void Game::run() {
