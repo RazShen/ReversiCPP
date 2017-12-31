@@ -162,7 +162,6 @@ void* Server::changeShouldStop(void *args) {
     string input = "";
     do {
         if (input == "exit") {
-            cout << 1 << endl;
             server->stopServer();
             server->stop();
             break;
