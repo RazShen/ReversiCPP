@@ -89,14 +89,10 @@ void Server::handleBeforeClient(int clientSocket) {
     string input = "", wantedCommand;
     vector<string> inputtedStringInVec;
     input = readFromClient(clientSocket);
-    cout << "handleBeforeClient read:" << input << endl;
     if (input != "list_games") {
-        cout << "down in !list_games" << endl;
         inputtedStringInVec = parseStringBySpace(input);
-        cout << "Parse of vector handleBeforeClient read:" << inputtedStringInVec.at(0) << "    "  << inputtedStringInVec.at(1) << endl;
         wantedCommand = inputtedStringInVec.at(0);
     } else {
-        cout << "down in list_games" << endl;
         wantedCommand = input;
         inputtedStringInVec.push_back(input);
     }
@@ -123,7 +119,6 @@ vector<string>  Server::parseStringBySpace(string str) {
 string Server::readFromClient(int clientSocket) {
     int stringLength, n;
     n = (int) read(clientSocket, &stringLength, sizeof(int));
-    cout << "readFromClient read stringLength: " << stringLength << endl;
     if (n == -1)
         throw "Error reading string length";
     char *command = new char[stringLength + 1];
@@ -134,7 +129,6 @@ string Server::readFromClient(int clientSocket) {
     }
     command[stringLength] = '\0';
     string strCommand(command);
-    cout << "server  read from client" << command << endl;
     delete(command);
     return strCommand;
 

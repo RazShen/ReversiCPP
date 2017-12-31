@@ -220,8 +220,6 @@ string RemotePlayerSender::ParseOperation(int operation, string name) {
 
 void RemotePlayerSender::writeToServer(string command) {
     int stringLength = command.length();
-    cout << "Client command length is:  " << stringLength << endl;
-    cout << "Client command is:  " << command << endl;
     int n;
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1 || n == 0) {

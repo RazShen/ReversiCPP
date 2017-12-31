@@ -20,6 +20,11 @@ public:
         Server* server;
         int clientS;
     public:
+        /**
+         * Struct for running the commands
+         * @param s the server
+         * @param client client socket
+         */
         serverAndClient(Server* s, int client) {
             server = s;
             clientS = client;

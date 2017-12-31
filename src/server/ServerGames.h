@@ -52,6 +52,12 @@ public:
         int client1;
         int client2;
     public:
+        /**
+         * Struct for running the handle-clients method.
+         * @param c1 client1 socket
+         * @param c2 client2 socket
+         * @param serverGames object that holds all the information about the games.
+         */
         twoClients(int c1, int c2, ServerGames* serverGames) {
             client1 = c1;
             client2 = c2;
@@ -68,7 +74,6 @@ public:
         }
     };
     static ServerGames *getInstance();
- //   static void deleteInstance();
     /**
      * this function find the room from a given name
      * @param gameName a given name of the room
@@ -126,8 +131,6 @@ public:
      * @return arguments
      */
     static void* wrapHandleClients(void* args);
-
-
 
 };
 #endif //EX4_SERVERGAMES_H

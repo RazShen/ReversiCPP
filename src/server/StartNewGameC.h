@@ -14,7 +14,12 @@
 
 class StartNewGameC : public Command {
 public:
-
+    /**
+     * This method executes the command.
+     * @param args inputted arguments
+     * @param client socket.
+     * @param serverGamesI- object that holds all the information about the games.
+     */
     void execute(vector<string> args, int client, ServerGames* serverGamesI);
 };
 #endif //EX4_STARTNEWGAMEC_H

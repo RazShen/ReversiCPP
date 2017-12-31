@@ -14,16 +14,13 @@
 ServerGames::ServerGames() {}
 
 Room* ServerGames::getGame(string gameName) {
-    cout << "started ServerGames::getGame " << endl;
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
-            cout << "ServerGames::getGame is now returning the room of game" << endl;
             return &(*it);
         }
         it++;
     }
-    cout << "finishing ServerGames::getGame, it didn't return the room of game " << endl;
     return &(*it);
 }
 
@@ -39,7 +36,7 @@ void ServerGames::addGame(string gameName, int clientSocket) {
 
 void ServerGames::deleteGame(string gameName) {
     //delete thread.
-    //earse from game list
+    //erase from game list
     // delete room (after new)
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
@@ -80,14 +77,10 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
 }
 
 bool ServerGames::isGameRunning(string gameName) {
-    cout << "started ServerGames::isGameRunning " << endl;
     bool isItRunning = false;
-    cout << "ServerGames::isGameRunning called getGame" << endl;
     if (getGame(gameName)->isRunning()) {
-        cout << "ServerGames::isGameRunning the game is running" << endl;
         isItRunning = true;
     }
-    cout << "end ServerGames::isGameRunning" << endl;
     return isItRunning;
 }
 string ServerGames::sendListGames() {
@@ -100,7 +93,6 @@ string ServerGames::sendListGames() {
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if(!it->isRunning()) {
-            cout << "added room to list of rooms:" << it->getRoomName() << endl;
             list += "\n                           " + it->getRoomName();
             allRun = false;
         }
@@ -121,21 +113,15 @@ int ServerGames::size() {
 }
 
 bool ServerGames::isGameInList(string gameName) {
-    cout << "ServerGames::isGameInList user gameName :   " << gameName << endl;
     if(!gamesList.empty()) {
-        cout << "ServerGames::isGameInList gamelist isn't empty" << endl;
-        cout << "ServerGames::isGameInList started iterating gamelist" << endl;
         vector<Room>::iterator it = gamesList.begin();
         while (it != gamesList.end()) {
             if (gameName == it->getRoomName()) {
-                cout <<  "ServerGames::isGameInList return true- game in list " << endl;
                 return true;
             }
             it++;
         }
-        cout << "ServerGames::isGameInList finished iterating gamelist" << endl;
     }
-    cout << "ServerGames::isGameInList the game isn't in the list"<< endl;
     return false;
 }
 
@@ -224,15 +210,11 @@ vector<Room>::iterator ServerGames::getGameIterator(string gameName) {
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
         if (gameName == it->getRoomName()) {
-            cout << "ServerGames::getGame is now returning the room of game" << endl;
             return it;
         }
         it++;
     }
-    cout << "finishing ServerGames::getGame, it didn't return the room of game " << endl;
     return it;
-
-
 }
 
 string ServerGames::findGame(int player1, int player2) {
