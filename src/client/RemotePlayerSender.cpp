@@ -249,7 +249,7 @@ string RemotePlayerSender::readFromServer() {
         }
         command[stringLength] = '\0';
         string strCommand(command);
-        //delete (command);
+        delete[] command;
         return strCommand;
     }
 }

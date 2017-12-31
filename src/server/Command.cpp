@@ -7,7 +7,7 @@
 
 void Command::writeToClient(string inputForClient, int clientSocket) {
     int stringLength = inputForClient.length();
-    int n;;
+    int n;
     n = (int) write(clientSocket, &stringLength, sizeof(int));
     if (n == -1)
         throw "Error writing string length";
