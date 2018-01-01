@@ -68,6 +68,7 @@ void Server::start() {
         }
         connectionThreads.push_back(currThread);
     }
+    this->stop();
 }
 
 
