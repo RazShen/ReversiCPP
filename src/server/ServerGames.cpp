@@ -245,9 +245,8 @@ void ServerGames::deleteAllGames() {
     while (it != gamesList.end()) {
         string name = it->getRoomName();
         it++;
-        if (isGameInList(name)) {
+        if(isGameInList(name)) {
             deleteGame(name);
-
         }
     }
 }

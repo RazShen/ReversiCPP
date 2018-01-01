@@ -12,7 +12,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <cstdlib>
-#include <iostream>
 #define ERROR 30
 using namespace std;
 
@@ -103,9 +102,8 @@ RemotePlayerReceiver::getMove(Pair positions[], int moves, GameLogic *gl, Board:
 
 void RemotePlayerReceiver::noMove(Display *display) {
     // just getting the pair -5,-5 from server to know opponent has no moves
-    int xUser, yUser;
     ssize_t n;
-    Pair pair(xUser, yUser);
+    Pair pair(0, 0);
     display->noPossiblePlayerMove(this->getType());
     n = read(clientSocket, &pair, sizeof(pair));
     if (n == -1 || n == 0) {
