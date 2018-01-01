@@ -11,7 +11,9 @@
 //pthread_mutex_t mutexCommand;
 
 
-ServerGames::ServerGames() {}
+ServerGames::ServerGames() {
+    pthread_mutex_init(&mutexCommand, NULL);
+}
 
 Room* ServerGames::getGame(string gameName) {
     vector<Room>::iterator it = gamesList.begin();
