@@ -54,13 +54,14 @@ void Server::start() {
     }
     threadServer = currThread;
     while (!shouldStop) {
-        cout << "Waiting for connections..." << endl;
+        cout << "Waiting for a new Connection" << endl;
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         if (player1 == -1 || player1 == 0) {
             this->stop();
             throw "Error on accept";
         }
+        cout << "Waiting for a new Connection" << endl;
         pthread_t currThread;
         serverAndClient sAC = serverAndClient(this, player1);
         int rc = pthread_create(&currThread, NULL, Server::handleAccept, &sAC);
@@ -131,7 +132,7 @@ string Server::readFromClient(int clientSocket) {
     }
     command[stringLength] = '\0';
     string strCommand(command);
-    delete(command);
+    delete[] command;
     return strCommand;
 
 }
