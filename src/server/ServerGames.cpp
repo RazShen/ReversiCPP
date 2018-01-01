@@ -68,8 +68,8 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
 
        // this->handleClients(roomToJoin.getOtherSocket(clientSocket2), clientSocket2);
         pthread_t currThread;
-        twoClients sAC = twoClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2, this);
-        int rc = pthread_create(&currThread, NULL, ServerGames::wrapHandleClients, &sAC);
+        twoClients* sAC = new twoClients(roomToJoin->getOtherSocket(clientSocket2), clientSocket2, this);
+        int rc = pthread_create(&currThread, NULL, ServerGames::wrapHandleClients, sAC);
         if (rc != 0) {
             cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
@@ -200,7 +200,8 @@ ServerGames::~ServerGames() {
 void* ServerGames::wrapHandleClients(void *args) {
     twoClients tC = * ((twoClients *) args);
     ((ServerGames*) tC.getServerGames())->handleClients(tC.getClient1(), tC.getClient2());
-    return args;
+    delete((twoClients*)args);
+    return NULL;
 }
 
 bool ServerGames::hasAtLeastOneRunningGame() {
