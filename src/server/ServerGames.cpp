@@ -43,6 +43,8 @@ void ServerGames::deleteGame(string gameName) {
         pthread_mutex_trylock(&mutexCommand);
         pthread_cancel(roomToDelete->getThread());
         gamesList.erase(getGameIterator(gameName));
+        close(roomToDelete->getPlayerSocket1());
+        close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
         //delete room from list
         delete(roomToDelete);
         pthread_mutex_unlock(&mutexCommand);
@@ -53,7 +55,7 @@ void ServerGames::deleteGame(string gameName) {
 void ServerGames::joinToGame(string gameName, int clientSocket2) {
     if(isGameInList(gameName) && !getGame(gameName)->isRunning()) {
         Room* roomToJoin = getGame(gameName);
-        pthread_mutex_trylock(&mutexCommand);
+        pthread_mutex_lock(&mutexCommand);
         roomToJoin->connectPlayer2(clientSocket2);
         initializingPlayer(clientSocket2, 2);
         initializingPlayer(roomToJoin->getOtherSocket(clientSocket2), 3);
@@ -68,7 +70,7 @@ void ServerGames::joinToGame(string gameName, int clientSocket2) {
             cout << "Error: unable to create thread, " << rc << endl;
             exit(-1);
         }
-        pthread_mutex_trylock(&mutexCommand);
+        pthread_mutex_lock(&mutexCommand);
         roomToJoin->setThread(currThread);
         pthread_mutex_unlock(&mutexCommand);
 
@@ -173,7 +175,11 @@ bool ServerGames::transferMessage(int sender, int receiver) {
 
 ServerGames *ServerGames::getInstance() {
     if (!instance) {
-        instance = new ServerGames();
+       // pthread_mutex_lock(&mutexCommand);
+        if(!instance) {
+            instance = new ServerGames();
+        }
+      //  pthread_mutex_unlock(&mutexCommand);
     }
     return instance;
 }

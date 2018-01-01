@@ -11,11 +11,11 @@
 class ServerGames {
 private:
     pthread_mutex_t mutexCommand;
+    vector<Room> gamesList;
     static ServerGames *instance;
     ServerGames();
     ServerGames(const ServerGames &other);
     ~ServerGames();
-    vector<Room> gamesList;
     /**
  * this method handles 2 clients and transfer their massages through function transferMassage
  * @param clientSocket1 a first client socket
@@ -35,7 +35,6 @@ private:
  * @return iterator of the Room
  */
     vector<Room>::iterator getGameIterator(string gameName);
-
     /**
     * this function find a game by 2 players socket
     * @param player1 a given player socket 1
