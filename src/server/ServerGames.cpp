@@ -27,7 +27,7 @@ Room* ServerGames::getGame(string gameName) {
 void ServerGames::addGame(string gameName, int clientSocket) {
     if (!isGameInList(gameName)) {
     Room *gameRoom = new Room(clientSocket, gameName);
-    pthread_mutex_trylock(&mutexCommand);
+    pthread_mutex_lock(&mutexCommand);
     gamesList.push_back(*gameRoom);
     pthread_mutex_unlock(&mutexCommand);
     initializingPlayer(clientSocket, 1);
@@ -40,13 +40,13 @@ void ServerGames::deleteGame(string gameName) {
     // delete room (after new)
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
-        pthread_mutex_trylock(&mutexCommand);
+        pthread_mutex_lock(&mutexCommand);
         close(roomToDelete->getPlayerSocket1());
         if(roomToDelete->isRunning()) {
             close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
         }
-        pthread_cancel(roomToDelete->getThread());
         gamesList.erase(getGameIterator(gameName));
+        pthread_cancel(roomToDelete->getThread());
         //delete room from list
         delete(roomToDelete);
         pthread_mutex_unlock(&mutexCommand);
@@ -240,7 +240,8 @@ string ServerGames::findGame(int player1, int player2) {
 void ServerGames::deleteAllGames() {
     vector<Room>::iterator it = gamesList.begin();
     while (it != gamesList.end()) {
-        deleteGame(it->getRoomName());
+        string name = it->getRoomName();
         it++;
+        deleteGame(name);
     }
 }
