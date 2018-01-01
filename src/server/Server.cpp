@@ -4,17 +4,14 @@
  */
 
 #include "Server.h"
-#include "../client/Pair.h"
 #include <string.h>
 #include <cstdlib>
-#include <pthread.h>
 
 
 
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
-#define THREADS_NUM 10
 
 
 Server::Server(int port) : port(port), serverSocket(0) {
@@ -42,17 +39,15 @@ void Server::start() {
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
     // Define the client socket's structures
     struct sockaddr_in playerAddress1;
-    struct sockaddr_in playerAddress2;
     socklen_t playerAddressLen1 = 0;
-    socklen_t playerAddressLen2 = 0;
-    int player1, player2;
-    pthread_t currThread;
-    int bc = pthread_create(&currThread, NULL, Server::changeShouldStop, this);
+    int player1;
+    pthread_t serverThread;
+    int bc = pthread_create(&serverThread, NULL, Server::changeShouldStop, this);
     if (bc != 0) {
         cout << "Error: unable to create thread, " << bc << endl;
         exit(-1);
     }
-    threadServer = currThread;
+    threadServer = serverThread;
     while (!shouldStop) {
         // Accept a new client connection
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
@@ -68,6 +63,7 @@ void Server::start() {
         }
         connectionThreads.push_back(currThread);
     }
+    this->stop();
 }
 
 
@@ -139,7 +135,7 @@ string Server::readFromClient(int clientSocket) {
 
 void *Server::handleAccept(void *structOfserver) {
     serverAndClient sAC = *((serverAndClient *) structOfserver);
-    ((Server *) sAC.getServer())->handleBeforeClient(sAC.getClientS());
+    (sAC.getServer())->handleBeforeClient(sAC.getClientS());
     return structOfserver;
 }
 
