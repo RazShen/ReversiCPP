@@ -130,6 +130,10 @@ public:
      * @return arguments
      */
     static void* wrapHandleClients(void* args);
+    /**
+     * this function deletes all the games from the list
+     */
+    void deleteAllGames();
 
 };
 #endif //EX4_SERVERGAMES_H

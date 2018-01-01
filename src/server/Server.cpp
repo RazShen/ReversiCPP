@@ -74,6 +74,8 @@ void Server::start() {
 
 
 void Server::stop() {
+    ServerGames* sG = ServerGames::getInstance();
+    sG->deleteAllGames();
     // close threads
     vector<pthread_t>::iterator it = connectionThreads.begin();
     while (it != connectionThreads.end()) {

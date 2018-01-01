@@ -41,10 +41,12 @@ void ServerGames::deleteGame(string gameName) {
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
         pthread_mutex_trylock(&mutexCommand);
+        close(roomToDelete->getPlayerSocket1());
+        if(roomToDelete->isRunning()) {
+            close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
+        }
         pthread_cancel(roomToDelete->getThread());
         gamesList.erase(getGameIterator(gameName));
-        close(roomToDelete->getPlayerSocket1());
-        close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
         //delete room from list
         delete(roomToDelete);
         pthread_mutex_unlock(&mutexCommand);
@@ -234,4 +236,11 @@ string ServerGames::findGame(int player1, int player2) {
         it++;
     }
     return "noGame";
+}
+void ServerGames::deleteAllGames() {
+    vector<Room>::iterator it = gamesList.begin();
+    while (it != gamesList.end()) {
+        deleteGame(it->getRoomName());
+        it++;
+    }
 }
