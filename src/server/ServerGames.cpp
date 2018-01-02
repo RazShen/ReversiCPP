@@ -41,13 +41,13 @@ void ServerGames::deleteGame(string gameName) {
     // delete room (after new)
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
-        pthread_mutex_lock(&mutexCommand);
+        pthread_mutex_trylock(&mutexCommand);
+        pthread_cancel(roomToDelete->getThread());
         close(roomToDelete->getPlayerSocket1());
         if(roomToDelete->isRunning()) {
             close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
         }
         gamesList.erase(getGameIterator(gameName));
-        pthread_cancel(roomToDelete->getThread());
         //delete room from list
         delete(roomToDelete);
         pthread_mutex_unlock(&mutexCommand);
@@ -178,11 +178,9 @@ bool ServerGames::transferMessage(int sender, int receiver) {
 
 ServerGames *ServerGames::getInstance() {
     if (!instance) {
-       // pthread_mutex_lock(&mutexCommand);
         if(!instance) {
             instance = new ServerGames();
         }
-      //  pthread_mutex_unlock(&mutexCommand);
     }
     return instance;
 }
@@ -241,7 +239,8 @@ string ServerGames::findGame(int player1, int player2) {
 }
 void ServerGames::deleteAllGames() {
     vector<Room>::iterator it = gamesList.begin();
-    while (it != gamesList.end()) {
+    int i, size =(int) gamesList.size();
+    for(i = 0; i < size; i ++) {
         string name = it->getRoomName();
         it++;
         pthread_mutex_lock(&mutexCommand);
@@ -250,6 +249,16 @@ void ServerGames::deleteAllGames() {
         }
         pthread_mutex_unlock(&mutexCommand);
     }
+//    
+//    while (it != gamesList.end()) {
+//        string name = it->getRoomName();
+//        it++;
+//        pthread_mutex_lock(&mutexCommand);
+//        if(isGameInList(name)) {
+//            deleteGame(name);
+//        }
+//        pthread_mutex_unlock(&mutexCommand);
+//    }
 
 }
 

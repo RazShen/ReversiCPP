@@ -61,13 +61,18 @@ void Server::start() {
         if (rc != 0) {
             exit(-1);
         }
+        pthread_join(currThread, NULL);
         connectionThreads.push_back(currThread);
+        if(shouldStop) {
+            break;
+        }
     }
     this->stop();
 }
 
 
 void Server::stop() {
+    shouldStop = true;
     ServerGames* sG = ServerGames::getInstance();
     sG->deleteAllGames();
     // close threads
@@ -77,6 +82,7 @@ void Server::stop() {
         it++;
     }
     pthread_cancel(threadServer);
+    shutdown(serverSocket, SHUT_RDWR);
     close(serverSocket);
     exit(1);
 }
@@ -133,27 +139,20 @@ string Server::readFromClient(int clientSocket) {
 
 }
 
-void *Server::handleAccept(void *structOfserver) {
-    serverAndClient sAC = *((serverAndClient *) structOfserver);
+void *Server::handleAccept(void *structOfServer) {
+        serverAndClient sAC = *((serverAndClient *) structOfServer);
     (sAC.getServer())->handleBeforeClient(sAC.getClientS());
-    return structOfserver;
-}
-
-void Server::stopServer() {
-    this->shouldStop = true;
-
+    return structOfServer;
 }
 
 void* Server::changeShouldStop(void *args) {
     Server* server = (Server*) args;
-    cout << "type ""exit"" then press ENTER to stop the server and all the running games" << endl;
-    string input = "";
-    do {
-        if (input == "exit") {
-            server->stopServer();
-            server->stop();
-            break;
-        }
+    string input;
+    while (input != "exit") {
+        cout << "type ""exit"" then press ENTER to stop the server and all the running games" << endl;
         cin >> input;
-    } while (true);
+    }
+    server->stop();
+    pthread_detach(pthread_self());
+    //exit(1);
 }
