@@ -53,7 +53,7 @@ void Server::start() {
         player1 = accept(serverSocket, (struct sockaddr *) &playerAddress1, &playerAddressLen1);
         if (player1 == -1 || player1 == 0) {
             this->stop();
-            throw "Error on accept";
+            return;
         }
         pthread_t currThread;
         serverAndClient sAC = serverAndClient(this, player1);
@@ -84,7 +84,7 @@ void Server::stop() {
     pthread_cancel(threadServer);
     shutdown(serverSocket, SHUT_RDWR);
     close(serverSocket);
-    exit(1);
+    return;
 }
 
 void Server::handleBeforeClient(int clientSocket) {
@@ -154,5 +154,5 @@ void* Server::changeShouldStop(void *args) {
     }
     server->stop();
     pthread_detach(pthread_self());
-    //exit(1);
+    exit(1);
 }

@@ -41,16 +41,18 @@ void ServerGames::deleteGame(string gameName) {
     // delete room (after new)
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
-        pthread_mutex_trylock(&mutexCommand);
         pthread_cancel(roomToDelete->getThread());
-        close(roomToDelete->getPlayerSocket1());
-        if(roomToDelete->isRunning()) {
-            close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
-        }
+//        close(roomToDelete->getPlayerSocket1());
+//        if(roomToDelete->isRunning()) {
+//            cout << "error" << endl;
+//            close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
+//        }
+        pthread_mutex_trylock(&mutexCommand);
         gamesList.erase(getGameIterator(gameName));
+        pthread_mutex_unlock(&mutexCommand);
+
         //delete room from list
         delete(roomToDelete);
-        pthread_mutex_unlock(&mutexCommand);
 
     }
 }
@@ -151,6 +153,8 @@ void ServerGames::handleClients(int player1, int player2) {
     // Close communication with the client
     close(player1);
     close(player2);
+    deleteGame(findGame(sender, receiver));
+
 }
 
 bool ServerGames::transferMessage(int sender, int receiver) {
@@ -162,7 +166,6 @@ bool ServerGames::transferMessage(int sender, int receiver) {
         }
         // end of game
         if (pair.getCol() == -6 && pair.getCol() == -6) {
-            deleteGame(findGame(sender, receiver));
             //finish thread
             return false;
         }
@@ -240,15 +243,16 @@ string ServerGames::findGame(int player1, int player2) {
 void ServerGames::deleteAllGames() {
     vector<Room>::iterator it = gamesList.begin();
     int i, size =(int) gamesList.size();
+    pthread_mutex_trylock(&mutexCommand);
     for(i = 0; i < size; i ++) {
         string name = it->getRoomName();
         it++;
-        pthread_mutex_lock(&mutexCommand);
         if(isGameInList(name)) {
             deleteGame(name);
         }
-        pthread_mutex_unlock(&mutexCommand);
     }
+    pthread_mutex_unlock(&mutexCommand);
+
 //    
 //    while (it != gamesList.end()) {
 //        string name = it->getRoomName();
