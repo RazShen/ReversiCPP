@@ -134,6 +134,8 @@ public:
      * this function deletes all the games from the list
      */
     void deleteAllGames();
+    vector<Room>* getGameList();
+
 
 };
 #endif //EX4_SERVERGAMES_H

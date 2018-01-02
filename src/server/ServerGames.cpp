@@ -8,7 +8,6 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cstdlib>
-//pthread_mutex_t mutexCommand;
 
 
 ServerGames::ServerGames() {
@@ -245,8 +244,15 @@ void ServerGames::deleteAllGames() {
     while (it != gamesList.end()) {
         string name = it->getRoomName();
         it++;
+        pthread_mutex_lock(&mutexCommand);
         if(isGameInList(name)) {
             deleteGame(name);
         }
+        pthread_mutex_unlock(&mutexCommand);
     }
+
+}
+
+vector<Room>* ServerGames::getGameList() {
+    return &gamesList;
 }
