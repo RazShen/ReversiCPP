@@ -27,9 +27,9 @@ Room* ServerGames::getGame(string gameName) {
 
 void ServerGames::addGame(string gameName, int clientSocket) {
     if (!isGameInList(gameName)) {
-    Room *gameRoom = new Room(clientSocket, gameName);
+    Room gameRoom = Room(clientSocket, gameName);
     pthread_mutex_lock(&mutexCommand);
-    gamesList.push_back(*gameRoom);
+    gamesList.push_back(gameRoom);
     pthread_mutex_unlock(&mutexCommand);
     initializingPlayer(clientSocket, 1);
     }
@@ -47,12 +47,12 @@ void ServerGames::deleteGame(string gameName) {
 //            cout << "error" << endl;
 //            close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
 //        }
-        pthread_mutex_trylock(&mutexCommand);
+//        pthread_mutex_trylock(&mutexCommand);
         gamesList.erase(getGameIterator(gameName));
-        pthread_mutex_unlock(&mutexCommand);
+//        pthread_mutex_unlock(&mutexCommand);
 
         //delete room from list
-        delete(roomToDelete);
+        //delete(roomToDelete);
 
     }
 }

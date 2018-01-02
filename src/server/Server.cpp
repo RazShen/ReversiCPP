@@ -64,10 +64,10 @@ void Server::start() {
         pthread_join(currThread, NULL);
         connectionThreads.push_back(currThread);
         if(shouldStop) {
-            break;
+            this->stop();
+            return;
         }
     }
-    this->stop();
 }
 
 
