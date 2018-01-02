@@ -17,7 +17,7 @@ using namespace std;
  * @return 0
  */
 int main() {
-    int boardSize = 4;
+    int boardSize = 8;
     int input = 0;
     bool isNotValidInput;
     ConsoleDisplay display = ConsoleDisplay();
