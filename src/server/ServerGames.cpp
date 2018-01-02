@@ -36,24 +36,10 @@ void ServerGames::addGame(string gameName, int clientSocket) {
 }
 
 void ServerGames::deleteGame(string gameName) {
-    //delete thread.
-    //erase from game list
-    // delete room (after new)
     Room* roomToDelete = getGame(gameName);
     if(isGameInList(gameName)) {
         pthread_cancel(roomToDelete->getThread());
-//        close(roomToDelete->getPlayerSocket1());
-//        if(roomToDelete->isRunning()) {
-//            cout << "error" << endl;
-//            close(roomToDelete->getOtherSocket(roomToDelete->getPlayerSocket1()));
-//        }
-//        pthread_mutex_trylock(&mutexCommand);
         gamesList.erase(getGameIterator(gameName));
-//        pthread_mutex_unlock(&mutexCommand);
-
-        //delete room from list
-        //delete(roomToDelete);
-
     }
 }
 
@@ -252,17 +238,6 @@ void ServerGames::deleteAllGames() {
         }
     }
     pthread_mutex_unlock(&mutexCommand);
-
-//    
-//    while (it != gamesList.end()) {
-//        string name = it->getRoomName();
-//        it++;
-//        pthread_mutex_lock(&mutexCommand);
-//        if(isGameInList(name)) {
-//            deleteGame(name);
-//        }
-//        pthread_mutex_unlock(&mutexCommand);
-//    }
 
 }
 

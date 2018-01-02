@@ -84,10 +84,10 @@ private:
     void handleBeforeClient(int clientSocket);
 
     /**
- * thid function runs handleBeforeClient function
- * @param structOfserver given arguments
- * @return arguments
- */
+     * this function runs handleBeforeClient function
+     * @param structOfserver given arguments
+     * @return arguments
+     */
     static void *handleAccept(void *structOfServer);
     /**
      * this function handle a situation that the user type exit massage to finish the game
