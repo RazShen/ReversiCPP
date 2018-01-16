@@ -1,6 +1,8 @@
-//
-// Created by raz on 1/15/18.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #include "ThreadPool.h"
 #include <unistd.h>

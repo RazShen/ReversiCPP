@@ -75,12 +75,12 @@ void Server::stop() {
     sG->deleteAllGames();
     // close threads
     this->threadPool.terminate();
-
-    vector<Task*>::iterator it = this->tasks.begin();
-    while (it != this->tasks.end()) {
-        delete(*it);
-        it++;
-    }
+//
+//    vector<Task*>::iterator it = this->tasks.begin();
+//    while (it != this->tasks.end()) {
+//        delete(*it);
+//        it++;
+//    }
 
     pthread_cancel(threadServer);
     shutdown(serverSocket, SHUT_RDWR);

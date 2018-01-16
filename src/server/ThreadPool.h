@@ -1,6 +1,7 @@
-//
-// Created by raz on 1/15/18.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
 
 #ifndef EX4_THREADPOOL_H
 #define EX4_THREADPOOL_H
@@ -10,23 +11,25 @@
 #include <pthread.h>
 using namespace std;
 class ThreadPool {
+
 public:
+
     /**
-     * ThreadPool constructor
+     * ThreadPool constructor.
      * @param threadsNum - number of threads for pool
      */
     ThreadPool(int threadsNum);
     /**
-     * addTask func.
+     * Add a task to the thread pool.
      * @param task - Task obj
      */
     void addTask(Task *task);
     /**
-     * terminate func.
+     * Terminate function.
      */
     void terminate();
     /**
-     * destructor
+     * Destructor for the thread pool
      */
     virtual ~ThreadPool();
 private:

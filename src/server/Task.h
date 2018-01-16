@@ -1,6 +1,8 @@
-//
-// Created by raz on 1/15/18.
-//
+/*
+ * Tomer Grady 205660863
+ * Raz Shenkman 311130777
+ */
+
 
 #ifndef EX4_TASK_H
 #define EX4_TASK_H
@@ -8,19 +10,23 @@
 class Task {
 public:
     /**
-     * constructor.
+     * Constructor for a task.
      * @param func - void * obj
      * @param arg - void * arg
      */
-    Task(void * (*func)(void *arg), void* arg): func(func), arg(arg) {}
+    Task(void * (*func)(void *arg), void* arg): func(func), arg(arg) {
+
+    }
+
     /**
-     * execute function.
+     * Execute the function of the task.
      */
     void execute() {
         func(arg);
     }
+
     /**
-     * destructor
+     * Destructor for the task
      */
     virtual ~Task() {}
 private:
