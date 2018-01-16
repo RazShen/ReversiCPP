@@ -59,7 +59,7 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
                 }
             }
             this->wHP = new RemotePlayerReceiver(filename);
-            //this->wHP->connectToServer();
+            //this->wHP->connectToServer();(
             this->wHP->setType(Board::White);
             this->wHP->setClientSocket(this->bHP->getClientSocket());
         } else if (indexPlayer == 2) {
@@ -71,7 +71,6 @@ Game::Game(RegularGameLogic *gameLogic, int choose, Display *consoleDisplay) {
             //this->bHP->connectToServer();
             this->bHP->setClientSocket(this->wHP->getClientSocket());
         }
-
 }
 
 void Game::run() {

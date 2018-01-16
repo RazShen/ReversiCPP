@@ -12,12 +12,12 @@
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
+#define MAX_THREADS 5
 
 
-Server::Server(int port) : port(port), serverSocket(0) {
+Server::Server(int port) : port(port), serverSocket(0), threadPool(MAX_THREADS) {
     cout << "Server" << endl;
     this->shouldStop = false;
-    this.t
 }
 
 
@@ -42,6 +42,7 @@ void Server::start() {
     struct sockaddr_in playerAddress1;
     socklen_t playerAddressLen1 = 0;
     int player1;
+    // thread for stopping the server (not in the thread-pool)
     pthread_t serverThread;
     int bc = pthread_create(&serverThread, NULL, Server::changeShouldStop, this);
     if (bc != 0) {
@@ -56,18 +57,10 @@ void Server::start() {
             this->stop();
             return;
         }
-
-        //pthread_t currThread;
         serverAndClient sAC = serverAndClient(this, player1);
-        //int rc = pthread_create(&currThread, NULL, Server::handleAccept, &sAC);
-//        if (rc != 0) {
-//            exit(-1);
-//        }
         Task* task = new Task(Server::handleAccept,&sAC);
-        tasks->push_back(task);
-        (*pool).addTask(task);
- //       pthread_join(currThread, NULL);
- //       connectionThreads.push_back(currThread);
+        tasks.push_back(task);
+        this->threadPool.addTask(task);
         if(shouldStop) {
             this->stop();
             return;
@@ -81,11 +74,14 @@ void Server::stop() {
     ServerGames* sG = ServerGames::getInstance();
     sG->deleteAllGames();
     // close threads
-    vector<pthread_t>::iterator it = connectionThreads.begin();
-    while (it != connectionThreads.end()) {
-        pthread_cancel(*it);
+    this->threadPool.terminate();
+
+    vector<Task*>::iterator it = this->tasks.begin();
+    while (it != this->tasks.end()) {
+        delete(*it);
         it++;
     }
+
     pthread_cancel(threadServer);
     shutdown(serverSocket, SHUT_RDWR);
     close(serverSocket);

@@ -5,11 +5,6 @@
 #ifndef EX4_TASK_H
 #define EX4_TASK_H
 
-
-#ifndef REVERSITESTS_TASK_H
-#define REVERSITESTS_TASK_H
-
-
 class Task {
 public:
     /**

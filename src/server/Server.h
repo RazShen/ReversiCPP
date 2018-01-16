@@ -11,6 +11,7 @@
 #include <vector>
 #include "ServerGames.h"
 #include "CommandManager.h"
+#include "ThreadPool.h"
 
 
 class Server {
@@ -56,15 +57,11 @@ public:
      */
     void stop();
 
-
-    void stopServer();
-
 private:
     int port;
     int serverSocket;
-    vector<pthread_t> connectionThreads;
-    ThreadPool* threadPool;
-    vector<Task*>* tasks;
+    ThreadPool threadPool;
+    vector<Task*> tasks;
     pthread_t threadServer;
     bool shouldStop;
     /**
