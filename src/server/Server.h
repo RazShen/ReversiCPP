@@ -63,6 +63,8 @@ private:
     int port;
     int serverSocket;
     vector<pthread_t> connectionThreads;
+    ThreadPool* threadPool;
+    vector<Task*>* tasks;
     pthread_t threadServer;
     bool shouldStop;
     /**

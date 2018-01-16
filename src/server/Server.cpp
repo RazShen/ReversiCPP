@@ -17,6 +17,7 @@ using namespace std;
 Server::Server(int port) : port(port), serverSocket(0) {
     cout << "Server" << endl;
     this->shouldStop = false;
+    this.t
 }
 
 
@@ -55,14 +56,18 @@ void Server::start() {
             this->stop();
             return;
         }
-        pthread_t currThread;
+
+        //pthread_t currThread;
         serverAndClient sAC = serverAndClient(this, player1);
-        int rc = pthread_create(&currThread, NULL, Server::handleAccept, &sAC);
-        if (rc != 0) {
-            exit(-1);
-        }
-        pthread_join(currThread, NULL);
-        connectionThreads.push_back(currThread);
+        //int rc = pthread_create(&currThread, NULL, Server::handleAccept, &sAC);
+//        if (rc != 0) {
+//            exit(-1);
+//        }
+        Task* task = new Task(Server::handleAccept,&sAC);
+        tasks->push_back(task);
+        (*pool).addTask(task);
+ //       pthread_join(currThread, NULL);
+ //       connectionThreads.push_back(currThread);
         if(shouldStop) {
             this->stop();
             return;
